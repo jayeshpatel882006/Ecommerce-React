@@ -1,0 +1,165 @@
+header {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: 30px 45px !important;
+}
+
+header .headerSerch {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #bce3c9;
+    padding: 20px;
+    position: relative;
+}
+
+header .headerSerch .selecterDrop {
+    width: 25%;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    padding-right: 20px;
+}
+
+
+header .headerSerch .selecterDrop:after {
+    content: "";
+    width: 2px;
+    height: 30px;
+    background: rgba(0, 0, 0, 0.369);
+    position: absolute;
+    top: 7px;
+    right: -5px;
+}
+
+header .headerSerch .search {
+    width: 75%;
+    padding-left: 30px;
+    position: relative;
+}
+
+header .headerSerch .search .searchIcon {
+    position: absolute;
+    top: 4px;
+    right: 7px;
+    font-size: 20px;
+    opacity: 0.7;
+}
+
+header .headerSerch .search input {
+    height: 30px;
+    width: 100%;
+    border: 0px;
+    font-size: 18px;
+    outline: none !important;
+}
+
+header .countryWraper .selecterDrop {
+    width: 200px;
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid #ececec;
+    display: flex;
+    align-items: center;
+}
+
+header .countryWraper .selecterDrop .openselect {
+    width: 100%;
+    font-weight: 300;
+    color: #279a65 !important;
+}
+
+header .countryWraper .selecterDrop {
+    left: 0px !important;
+    border: 1px solid #ececec;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+    color: #279a65;
+
+}
+
+header .countryWraper .selecterDrop .selectDrop ul li {
+    display: flex;
+    align-items: center;
+
+    height: 40px;
+}
+
+header .another {
+    margin-left: auto;
+}
+
+header .headerTabs {
+    padding-left: 40px;
+    margin-left: auto
+}
+
+header .headerTabs li {
+    position: relative;
+    margin-left: 10px;
+}
+
+header .headerTabs li span {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+header .headerTabs li img {
+    margin-right: 10px;
+}
+
+header .headerTabs li span.bedge {
+    width: 11px;
+    height: 11px;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    justify-content: center;
+    background: #3BB77E;
+    padding: 10px;
+    color: #fff;
+    position: absolute;
+    top: -8px;
+    left: 10px;
+}
+
+.DropDownMenu {
+    position: absolute;
+    top: 100%;
+    right: -10px;
+    width: 200px;
+    height: auto;
+    background: #fff;
+    box-shadow: 0 3px 6px rgb(0 0 0/ 20%);
+    margin: 0 !important;
+    padding-left: 0 !important;
+    border-radius: 7px;
+    z-index: 100;
+}
+
+
+
+.DropDownMenu li {
+    width: 100%;
+    list-style: none;
+    margin: 0 !important;
+}
+
+.DropDownMenu li button {
+    width: 100%;
+    justify-content: flex-start;
+    text-transform: capitalize;
+    padding: 6px 15px !important;
+    color: rgba(0, 0, 0, 0.7);
+    background: #fff;
+    border-radius: 7px;
+}
+
+.DropDownMenu li button:hover {
+    background: #3BB77E;
+    color: #fff;
+}
+
+.DropDownMenu li button svg {
+    margin-right: 8px;
+    opacity: 0.7;
+}
