@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import axios from "axios";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
@@ -22,6 +22,7 @@ import Nav from "./nav/Nav";
 
 const Header = () => {
   const [accountDropDown, setAccountDropDown] = useState(false);
+  const headerRef = useRef();
   const [category, setCategory] = useState([
     "Milks and Dairies",
     "Wines & Drinks",
@@ -56,118 +57,129 @@ const Header = () => {
 
   useEffect(() => {
     getContry();
+    window.addEventListener("scroll", () => {
+      let position = window.pageYOffset;
+      if (position > 100) {
+        headerRef.current.classList.add("fixed");
+      } else {
+        headerRef.current.classList.remove("fixed");
+      }
+    });
   }, []);
 
   return (
     <>
-      <header className="container-fluid">
-        {/* <header> */}
+      <div className="headerWreper" ref={headerRef}>
+        <header className="container-fluid">
+          {/* <header> */}
 
-        <div className="row">
-          <div className="col-sm-2 d-flex align-items-center">
-            <img src={Logo} />
-          </div>
-          <div className="col-sm-5 d-flex align-items-center">
-            <div className="headerSerch d-flex align-items-center">
-              <Select data={category} placeholder="All Category" />
-              <div className="search ">
-                <input type="text" placeholder="Search for items..." />
-                <SearchIcon className="searchIcon cursor" />
+          <div className="row">
+            <div className="col-sm-2 d-flex align-items-center">
+              <img src={Logo} />
+            </div>
+            <div className="col-sm-5 d-flex align-items-center">
+              <div className="headerSerch d-flex align-items-center">
+                <Select data={category} placeholder="All Category" />
+                <div className="search ">
+                  <input type="text" placeholder="Search for items..." />
+                  <SearchIcon className="searchIcon cursor" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="col-sm-5 d-flex  align-items-center ">
-            <div className="d-flex align-items-center another">
-              <div className="countryWraper">
-                <Select
-                  data={contryList}
-                  Icon={<LocationOnOutlined />}
-                  placeholder="Your Location"
-                />
-              </div>
-              <div className="list list-inline mb-0 headerTabs ml-auto">
-                <li className="list-inline-item">
-                  <span>
-                    <img src={IconCompare} />
-                    <span className="bedge  rounded-circle">3</span>
-                    Compare
-                  </span>
-                </li>
-                <li className="list-inline-item">
-                  <span>
-                    <img src={IconWishlist} />
-                    <span className="bedge  rounded-circle">6</span>
-                    Wishlist
-                  </span>
-                </li>
-                <li className="list-inline-item">
-                  <span>
-                    <img src={IconCart} />
-                    <span className="bedge  rounded-circle">2</span>
-                    Cart
-                  </span>
-                </li>
-                <li className="list-inline-item">
-                  <span
-                    onClick={() => setAccountDropDown(!accountDropDown)}
-                    onMouseEnter={() => setAccountDropDown(true)}
+            <div className="col-sm-5 d-flex  align-items-center ">
+              <div className="d-flex align-items-center another">
+                <div className="countryWraper">
+                  <Select
+                    data={contryList}
+                    Icon={<LocationOnOutlined />}
+                    placeholder="Your Location"
+                  />
+                </div>
+                <div className="list list-inline mb-0 headerTabs ml-auto">
+                  <li className="list-inline-item">
+                    <span>
+                      <img src={IconCompare} />
+                      <span className="bedge  rounded-circle">3</span>
+                      Compare
+                    </span>
+                  </li>
+                  <li className="list-inline-item">
+                    <span>
+                      <img src={IconWishlist} />
+                      <span className="bedge  rounded-circle">6</span>
+                      Wishlist
+                    </span>
+                  </li>
+                  <li className="list-inline-item">
+                    <span>
+                      <img src={IconCart} />
+                      <span className="bedge  rounded-circle">2</span>
+                      Cart
+                    </span>
+                  </li>
+                  <li className="list-inline-item">
+                    <span
+                      onClick={() => setAccountDropDown(!accountDropDown)}
+                      onMouseEnter={() => setAccountDropDown(true)}
 
-                    // onMouseLeave={() => setAccountDropDown(false)}
-                  >
-                    <img src={IconUser} />
-                    {/* <span className="bedge  rounded-circle">2</span>   */}
-                    Account
-                  </span>
-                  {accountDropDown && (
-                    <ClickAwayListener
-                      onClickAway={() => setAccountDropDown(false)}
+                      // onMouseLeave={() => setAccountDropDown(false)}
                     >
-                      <ul
-                        className="DropDownMenu"
-                        onMouseEnter={() => setAccountDropDown(true)}
-                        onMouseLeave={() => setAccountDropDown(false)}
+                      <img src={IconUser} />
+                      {/* <span className="bedge  rounded-circle">2</span>   */}
+                      Account
+                    </span>
+                    {accountDropDown && (
+                      <ClickAwayListener
+                        onClickAway={() => setAccountDropDown(false)}
                       >
-                        <li>
-                          <Button>
-                            {" "}
-                            <Person2OutLinedIcon />
-                            My Account
-                          </Button>
-                        </li>
-                        <li>
-                          <Button>
-                            <LocationOnOutlined /> Order Tracking
-                          </Button>
-                        </li>
+                        <ul
+                          className="DropDownMenu"
+                          onMouseEnter={() => setAccountDropDown(true)}
+                          onMouseLeave={() => setAccountDropDown(false)}
+                        >
+                          <li>
+                            <Button>
+                              {" "}
+                              <Person2OutLinedIcon />
+                              My Account
+                            </Button>
+                          </li>
+                          <li>
+                            <Button>
+                              <LocationOnOutlined /> Order Tracking
+                            </Button>
+                          </li>
 
-                        <li>
-                          <Button>
-                            {" "}
-                            <FavoriteBorderOutlined />
-                            My Wishlist
-                          </Button>
-                        </li>
-                        <li>
-                          <Button>
-                            <SettingsOutlined /> Setting
-                          </Button>
-                        </li>
-                        <li>
-                          <Button>
-                            {" "}
-                            <LogoutOutlined /> Sign Out
-                          </Button>
-                        </li>
-                      </ul>
-                    </ClickAwayListener>
-                  )}
-                </li>
+                          <li>
+                            <Button>
+                              {" "}
+                              <FavoriteBorderOutlined />
+                              My Wishlist
+                            </Button>
+                          </li>
+                          <li>
+                            <Button>
+                              <SettingsOutlined /> Setting
+                            </Button>
+                          </li>
+                          <li>
+                            <Button>
+                              {" "}
+                              <LogoutOutlined /> Sign Out
+                            </Button>
+                          </li>
+                        </ul>
+                      </ClickAwayListener>
+                    )}
+                  </li>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
-      <Nav />
+        </header>
+        <Nav />
+      </div>
+      <div className="AfterHeader"></div>
     </>
   );
 };

@@ -96,8 +96,8 @@ const CatSlider = () => {
     // speed: 300,
     slidesToShow: 10,
     slidesToScroll: 1,
-    // autoplay: true,
-    // autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     fade: false,
     arrows: true,
   };

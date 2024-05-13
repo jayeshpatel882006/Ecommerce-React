@@ -38,3 +38,15 @@
     padding: 0px 15px;
     overflow: hidden;
 }
+.DailyProduct {
+    margin-bottom: 2000px;
+}
+
+.DailyProduct .dailyProductSlider .item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.DailyProduct .demoImg {
+    border-radius: 20px;
+}

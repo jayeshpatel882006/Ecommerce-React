@@ -14,7 +14,7 @@ const ProductCard = ({ Data }) => {
   return (
     <div className="ProductThumb transition position-relative">
       <div className="imgWreper cursor  position-relative">
-        <img src={Data.imgLink} className="w-100 transition" />
+        <img src={Data?.imgLink} className="w-100 transition" />
 
         <div className="overlay transition">
           <Link
@@ -37,7 +37,7 @@ const ProductCard = ({ Data }) => {
           </Link>
         </div>
       </div>
-      {Data.bedgetxt && (
+      {Data?.bedgetxt && (
         <div className="Bedge">
           <span style={{ background: Data.bedgeBackground }}>
             {Data.bedgetxt}
@@ -45,26 +45,26 @@ const ProductCard = ({ Data }) => {
         </div>
       )}
       <div className="info">
-        <span className="d-block catname">{Data.catName}</span>
+        <span className="d-block catname">{Data?.catName}</span>
         <h4 className="title">
-          <Link>{Data.title}</Link>
+          <Link>{Data?.title}</Link>
         </h4>
         <Rating
           className="rating"
           name="read-only"
-          value={Data.rating}
+          value={Data?.rating}
           precision={0.5}
           size="small"
           readOnly
         />
 
         <span className="brand d-block">
-          By <Link>{Data.brandName}</Link>
+          By <Link>{Data?.brandName}</Link>
         </span>
         <div className="d-flex align-items-center">
           <div className="d-flex align-items-center">
-            <span className="price">${Data.newPrice} </span>
-            <span className="oldprice">${Data.oldPrice} </span>
+            <span className="price">${Data?.newPrice} </span>
+            <span className="oldprice">${Data?.oldPrice} </span>
           </div>
           <Button
             className="btnAdd transition"

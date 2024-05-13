@@ -4,6 +4,24 @@ header {
     margin: auto;
     padding: 30px 45px !important;
 }
+.AfterHeader {
+    margin-top: 200px;
+}
+
+.headerWreper {
+    background: #fff;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.05);
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+}
+
+
+.headerWreper.fixed {
+    top: -126px;
+}
 
 header .headerSerch {
     width: 100%;

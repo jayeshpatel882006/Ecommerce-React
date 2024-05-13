@@ -5,8 +5,20 @@ import Banner from "../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
 import "./home.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import Slider from "react-slick";
 
 const Home = () => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    // speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    fade: false,
+    arrows: true,
+  };
   const [popularHeading, setPopularHeading] = useState([
     "All",
     "Milks & Dairies",
@@ -15,6 +27,11 @@ const Home = () => {
     "Meats",
     "Vegetables",
     "Fruits",
+  ]);
+  const [dailyBestSells, setDailyBestSalls] = useState([
+    "Featured",
+    "Popular",
+    "New added",
   ]);
   const [popularProducts, setpopularProducts] = useState([
     {
@@ -168,6 +185,45 @@ const Home = () => {
                   <ProductCard Data={ite} />
                 </div>
               ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="DailyProduct">
+        <div className="conatiner-web mt-5">
+          <div className="d-flex align-items-center">
+            <h4 className="hd mb-0 ">Daily Best Sells</h4>
+            <ul className="list list-inline FilterTab transition">
+              {dailyBestSells &&
+                dailyBestSells.map((ite, index) => (
+                  <li
+                    className={`list-inline-item transition ${
+                      index == 0 ? "Active" : ""
+                    }`}
+                    key={index}
+                  >
+                    <Link className="cursor transition">{ite}</Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="row">
+            <div className="col-sm-3">
+              <img
+                src="https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-4.png"
+                className="w-100 demoImg"
+              />
+            </div>
+            <div className="col-sm-9">
+              <Slider {...settings} className="dailyProductSlider">
+                {popularProducts &&
+                  popularProducts.map((ite, index) => (
+                    <div className="item">
+                      <ProductCard Data={ite} key={index} />
+                    </div>
+                  ))}
+              </Slider>
+            </div>
           </div>
         </div>
       </section>
