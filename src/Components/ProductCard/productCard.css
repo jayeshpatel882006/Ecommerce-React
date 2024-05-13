@@ -1,0 +1,147 @@
+.ProductThumb {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.131);
+    overflow: hidden;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0);
+
+}
+
+.ProductThumb:hover {
+    box-shadow: 0px 0px 7px rgba(0, 255, 81, 0.4);
+
+}
+
+.ProductThumb .imgWreper {
+    overflow: hidden;
+}
+
+.ProductThumb:hover.imgWreper.overlay {
+    opacity: 1;
+    z-index: 100;
+    visibility: visible;
+}
+
+.ProductThumb .imgWreper .overlay {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #BCE3C9;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.07);
+    opacity: 0;
+
+}
+
+.ProductThumb .imgWreper .overlay .actionBtn {
+    text-decoration: none;
+    color: #3BB77E;
+    width: 40px;
+    height: 36px;
+    line-height: 34px;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+
+    border-right: 1px solid #BCE3C9;
+}
+
+.ProductThumb:hover .imgWreper .overlay {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+
+
+.ProductThumb .imgWreper .overlay .actionBtn:hover {
+    color: #ffc107;
+}
+
+.ProductThumb .imgWreper .overlay .actionBtn:last-child {
+    border: none;
+}
+
+.ProductThumb:hover .imgWreper img {
+    transform: scale(1.1);
+}
+
+.ProductThumb .Bedge {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+}
+
+.ProductThumb .Bedge span {
+    font-size: 12px;
+    text-transform: capitalize;
+    line-height: 1;
+    border-radius: 15px 0 20px 0;
+    color: #fff;
+    padding: 9px 20px 10px 20px;
+
+}
+
+.ProductThumb .info .catname {
+    font-weight: 300;
+    font-size: 12px;
+    color: #adadad;
+}
+
+.ProductThumb .info .title {
+    padding: 0;
+    width: 100%;
+}
+
+.ProductThumb .info .title a {
+    text-decoration: none;
+    color: #253D4E;
+    font-size: 16px;
+}
+
+.ProductThumb .info .brand {
+    color: #B6B6B6;
+    font-size: 14px;
+}
+
+.ProductThumb .info .brand a {
+    margin-bottom: 0px;
+    color: #3BB77E;
+}
+
+.ProductThumb .info .price {
+    color: #3BB77E;
+    margin-right: 7px;
+    font-size: 18px;
+}
+
+.ProductThumb .info .oldprice {
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.ProductThumb .info .btnAdd {
+    margin-left: auto;
+    color: #3BB77E;
+    padding: 6px 20px 6px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ProductThumb .info .btnAdd svg {
+    margin-right: 10px;
+}
+
+.ProductThumb .info .btnAdd:hover {
+    background: #3BB77E !important;
+    transform: translateY(-5px);
+    color: #fff;
+}

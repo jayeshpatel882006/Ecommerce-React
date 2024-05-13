@@ -1,0 +1,55 @@
+.bannersection {
+    padding: 25px 0;
+}
+
+.bannersection .box {
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.bannersection .box:hover img {
+    transform: scale(1.05);
+}
+
+
+.bannersection .box h3 {
+    position: absolute;
+    top: 20%;
+    left: 8%;
+    font-size: 24px;
+    width: 50%;
+    text-transform: capitalize;
+}
+
+.bannersection .box:hover h3 {
+    top: 17%;
+}
+
+.bannersection .box button {
+    position: absolute;
+    bottom: 20%;
+    left: 8%;
+    padding: 7px 8px 7px 12px;
+    font-size: 12px;
+    background: #3BB77E;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+}
+
+.bannersection .box button svg {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.bannersection .box button:hover {
+    background: #000;
+}
+
+.bannersection .box button:hover svg {
+    margin-left: 15px;
+}

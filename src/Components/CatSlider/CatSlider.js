@@ -109,7 +109,10 @@ const CatSlider = () => {
           {CategoryItems !== 0 &&
             CategoryItems.map((ite, index) => (
               <div className="item" key={index}>
-                <div className="info" style={{ background: ite.bgColor }}>
+                <div
+                  className="info"
+                  style={{ background: ite.bgColor, borderColor: ite.bgColor }}
+                >
                   <img src={ite.imglink} />
                   <h5>{ite.name}</h5>
                   <span>{ite.items}</span>
@@ -117,11 +120,6 @@ const CatSlider = () => {
               </div>
             ))}
         </Slider>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </div>
     </div>
   );
