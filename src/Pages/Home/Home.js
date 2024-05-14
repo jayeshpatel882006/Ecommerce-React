@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Slider from "react-slick";
+import imgbg from "../../assets/images/banner-9.png";
 import TopProducts from "../../Components/TopProducts/TopProducts";
+import Newsletter from "../../Components/Newsletter/Newsletter";
 
 const Home = () => {
   var settings = {
@@ -15,8 +17,8 @@ const Home = () => {
     // speed: 300,
     slidesToShow: 4,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    // autoplay: true,
+    // autoplaySpeed: 3000,
     fade: false,
     arrows: true,
   };
@@ -270,7 +272,7 @@ const Home = () => {
       <section className="HomeProduct">
         <div className="container-fluid  mt-5">
           <div className="d-flex align-items-center">
-            <h4 className="hd mb-0 ">Popular Products</h4>
+            <h4 className="hd mb-0 cursor-text">Popular Products</h4>
             <ul className="list list-inline FilterTab transition">
               {popularHeading &&
                 popularHeading.map((ite, index) => (
@@ -299,7 +301,7 @@ const Home = () => {
       <section className="DailyProduct">
         <div className="container-fluid  mt-5">
           <div className="d-flex align-items-center">
-            <h4 className="hd mb-0 ">Daily Best Sells</h4>
+            <h4 className="hd mb-0 cursor-text">Daily Best Sells</h4>
             <ul className="list list-inline FilterTab transition">
               {dailyBestSells &&
                 dailyBestSells.map((ite, index) => (
@@ -315,17 +317,17 @@ const Home = () => {
             </ul>
           </div>
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-3 demoImgContainer">
               <img
                 src="https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-4.png"
-                className="w-100 demoImg"
+                className="demoImg w-100"
               />
             </div>
             <div className="col-sm-9">
               <Slider {...settings} className="dailyProductSlider">
                 {popularProducts &&
                   popularProducts.map((ite, index) => (
-                    <div className="item">
+                    <div className="item" key={index}>
                       <ProductCard Data={ite} key={index} />
                     </div>
                   ))}
@@ -348,6 +350,23 @@ const Home = () => {
             </div>
             <div className="col">
               <TopProducts title="Top Rated " Data={topSelling[3]} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="NewsLetter">
+        <div className="container-fluid ">
+          <div className="newslettrebox">
+            <div className="d-flex">
+              <div className="info">
+                <h2>Stay home & get your daily needs from our shop</h2>
+                <span>Start You'r Daily Shopping with Nest Mart</span>
+                <Newsletter />
+              </div>
+              <div className="img">
+                <img src={imgbg} />
+              </div>
             </div>
           </div>
         </div>

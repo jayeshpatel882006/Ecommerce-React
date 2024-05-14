@@ -47,6 +47,48 @@
     padding-right: 10px;
 }
 
+
 .DailyProduct .demoImg {
     border-radius: 20px;
 }
+                .newslettrebox {
+                    background: url("https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-10.png");
+                    border-radius: 30px;
+                    width: 100%;
+                    height: auto;
+                    padding: 40px;
+                    position: relative;
+                }
+        
+                .newslettrebox .info {
+                    width: 60%;
+                    padding-left: 60px;
+        
+                }
+        
+                .newslettrebox .info h2 {
+                    font-size: 40px;
+                    width: 70%;
+                    margin-top: 30px;
+                    color: #253D4E;
+                }
+        
+                .newslettrebox .info span {
+                    font-size: 20px;
+                    opacity: 0.6;
+                }
+        
+                .newslettrebox .img {
+                    width: 40%;
+                }
+        
+                .newslettrebox .img img {
+                    width: 100%;
+                    margin-bottom: 0px;
+                }
+        
+                .newslettrebox .newsLetterBanner {
+                    left: auto !important;
+                    bottom: auto !important;
+                    margin-top: 50px;
+                }

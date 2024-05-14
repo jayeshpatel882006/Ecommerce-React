@@ -3,8 +3,7 @@ import Slider from "react-slick";
 import "./slider.css";
 import img1 from "../../../assets/images/slider-1.png";
 import img2 from "../../../assets/images/slider-2.png";
-import { Button } from "@mui/material";
-import { SendOutlined } from "@mui/icons-material";
+import Newsletter from "../../../Components/Newsletter/Newsletter";
 
 const SliderCompo = () => {
   var settings = {
@@ -45,11 +44,7 @@ const SliderCompo = () => {
             </div>
           </div>
         </Slider>
-        <div className="newsLetterBanner">
-          <input type="text" placeholder="Your emaill address" />
-          <SendOutlined className="newsLetterIcon" />
-          <Button className="newsLetterButton">Subscribe</Button>
-        </div>
+        <Newsletter />
       </div>
     </section>
   );

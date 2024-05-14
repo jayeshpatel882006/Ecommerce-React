@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 const TopProducts = ({ title, Data }) => {
   return (
     <div className="topSelling_box ">
-      <h3 className="">{title}</h3>
+      <h3 className="cursor-text">{title}</h3>
 
       {Data &&
         Data.map((ite, index) => (
-          <div className="items d-flex align-items-center transition">
+          <div
+            className="items d-flex align-items-center transition"
+            key={index}
+          >
             <div className="img">
               <img src={ite.imgSrc} className="w-100" />
             </div>

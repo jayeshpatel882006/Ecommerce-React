@@ -3,7 +3,7 @@ import "./productCard.css";
 
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
-import { Button, ButtonGroup } from "@mui/material";
+import { Button } from "@mui/material";
 import {
   CompareArrowsOutlined,
   FavoriteBorderSharp,

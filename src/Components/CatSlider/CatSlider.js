@@ -104,7 +104,7 @@ const CatSlider = () => {
   return (
     <div className="catSliderSection">
       <div className="container-fluid ">
-        <h2 className="hd ">Featured Categories</h2>
+        <h2 className="hd cursor-text">Featured Categories</h2>
         <Slider {...settings} className="cat_slider_Main w-100">
           {CategoryItems !== 0 &&
             CategoryItems.map((ite, index) => (

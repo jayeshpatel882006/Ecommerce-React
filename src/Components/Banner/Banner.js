@@ -30,7 +30,7 @@ const Banner = () => {
         <div className="row">
           {BannerData &&
             BannerData.map((ite, index) => (
-              <div className="col">
+              <div className="col" key={index}>
                 <div className="box position-relative" key={index}>
                   <img src={ite.imgLink} className="w-100 transition " />
                   <h3 className="transition">{ite.text}</h3>
