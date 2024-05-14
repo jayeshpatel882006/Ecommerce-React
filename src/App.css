@@ -86,6 +86,10 @@ body {
   font-weight: 600;
   padding-bottom: 30px;
 }
+::selection {
+  color: #fff;
+  background: #3BB77E;
+}
 [tooltip] {
   position: relative;
   /* opinion 1 */

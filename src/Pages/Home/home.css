@@ -41,6 +41,63 @@
 .DailyProduct {
     margin-bottom: 30px;
 }
+.DailyProduct .demoImgContainer {
+    position: relative;
+    overflow: hidden;
+    padding: 0px !important;
+    margin: 0px !important;
+    border-radius: 20px;
+    width: 19% !important;
+}
+
+.DailyProduct .demoImgContainer:hover img {
+    transform: scale(1.1);
+}
+
+.DailyProduct .demoImgContainer button {
+    position: absolute;
+    bottom: 20%;
+    left: 8%;
+    padding: 7px 8px 7px 12px;
+    font-size: 12px;
+    background: #3BB77E;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+}
+
+.DailyProduct .demoImgContainer button svg {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.DailyProduct .demoImgContainer button:hover {
+    background: #000;
+}
+
+.DailyProduct .demoImgContainer button:hover svg {
+    margin-left: 15px;
+}
+
+
+
+
+
+
+.DailyProduct .demoImgContainer h4 {
+    position: absolute;
+    width: 70%;
+    top: 10%;
+    left: 10%;
+    font-size: 40px;
+    color: #253D4E;
+    font-weight: 700;
+    line-height: 1.2;
+}
 
 .DailyProduct .dailyProductSlider .item {
     padding-left: 10px;
@@ -48,9 +105,7 @@
 }
 
 
-.DailyProduct .demoImg {
-    border-radius: 20px;
-}
+
                 .newslettrebox {
                     background: url("https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-10.png");
                     border-radius: 30px;
@@ -84,7 +139,7 @@
         
                 .newslettrebox .img img {
                     width: 100%;
-                    margin-bottom: 0px;
+                    margin-bottom: -40px !important;
                 }
         
                 .newslettrebox .newsLetterBanner {

@@ -9,6 +9,10 @@ import Slider from "react-slick";
 import imgbg from "../../assets/images/banner-9.png";
 import TopProducts from "../../Components/TopProducts/TopProducts";
 import Newsletter from "../../Components/Newsletter/Newsletter";
+import Footer from "../../Components/Footer/Footer";
+import { ArrowForward } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import Banner4 from "../../assets/images/banner-4.png";
 
 const Home = () => {
   var settings = {
@@ -318,10 +322,11 @@ const Home = () => {
           </div>
           <div className="row">
             <div className="col-sm-3 demoImgContainer">
-              <img
-                src="https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-4.png"
-                className="demoImg w-100"
-              />
+              <img src={Banner4} className="demoImg w-100" />
+              <h4>Bring nature into your home</h4>
+              <Button className="transition">
+                Shop Now <ArrowForward className="transition" />
+              </Button>
             </div>
             <div className="col-sm-9">
               <Slider {...settings} className="dailyProductSlider">
@@ -371,12 +376,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
+      <Footer />
     </div>
   );
 };
