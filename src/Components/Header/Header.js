@@ -13,6 +13,8 @@ import Select from "../SelectDrop/Select";
 import Button from "@mui/material/Button";
 import {
   FavoriteBorderOutlined,
+  GridViewOutlined,
+  HorizontalRule,
   LocationOnOutlined,
   LogoutOutlined,
   SettingsOutlined,
@@ -73,8 +75,8 @@ const Header = () => {
         <header className="container-fluid">
           {/* <header> */}
 
-          <div className="row">
-            <div className="col-sm-2 d-flex align-items-center">
+          <div className="row w-100">
+            <div className="col-sm-2 d-flex headerLogo align-items-center">
               <img src={Logo} />
             </div>
             <div className="col-sm-5 d-flex align-items-center">
@@ -86,7 +88,10 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="col-sm-5 d-flex  align-items-center ">
+            <div className="Phonebutton">
+              <GridViewOutlined />
+            </div>
+            <div className="col-sm-5 d-flex  align-items-center leftHendSide">
               <div className="d-flex align-items-center another">
                 <div className="countryWraper">
                   <Select

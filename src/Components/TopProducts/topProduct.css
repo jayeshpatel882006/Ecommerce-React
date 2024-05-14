@@ -1,0 +1,69 @@
+.topSelling_box h3 {
+    font-weight: 500;
+    padding-bottom: 10px;
+    position: relative;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 30px;
+}
+
+.topSelling_box .items:hover {
+    transform: translateY(-10px);
+}
+
+.topSelling_box .items {
+    padding: 15px 0;
+}
+
+.topSelling_box .items .info a:hover h4 {
+    color: #3BB77E;
+}
+
+
+.topSelling_box h3::before {
+    content: "";
+    width: 27%;
+    height: 2px;
+    background: #BCE3C9;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
+}
+
+.topSelling_box .items .img {
+    width: 30%;
+}
+
+.topSelling_box .items .img img {
+    border-radius: 15px;
+
+}
+
+.topSelling_box .items .info {
+    width: 70%;
+}
+
+.topSelling_box .items .info .RatingSpan {
+    font-size: 13px;
+}
+
+.topSelling_box .items .info a {
+    text-decoration: none;
+    color: #000;
+}
+
+.topSelling_box .items .info a h4 {
+    font-size: 17px;
+}
+
+.topSelling_box .items .info .price {
+    color: #3BB77E;
+    margin-right: 7px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.topSelling_box .items .info .oldprice {
+    text-decoration: line-through;
+    font-size: 14px;
+}

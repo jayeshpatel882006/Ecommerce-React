@@ -26,7 +26,7 @@ const Banner = () => {
   ]);
   return (
     <div className="bannersection">
-      <div className="conatiner-web">
+      <div className="container-fluid ">
         <div className="row">
           {BannerData &&
             BannerData.map((ite, index) => (

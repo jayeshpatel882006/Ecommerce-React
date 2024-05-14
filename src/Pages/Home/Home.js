@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Slider from "react-slick";
+import TopProducts from "../../Components/TopProducts/TopProducts";
 
 const Home = () => {
   var settings = {
@@ -79,8 +80,8 @@ const Home = () => {
       title: "Angie’s Boomchickapop Sweet & Salty Kettle Corn",
       rating: 4.0,
       brandName: "StarKist",
-      newPrice: "$48.85",
-      oldPrice: "$52.8",
+      newPrice: "48.85",
+      oldPrice: "52.8",
     },
     {
       imgLink:
@@ -91,8 +92,8 @@ const Home = () => {
       title: "Foster Farms Takeout Crispy Classic Buffalo Wings",
       rating: 4.0,
       brandName: "NestFood",
-      newPrice: "$17.85",
-      oldPrice: "$19.8",
+      newPrice: "17.85",
+      oldPrice: "19.8",
     },
     {
       imgLink:
@@ -103,8 +104,8 @@ const Home = () => {
       title: "Blue Diamond Almonds Lightly Salted Vegetables",
       rating: 4.0,
       brandName: "NestFood",
-      newPrice: "$23.85",
-      oldPrice: "$25.8",
+      newPrice: "23.85",
+      oldPrice: "25.8",
     },
     {
       imgLink:
@@ -115,8 +116,8 @@ const Home = () => {
       title: "Canada Dry Ginger Ale – 2 L Bottle - 200ml - 400g",
       rating: 4.0,
       brandName: "NestFood",
-      newPrice: "$32.85",
-      oldPrice: "$33.8",
+      newPrice: "32.85",
+      oldPrice: "33.8",
     },
     {
       imgLink:
@@ -127,8 +128,8 @@ const Home = () => {
       title: "Encore Seafoods Stuffed Alaskan Salmon",
       rating: 4.0,
       brandName: "NestFood",
-      newPrice: "$35.85",
-      oldPrice: "$37.8",
+      newPrice: "35.85",
+      oldPrice: "37.8",
     },
     {
       imgLink:
@@ -139,8 +140,8 @@ const Home = () => {
       title: "Gorton’s Beer Battered Fish Fillets with soft paper",
       rating: 4.0,
       brandName: "Old El Paso",
-      newPrice: "$23.85",
-      oldPrice: "$25.8",
+      newPrice: "23.85",
+      oldPrice: "25.8",
     },
     {
       imgLink:
@@ -151,9 +152,115 @@ const Home = () => {
       title: "Haagen-Dazs Caramel Cone Ice Cream Ketchup",
       rating: 2.0,
       brandName: "Tyson",
-      newPrice: "$22.85",
-      oldPrice: "$24.8",
+      newPrice: "22.85",
+      oldPrice: "24.8",
     },
+  ]);
+  const [topSelling, setTopSelling] = useState([
+    [
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-1.jpg",
+        titleName: "Nestle Original Coffee-Mate Coffee Creamer",
+        rating: 2,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-2.jpg",
+        titleName: "Nestle Original Coffee-Mate Coffee Creamer",
+        rating: 3,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-3.jpg",
+        titleName: "Nestle Original Coffee-Mate Coffee Creamer",
+        rating: 5,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+    ],
+    [
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-4.jpg",
+        titleName: "Organic Cage-Free Grade A Large Brown Eggs",
+        rating: 3,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-5.jpg",
+        titleName: "Seeds of Change Organic Quinoa, Brown, & Red Rice",
+        rating: 1,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-6.jpg",
+        titleName: "Naturally Flavored Cinnamon Vanilla Light Roast Coffee",
+        rating: 2,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+    ],
+    [
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-7.jpg",
+        titleName: "Pepperidge Farm Farmhouse Hearty White Bread",
+        rating: 5,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-8.jpg",
+        titleName: "Organic Frozen Triple Berry Blend",
+        rating: 4,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-9.jpg",
+        titleName: "Oroweat Country Buttermilk Bread",
+        rating: 2,
+        price: "$32.85",
+        oldprice: "$33",
+      },
+    ],
+    [
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-10.jpg",
+        titleName: "Foster Farms Takeout Crispy Classic Buffalo Wings",
+        rating: 3,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-11.jpg",
+        titleName: "Angie’s Boomchickapop Sweet & Salty Kettle Corn",
+        rating: 4,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+      {
+        imgSrc:
+          "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-12.jpg",
+        titleName: "All Natural Italian-Style Chicken Meatballs",
+        rating: 2,
+        price: "$32.85",
+        oldprice: "$33.8",
+      },
+    ],
   ]);
   return (
     <div>
@@ -161,7 +268,7 @@ const Home = () => {
       <CatSlider />
       <Banner />
       <section className="HomeProduct">
-        <div className="conatiner-web mt-5">
+        <div className="container-fluid  mt-5">
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 ">Popular Products</h4>
             <ul className="list list-inline FilterTab transition">
@@ -190,7 +297,7 @@ const Home = () => {
       </section>
 
       <section className="DailyProduct">
-        <div className="conatiner-web mt-5">
+        <div className="container-fluid  mt-5">
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 ">Daily Best Sells</h4>
             <ul className="list list-inline FilterTab transition">
@@ -227,6 +334,30 @@ const Home = () => {
           </div>
         </div>
       </section>
+      <section className="topProduct">
+        <div className="container-fluid  w-100">
+          <div className="row">
+            <div className="col">
+              <TopProducts title="Top Selling" Data={topSelling[0]} />
+            </div>
+            <div className="col">
+              <TopProducts title="Trending Products" Data={topSelling[1]} />
+            </div>
+            <div className="col">
+              <TopProducts title="Recently added" Data={topSelling[2]} />
+            </div>
+            <div className="col">
+              <TopProducts title="Top Rated " Data={topSelling[3]} />
+            </div>
+          </div>
+        </div>
+      </section>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

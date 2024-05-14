@@ -94,7 +94,7 @@ const CatSlider = () => {
     dots: false,
     infinite: true,
     // speed: 300,
-    slidesToShow: 10,
+    slidesToShow: 11,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -103,7 +103,7 @@ const CatSlider = () => {
   };
   return (
     <div className="catSliderSection">
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <h2 className="hd ">Featured Categories</h2>
         <Slider {...settings} className="cat_slider_Main w-100">
           {CategoryItems !== 0 &&
