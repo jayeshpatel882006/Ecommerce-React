@@ -42,7 +42,8 @@ footer a {
 footer .part2 p:hover,
 footer .part2 a:hover,
 footer .part1 .email:hover a,
-footer .part3 .link:hover a {
+footer .part3 p:hover,
+footer .part3 p:hover a {
     color: #3bb77e;
     transform: translateX(10px);
 }
