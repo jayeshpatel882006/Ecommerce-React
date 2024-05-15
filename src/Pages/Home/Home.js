@@ -6,10 +6,7 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Slider from "react-slick";
-import imgbg from "../../assets/images/banner-9.png";
 import TopProducts from "../../Components/TopProducts/TopProducts";
-import Newsletter from "../../Components/Newsletter/Newsletter";
-import Footer from "../../Components/Footer/Footer";
 import { ArrowForward } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Banner4 from "../../assets/images/banner-4.png";
@@ -274,7 +271,7 @@ const Home = () => {
       <CatSlider />
       <Banner />
       <section className="HomeProduct">
-        <div className="container-fluid  mt-5">
+        <div className="container-fluid ">
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 cursor-text">Popular Products</h4>
             <ul className="list list-inline FilterTab transition">
@@ -303,7 +300,7 @@ const Home = () => {
       </section>
 
       <section className="DailyProduct">
-        <div className="container-fluid  mt-5">
+        <div className="container-fluid  ">
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 cursor-text">Daily Best Sells</h4>
             <ul className="list list-inline FilterTab transition">
@@ -359,25 +356,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <section className="NewsLetter">
-        <div className="container-fluid ">
-          <div className="newslettrebox">
-            <div className="d-flex">
-              <div className="info">
-                <h2>Stay home & get your daily needs from our shop</h2>
-                <span>Start You'r Daily Shopping with Nest Mart</span>
-                <Newsletter />
-              </div>
-              <div className="img">
-                <img src={imgbg} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
     </div>
   );
 };

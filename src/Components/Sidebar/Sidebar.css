@@ -1,0 +1,156 @@
+.Card {
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.Card h2 {
+    border-bottom: 1px solid #ececec;
+    font-size: 30px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+
+.Card h2::after {
+    content: "";
+    height: 2px;
+    width: 30%;
+    background: #BCE3C9;
+    z-index: 100;
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+}
+
+.Card .catList .catItem {
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px 0px;
+    border-radius: 8px;
+    border: 1px solid #4e4e4e4d;
+
+}
+
+.Card .catList .catItem:hover {
+    border: 1px solid #BCE3C9;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.Card .catList .catItem:hover h4 {
+    color: #3BB77E;
+}
+
+.Card .catList .catItem h4 {
+    color: #000000a2;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.Card .catList .catItem .rounded-circle {
+    background: #BCE3C9;
+    width: 35px;
+    height: 35px;
+}
+
+.Filters {
+    padding: 5px 0px;
+}
+
+.Filters h5 {
+    font-weight: bold;
+    color: #00000098;
+}
+
+.Filters ul {
+    margin-left: -40px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.Filters ul::-webkit-scrollbar {
+    width: 10 px !important;
+}
+
+.Filters ul::-webkit-scrollbar-thumb {
+    background: #3bb77d96 !important;
+}
+
+.Filters ul li {
+    width: 100%;
+    list-style: none;
+}
+
+
+.Card button {
+    padding: 8px 18px !important;
+    color: #fff;
+    background: #3BB77E;
+    width: auto;
+    border-radius: 10px;
+
+}
+
+.Card button svg {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.Card button:hover {
+    background-color: #FDC040;
+    padding-left: 25px !important;
+}
+
+.Products {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Products .imgContainer {
+    width: 30%;
+}
+
+.Products .InfoContainer {
+    width: 70%;
+}
+
+.Products .InfoContainer h6 a {
+    font-size: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.Products .InfoContainer p {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.SideBarImg {
+    position: relative;
+}
+
+.SideBarImg img {
+    border-radius: 10px;
+}
+
+.SideBarImg h5 {
+    font-size: 32px;
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 50%;
+    color: #000;
+}
+
+.SideBarImg:hover h5 {
+    top: 22%;
+}
+
+.SideBarImg h5 strong:hover {
+    color: #3BB77E !important;
+}

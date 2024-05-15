@@ -44,15 +44,17 @@
 
 .nav .part3 .phno {
     margin-left: auto;
+
 }
 
+
 .nav .part3 .phno svg {
-    font-size: 40px;
+    font-size: 35px;
     opacity: 0.8;
 }
 
 .nav .part3 .phno h3 {
-    font-size: 25px;
+    font-size: 20px;
     line-height: 35px;
 }
 

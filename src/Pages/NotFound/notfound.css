@@ -1,0 +1,56 @@
+.notFound .box {
+    padding: 100px 30px;
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.notFound .box h3 {
+    font-size: 72px;
+    font-family: Roboto;
+    color: #253D4E;
+}
+
+.notFound .box p {
+    text-align: center;
+    color: #7E7E7E;
+}
+
+
+.box .Btn {
+    padding: 40px 50px 40px 50px;
+    font-size: 12px;
+    background: #3BB77E;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+}
+
+.box a {
+    text-decoration: none;
+}
+
+.box .Btn svg {
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.box .Btn {
+    font-size: 25px;
+}
+
+.box .Btn:hover {
+    background: #000;
+    transform: scale(1.05) translatey(-10px);
+}
+
+/* .box .Btn:hover svg {
+    margin-left: 15px;
+} */

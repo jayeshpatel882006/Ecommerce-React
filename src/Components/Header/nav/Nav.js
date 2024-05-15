@@ -147,6 +147,11 @@ const Nav = () => {
                       </li>
                       <li>
                         <Button>
+                          <Link to="/listing">Listing</Link>
+                        </Button>
+                      </li>
+                      <li>
+                        <Button>
                           <Link to="/about">About Us</Link>
                         </Button>
                       </li>
@@ -202,7 +207,7 @@ const Nav = () => {
                       </li>
                       <li>
                         <Button>
-                          <Link>404 Page</Link>
+                          <Link to="/sfaew">404 Page</Link>
                         </Button>
                       </li>
                     </ul>

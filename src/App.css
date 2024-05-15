@@ -56,8 +56,9 @@ body {
 .conatiner-web {
   max-width: 1610px;
   width: 100%;
+  height: auto;
+    margin: auto;
   padding: 0px 45px;
-  margin: auto;
   /* display: flex;
   justify-content: center; */
 }
@@ -79,6 +80,11 @@ body {
 
 .text-g {
   color: #3bb77e !important;
+  text-decoration: none;
+  }
+  
+  .text-g:hover {
+    color: #FDC040 !important;
 }
 
 .hd {
