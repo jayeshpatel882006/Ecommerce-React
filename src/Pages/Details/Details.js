@@ -8,17 +8,18 @@ import Slider from "react-slick";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import {
   FavoriteBorderOutlined,
+  HeadsetMicOutlined,
   KeyboardArrowDownOutlined,
   KeyboardArrowUpOutlined,
+  LocationOnOutlined,
   ShoppingCartOutlined,
-  ShuffleOnOutlined,
   ShuffleOutlined,
 } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
 const Details = () => {
-  const [CategoryItems, setcategoryItems] = useState([
+  const CategoryItems = [
     {
       imglink:
         "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-3.jpg",
@@ -47,7 +48,7 @@ const Details = () => {
       imglink:
         "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-9.jpg",
     },
-  ]);
+  ];
   const [selected, setselected] = useState(
     "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-3.jpg"
   );
@@ -112,6 +113,93 @@ const Details = () => {
       oldPrice: "52.8",
     },
   ];
+  const TableContent = [
+    {
+      name: "Stand Up",
+      content: "35″L x 24″W x 37-45″H(front to back wheel)",
+    },
+    {
+      name: "Folded (w/o wheels)",
+      content: "32.5″L x 18.5″W x 16.5″H",
+    },
+    {
+      name: "Folded (w/ wheels)	",
+      content: "32.5″L x 24″W x 18.5″H",
+    },
+    {
+      name: "Door Pass Through  ",
+      content: "24",
+    },
+    {
+      name: "Frame",
+      content: "Aluminum",
+    },
+    {
+      name: "Weight (w/o wheels)",
+      content: "20 LBS",
+    },
+    {
+      name: "Weight Capacity",
+      content: "60 LBS",
+    },
+    {
+      name: "Width",
+      content: "24″",
+    },
+    {
+      name: "Handle height (ground to handle)",
+      content: "37-45″",
+    },
+    {
+      name: "Wheels",
+      content: "12″ air / wide track slick tread",
+    },
+    {
+      name: "Seat back height",
+      content: "21.5″",
+    },
+    {
+      name: "Head room (inside canopy)",
+      content: "25″",
+    },
+    {
+      name: "Color",
+      content: "Black, Blue, Red, White",
+    },
+    {
+      name: "Size",
+      content: "M,S",
+    },
+  ];
+  const Users = [
+    {
+      name: "Sienna",
+      imgScr:
+        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png",
+      date: "December 4, 2022 at 3:12 pm",
+      rating: 4,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
+    },
+    {
+      name: "Brenna",
+      imgScr:
+        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-3.png",
+      date: "December 4, 2022 at 3:12 pm",
+      rating: 4.5,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
+    },
+    {
+      name: "Gemma",
+      imgScr:
+        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-4.png",
+      date: "December 4, 2022 at 3:12 pm",
+      rating: 3,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
+    },
+  ];
   var settings = {
     dots: false,
     infinite: true,
@@ -122,7 +210,6 @@ const Details = () => {
     arrows: true,
   };
 
-  const ZoomSetting = { width: 400, height: 250, zoomWidth: 500, img: "1.jpg" };
   return (
     <section className="detailsPage">
       <div className="breadCrumbWerper">
@@ -162,6 +249,7 @@ const Details = () => {
                         <div className="item" key={index}>
                           <img
                             src={ite.imglink}
+                            alt=".."
                             className={`w-100 ${
                               selected === ite.imglink ? "selected" : ""
                             }`}
@@ -285,7 +373,7 @@ const Details = () => {
                 {AdditionalInfo.map((ite, index) => (
                   <li
                     className={`list-inline-item ${
-                      activeAdditionalInfo == ite ? "Active" : ""
+                      activeAdditionalInfo === ite ? "Active" : ""
                     }`}
                     key={index}
                     onClick={() => {
@@ -299,7 +387,7 @@ const Details = () => {
                 ))}
               </ul>
               <div className="displayAdditionalInfo">
-                {activeAdditionalInfo == "Description" && (
+                {activeAdditionalInfo === "Description" && (
                   <div className="DescriptionDisplay">
                     <p>
                       Uninhibited carnally hired played in whimpered dear
@@ -389,16 +477,226 @@ const Details = () => {
                     </ul>
                   </div>
                 )}
-                {activeAdditionalInfo == "Additional info" && (
+                {activeAdditionalInfo === "Additional info" && (
                   <div className="AdditionalInfoDisplay">
-                    AdditionalInfoDisplay
+                    <table className="Additionaltable">
+                      {TableContent.map((ite, index) => (
+                        <tr key={index}>
+                          <th>{ite.name}</th>
+                          <td>
+                            <p>{ite.content}</p>
+                          </td>
+                        </tr>
+                      ))}
+                    </table>
                   </div>
                 )}
-                {activeAdditionalInfo == "Vendor" && (
-                  <div className="VendorDisplay">VendorDisplay</div>
+                {activeAdditionalInfo === "Vendor" && (
+                  <div className="VendorDisplay">
+                    <div className="Company d-flex">
+                      <img
+                        src="https://wp.alithemes.com/html/nest/demo/assets/imgs/vendor/vendor-18.svg"
+                        alt=".."
+                      />
+                      <div className="CompanyInfo">
+                        <h4>
+                          <Link className="text-g transition">Noodles Co.</Link>
+                        </h4>
+                        <div className="reting">
+                          <Rating
+                            className="rating"
+                            name="read-only"
+                            value={4.5}
+                            precision={0.5}
+                            size="small"
+                            readOnly
+                          />
+                          <p>(32 reviews)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="otherCompanyInfo">
+                      <h5>
+                        <span>
+                          <LocationOnOutlined />
+                          Address
+                        </span>
+                        : 5171 W Campbell Ave undefined Kent, Utah 53127 United
+                        States
+                      </h5>
+                      <h5>
+                        <span>
+                          <HeadsetMicOutlined />
+                          Contact Seller
+                        </span>
+                        :(+91) - 540-025-553
+                      </h5>
+                    </div>
+                    <div className="qualom3 d-flex">
+                      <div className="Q1">
+                        <p>Rating</p>
+                        <h4>92%</h4>
+                      </div>
+                      <div className="Q2">
+                        <p>Ship on time</p>
+                        <h4>100%</h4>
+                      </div>
+                      <div className="Q3">
+                        <p>Chat response</p>
+                        <h4>89%</h4>
+                      </div>
+                    </div>
+                    <p>
+                      Noodles & Company is an American fast-casual restaurant
+                      that offers international and American noodle dishes and
+                      pasta in addition to soups and salads. Noodles & Company
+                      was founded in 1995 by Aaron Kennedy and is headquartered
+                      in Broomfield, Colorado. The company went public in 2013
+                      and recorded a $457 million revenue in 2017.In late 2018,
+                      there were 460 Noodles & Company locations across 29
+                      states and Washington, D.C.
+                    </p>
+                  </div>
                 )}
-                {activeAdditionalInfo == "Reviews (3)" && (
-                  <div className="ReviewsDisplay">ReviewsDisplay</div>
+                {activeAdditionalInfo === "Reviews (3)" && (
+                  <div className="ReviewsDisplay">
+                    <div className="commentArea">
+                      <div className="row">
+                        <div className="col-md-8">
+                          <h4>Customer questions & answers</h4>
+                          <div className="commentList">
+                            {Users.map((ite, index) => (
+                              <div
+                                className="user shadow border-0 transition"
+                                key={index}
+                              >
+                                <div className="thumb">
+                                  <img src={ite.imgScr} alt="..." />
+                                  <h5 className="text-g">{ite.name}</h5>
+                                </div>
+                                <div className="desc">
+                                  <div className="upperSection">
+                                    <p>{ite.date}</p>
+                                    <Rating
+                                      className="rating"
+                                      name="read-only"
+                                      value={ite.rating}
+                                      precision={0.5}
+                                      size="small"
+                                      readOnly
+                                    />
+                                  </div>
+                                  <div className="lowerSection">
+                                    <p>
+                                      {ite.description}
+                                      <h6 className="reply transition">
+                                        <Button className="text-g transition">
+                                          Reply
+                                        </Button>
+                                      </h6>
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="col-md-4 halfRatingSection">
+                          <h4>Customer reviews</h4>
+
+                          <div className="rating d-flex">
+                            <Rating
+                              className="rating"
+                              name="read-only"
+                              value={4.8}
+                              precision={0.1}
+                              size="small"
+                              readOnly
+                            />
+                            <h6>4.8 out of 5</h6>
+                          </div>
+                          <div className="allProgeshBar">
+                            <div className="progressBarWerper">
+                              <p>5 Star</p>
+                              <div class="progress">
+                                <div
+                                  class="progress-bar bg-success"
+                                  role="progressbar"
+                                  style={{ width: "50%" }}
+                                  aria-valuenow="25"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  50%
+                                </div>
+                              </div>
+                            </div>
+                            <div className="progressBarWerper">
+                              <p>4 Star</p>
+                              <div class="progress">
+                                <div
+                                  class="progress-bar bg-success"
+                                  role="progressbar"
+                                  style={{ width: "25%" }}
+                                  aria-valuenow="25"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  25%
+                                </div>
+                              </div>
+                            </div>
+                            <div className="progressBarWerper">
+                              <p>3 Star</p>
+                              <div class="progress">
+                                <div
+                                  class="progress-bar bg-success"
+                                  role="progressbar"
+                                  style={{ width: "43%" }}
+                                  aria-valuenow="25"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  43%
+                                </div>
+                              </div>
+                            </div>
+                            <div className="progressBarWerper">
+                              <p>2 Star</p>
+                              <div class="progress">
+                                <div
+                                  class="progress-bar bg-success"
+                                  role="progressbar"
+                                  style={{ width: "63%" }}
+                                  aria-valuenow="25"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  63%
+                                </div>
+                              </div>
+                            </div>
+                            <div className="progressBarWerper">
+                              <p>1 Star</p>
+                              <div class="progress">
+                                <div
+                                  class="progress-bar bg-success"
+                                  role="progressbar"
+                                  style={{ width: "81%" }}
+                                  aria-valuenow="25"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  81%
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="CommentForm"></div>
+                  </div>
                 )}
               </div>
             </div>
