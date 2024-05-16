@@ -147,6 +147,11 @@ const Nav = () => {
                       </li>
                       <li>
                         <Button>
+                          <Link to="/products/details">Display</Link>
+                        </Button>
+                      </li>
+                      <li>
+                        <Button>
                           <Link to="/listing">Listing</Link>
                         </Button>
                       </li>

@@ -6,7 +6,7 @@
 
 .Card h2 {
     border-bottom: 1px solid #ececec;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 600;
     position: relative;
     padding-bottom: 20px;
@@ -31,7 +31,7 @@
     cursor: pointer;
     margin: 10px 0px;
     border-radius: 8px;
-    border: 1px solid #4e4e4e4d;
+    border: 1px solid #F2F3F4;
 
 }
 
@@ -52,8 +52,8 @@
 
 .Card .catList .catItem .rounded-circle {
     background: #BCE3C9;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+        height: 30px;
 }
 
 .Filters {
@@ -107,7 +107,8 @@
 .Products {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
+        margin: 10px 5px;
 }
 
 .Products .imgContainer {
@@ -123,6 +124,9 @@
     text-decoration: none;
     font-weight: 600;
     line-height: 1.2;
+}
+.Products:hover .InfoContainer h6 a {
+    color: #FDC040 !important;
 }
 
 .Products .InfoContainer p {

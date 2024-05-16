@@ -18,8 +18,8 @@ const Home = () => {
     // speed: 300,
     slidesToShow: 4,
     slidesToScroll: 1,
-    // autoplay: true,
-    // autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 3000,
     fade: false,
     arrows: true,
   };
@@ -319,7 +319,7 @@ const Home = () => {
           </div>
           <div className="row">
             <div className="col-sm-3 demoImgContainer">
-              <img src={Banner4} className="demoImg w-100" />
+              <img src={Banner4} className="demoImg w-100 transition" />
               <h4>Bring nature into your home</h4>
               <Button className="transition">
                 Shop Now <ArrowForward className="transition" />

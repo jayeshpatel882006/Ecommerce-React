@@ -53,7 +53,7 @@ body {
   padding: 0px 45px;
 }
 
-.conatiner-web {
+.container-web {
   max-width: 1610px;
   width: 100%;
   height: auto;
@@ -82,11 +82,15 @@ body {
   color: #3bb77e !important;
   text-decoration: none;
   }
+        .text-org {
+          color: #FDC040 !important;
+        }
   
-  .text-g:hover {
+                /* .text-g:hover {
     color: #FDC040 !important;
 }
 
+*/
 .hd {
   font-size: 35px;
   font-weight: 600;

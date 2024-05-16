@@ -8,7 +8,7 @@ import { HomeOutlined } from "@mui/icons-material";
 const NotFound = () => {
   return (
     <section className="notFound">
-      <div className="conatiner-web">
+      <div className="container-web">
         <div className="box">
           <img src={notfoundImg} />
           <br />
