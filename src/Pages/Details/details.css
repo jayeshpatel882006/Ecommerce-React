@@ -263,11 +263,6 @@
     border: none
 }
 
-/* Firefox */
-.quantity input[type=number] {
-    -moz-appearance: textfield;
-}
-
 
 
 .PRODUCTINFO {
