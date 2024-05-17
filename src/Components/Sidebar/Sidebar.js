@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import Slider from "@mui/material/Slider";
@@ -9,40 +9,10 @@ import Rating from "@mui/material/Rating";
 import Banner11 from "../../assets/images/banner-11.png";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const Sidebar = () => {
-  const [value, setValue] = useState([200, 750]);
-  const [category, setCategory] = useState([
-    {
-      imgSrc:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-1.svg",
-      catname: "Milks & Dairies",
-      count: 30,
-    },
-    {
-      imgSrc:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-2.svg",
-      catname: "Clothing",
-      count: 35,
-    },
-    {
-      imgSrc:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-3.svg",
-      catname: "Pet Foods",
-      count: 0,
-    },
-    {
-      imgSrc:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-4.svg",
-      catname: "Baking material",
-      count: 60,
-    },
-    {
-      imgSrc:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/theme/icons/category-5.svg",
-      catname: "Fresh Fruit",
-      count: 20,
-    },
-  ]);
+const Sidebar = ({ data, filterByPrice }) => {
+  const [value, setValue] = useState([500, 25000]);
+  const [count, setCount] = useState();
+
   const [color, setColor] = useState([
     {
       name: "Red",
@@ -63,7 +33,27 @@ const Sidebar = () => {
   ]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    filterByPrice(newValue[0], newValue[1]);
   };
+
+  let temp = 0;
+  let LengthArr = [];
+
+  useEffect(() => {
+    data.map((ite) => {
+      ite.items.map((ite1) => {
+        temp = temp + ite1.products.length;
+        // console.log(ite1.products.length);
+      });
+      LengthArr.push(temp);
+      temp = 0;
+    });
+
+    const list = LengthArr.filter(
+      (item, index) => LengthArr.indexOf(item) === index
+    );
+    setCount(list);
+  }, []);
 
   return (
     <>
@@ -71,21 +61,22 @@ const Sidebar = () => {
         <div className="Card border-0 shadow">
           <h2>Category</h2>
           <div className="catList">
-            {category &&
-              category.map((ite, index) => (
-                <div
-                  className="catItem d-flex align-items-center transition"
-                  key={index}
+            {data.map((ite, index) => (
+              <div className="catItem  transition" key={index}>
+                <Link
+                  className="d-flex align-items-center transition"
+                  to={`/cat/${ite.cat_name.toLowerCase()}`}
                 >
                   <span className="img">
-                    <img src={ite.imgSrc} width={30} />
+                    <img src={ite.image} width={30} />
                   </span>
-                  <h4 className="mb-0 ms-3 me-3 transition">{ite.catname}</h4>
+                  <h4 className="mb-0 ms-3 me-3 transition">{ite.cat_name}</h4>
                   <span className="d-flex align-items-center justify-content-center rounded-circle ms-auto">
-                    {ite.count}
+                    {count !== undefined && count[index]}
                   </span>
-                </div>
-              ))}
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
         <div className="Card border-0 shadow">
@@ -93,7 +84,7 @@ const Sidebar = () => {
           <Slider
             min={0}
             max={1000}
-            step={"1"}
+            step={1}
             value={value}
             onChange={handleChange}
             valueLabelDisplay="auto"
@@ -101,10 +92,11 @@ const Sidebar = () => {
           />
           <div className="d-flex pt-2 pb-2 priceRange">
             <span>
-              From: <strong className="text-success"> ${value[0]}</strong>
+              From: <strong className="text-success">Rs {value[0]}</strong>
             </span>
             <span className="ms-auto">
-              To: <strong className="text-success"> ${value[1]}</strong>
+              To:
+              <strong className="text-success">Rs {value[1]}</strong>
             </span>
           </div>
 

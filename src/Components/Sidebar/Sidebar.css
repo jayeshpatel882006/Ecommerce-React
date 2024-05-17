@@ -34,6 +34,9 @@
     border: 1px solid #F2F3F4;
 
 }
+.Card .catList .catItem a {
+    text-decoration: none;
+}
 
 .Card .catList .catItem:hover {
     border: 1px solid #BCE3C9;
@@ -41,11 +44,11 @@
 }
 
 .Card .catList .catItem:hover h4 {
-    color: #3BB77E;
+    color: #3BB77E !important;
 }
 
 .Card .catList .catItem h4 {
-    color: #000000a2;
+    color: #000000a2 !important;
     font-size: 18px;
     font-weight: 400;
 }

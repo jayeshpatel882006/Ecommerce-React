@@ -58,7 +58,7 @@ const Details = () => {
     "Description",
     "Additional info",
     "Vendor",
-    "Reviews (3)",
+    "Reviews",
   ];
   const [activeAdditionalInfo, setActiveAdditionalInfo] =
     useState("Description");
@@ -199,6 +199,15 @@ const Details = () => {
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
     },
+    {
+      name: "Brenna",
+      imgScr:
+        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-3.png",
+      date: "December 4, 2022 at 3:12 pm",
+      rating: 4.5,
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
+    },
   ];
   var settings = {
     dots: false,
@@ -213,16 +222,16 @@ const Details = () => {
   return (
     <section className="detailsPage">
       <div className="breadCrumbWerper">
-        <ul class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ul className="breadcrumb">
+          <li className="breadcrumb-item">
             <Link className="text-g transition" to="/">
               Home
             </Link>
           </li>
-          <li class="breadcrumb-item">
+          <li className="breadcrumb-item">
             <Link className="text-g transition"> Vegetables & Tubers </Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             <Link className="text-g transition"> Seeds Of Change Organic</Link>
           </li>
         </ul>
@@ -239,7 +248,7 @@ const Details = () => {
                     src={selected}
                     zoomType="hover"
                     zoomScale={2}
-                    width={"100%"}
+                    width={500}
                   />
                 </div>
                 <div className="imgSlider">
@@ -382,7 +391,11 @@ const Details = () => {
                       }
                     }}
                   >
-                    <Button>{ite}</Button>
+                    <Button>
+                      {ite === "Reviews"
+                        ? "Reviews (" + Users.length + ")"
+                        : ite}
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -558,7 +571,7 @@ const Details = () => {
                     </p>
                   </div>
                 )}
-                {activeAdditionalInfo === "Reviews (3)" && (
+                {activeAdditionalInfo === "Reviews" && (
                   <div className="ReviewsDisplay">
                     <div className="commentArea">
                       <div className="row">
@@ -618,9 +631,9 @@ const Details = () => {
                           <div className="allProgeshBar">
                             <div className="progressBarWerper">
                               <p>5 Star</p>
-                              <div class="progress">
+                              <div className="progress">
                                 <div
-                                  class="progress-bar bg-success"
+                                  className="progress-bar bg-success"
                                   role="progressbar"
                                   style={{ width: "50%" }}
                                   aria-valuenow="25"
@@ -633,9 +646,9 @@ const Details = () => {
                             </div>
                             <div className="progressBarWerper">
                               <p>4 Star</p>
-                              <div class="progress">
+                              <div className="progress">
                                 <div
-                                  class="progress-bar bg-success"
+                                  className="progress-bar bg-success"
                                   role="progressbar"
                                   style={{ width: "25%" }}
                                   aria-valuenow="25"
@@ -648,9 +661,9 @@ const Details = () => {
                             </div>
                             <div className="progressBarWerper">
                               <p>3 Star</p>
-                              <div class="progress">
+                              <div className="progress">
                                 <div
-                                  class="progress-bar bg-success"
+                                  className="progress-bar bg-success"
                                   role="progressbar"
                                   style={{ width: "43%" }}
                                   aria-valuenow="25"
@@ -663,9 +676,9 @@ const Details = () => {
                             </div>
                             <div className="progressBarWerper">
                               <p>2 Star</p>
-                              <div class="progress">
+                              <div className="progress">
                                 <div
-                                  class="progress-bar bg-success"
+                                  className="progress-bar bg-success"
                                   role="progressbar"
                                   style={{ width: "63%" }}
                                   aria-valuenow="25"
@@ -678,9 +691,9 @@ const Details = () => {
                             </div>
                             <div className="progressBarWerper">
                               <p>1 Star</p>
-                              <div class="progress">
+                              <div className="progress">
                                 <div
-                                  class="progress-bar bg-success"
+                                  className="progress-bar bg-success"
                                   role="progressbar"
                                   style={{ width: "81%" }}
                                   aria-valuenow="25"

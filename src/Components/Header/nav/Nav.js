@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./nav.css";
 
 import Button from "@mui/material/Button";
@@ -6,7 +6,13 @@ import { GridView, HeadsetMic, KeyboardArrowDown } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ data }) => {
+  const [Data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(data);
+  }, []);
+
   return (
     <div className="nav d-flex align-items-center">
       <div className="container-fluid">
@@ -25,16 +31,57 @@ const Nav = () => {
                     <Link to="/">Home</Link>
                   </Button>
                 </li>
+
+                {Data?.length !== 0 &&
+                  Data?.map((item, index) => {
+                    return (
+                      <li className="list-inline-item" key={index}>
+                        <Button>
+                          <Link
+                            to={`/cat/${item.cat_name?.toLowerCase()}`}
+                            onClick={() =>
+                              sessionStorage.setItem("cat", item.cat_name)
+                            }
+                          >
+                            {item.cat_name}
+                            {item.items && <KeyboardArrowDown />}
+                          </Link>
+                        </Button>
+                        {/* {item.items?.length !== 0 && ( */}
+                        <div className="dropDown_Menu">
+                          <ul>
+                            {item.items?.map((item_, index1) => (
+                              <li key={index1}>
+                                <Button>
+                                  <Link
+                                    to={`/cat/${item.cat_name?.toLowerCase()}/${item_.cat_name
+                                      .replace(/\s/g, "-")
+                                      .toLowerCase()}`}
+                                    onClick={() =>
+                                      sessionStorage.setItem(
+                                        "cat",
+                                        item.cat_name
+                                      )
+                                    }
+                                  >
+                                    {item_.cat_name}
+                                  </Link>
+                                </Button>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        {/* )} */}
+                      </li>
+                    );
+                  })}
+
                 <li className="list-inline-item">
                   <Button>
                     <Link to="/about">About</Link>
                   </Button>
                 </li>
-                <li className="list-inline-item">
-                  <Button>
-                    <Link>Shop</Link>
-                  </Button>
-                </li>
+
                 <li className="list-inline-item">
                   <Button>
                     <Link>Vendors</Link>
@@ -48,75 +95,28 @@ const Nav = () => {
                   </Button>
                   <div className="dropDown_Menu megaMenu w-100">
                     <div className="row">
-                      <div className="col">
-                        <h4 className="text-g">Fruit & Vegetables</h4>
-                        <ul className="mt-4 mb-0 ">
-                          <li>
-                            <Link>Meat & Poultry</Link>
-                          </li>
-                          <li>
-                            <Link>Fresh Vegetables</Link>
-                          </li>
-                          <li>
-                            <Link>Herbs & Seasonings</Link>
-                          </li>
-                          <li>
-                            <Link>Cuts & Sprouts</Link>
-                          </li>
-                          <li>
-                            <Link>Exotic Fruits & Veggies</Link>
-                          </li>
-                          <li>
-                            <Link>Packaged Produce</Link>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col">
-                        <h4 className="text-g">Breakfast & Dairy</h4>
-                        <ul className="mt-4 mb-0 ">
-                          <li>
-                            <Link>Milk & Flavoured Milk</Link>
-                          </li>
-                          <li>
-                            <Link>Butter and Margarine</Link>
-                          </li>
-                          <li>
-                            <Link>Eggs Substitutes</Link>
-                          </li>
-                          <li>
-                            <Link>Marmalades</Link>
-                          </li>
-                          <li>
-                            <Link>Sour Cream</Link>
-                          </li>
-                          <li>
-                            <Link>Cheese</Link>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col">
-                        <h4 className="text-g">Meat & Seafood</h4>
-                        <ul className="mt-4 mb-0 ">
-                          <li>
-                            <Link>Breakfast Sausage</Link>
-                          </li>
-                          <li>
-                            <Link>Dinner Sausage</Link>
-                          </li>
-                          <li>
-                            <Link>Chicken</Link>
-                          </li>
-                          <li>
-                            <Link>Sliced Deli Meat</Link>
-                          </li>
-                          <li>
-                            <Link>Wild Caught Fillets</Link>
-                          </li>
-                          <li>
-                            <Link>Crab and Shellfish</Link>
-                          </li>
-                        </ul>
-                      </div>
+                      {Data?.length !== 0 &&
+                        Data?.map((item, index) => {
+                          return (
+                            <div className="col" key={index}>
+                              <h4 className="text-g">{item.cat_name}</h4>
+                              <ul className="mt-4 mb-0 ">
+                                {item.items?.map((item_, index1) => (
+                                  <li key={index1}>
+                                    <Link
+                                      to={`/cat/${item.cat_name?.toLowerCase()}/${item_.cat_name
+                                        .replace(/\s/g, "-")
+                                        .toLowerCase()}`}
+                                    >
+                                      {item_.cat_name}
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          );
+                        })}
+
                       <div className="col">
                         <img
                           src="https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-menu.png"
@@ -126,11 +126,7 @@ const Nav = () => {
                     </div>
                   </div>
                 </li>
-                <li className="list-inline-item">
-                  <Button>
-                    <Link>Blog</Link>
-                  </Button>
-                </li>
+
                 <li className="list-inline-item">
                   <Button>
                     <Link>

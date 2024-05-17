@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./catslider.css";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
-const CatSlider = () => {
+const CatSlider = ({ data }) => {
   const [CategoryItems, setcategoryItems] = useState([
     {
       name: "Custard apple",
@@ -89,12 +90,33 @@ const CatSlider = () => {
         "https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/cat-13.png",
     },
   ]);
+  const [count, setCount] = useState();
+  const bgColor = ["#feefea", "#ecffec", "#fff3eb"];
+  // let count;
+  let temp = 0;
+  let LengthArr = [];
+
+  useEffect(() => {
+    data.map((ite) => {
+      ite.items.map((ite1) => {
+        temp = temp + ite1.products.length;
+        // console.log(ite1.products.length);
+      });
+      LengthArr.push(temp);
+      temp = 0;
+    });
+
+    const list = LengthArr.filter(
+      (item, index) => LengthArr.indexOf(item) === index
+    );
+    setCount(list);
+  }, []);
 
   var settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     // speed: 300,
-    slidesToShow: 11,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -106,19 +128,26 @@ const CatSlider = () => {
       <div className="container-fluid ">
         <h2 className="hd cursor-text">Featured Categories</h2>
         <Slider {...settings} className="cat_slider_Main w-100">
-          {CategoryItems !== 0 &&
-            CategoryItems.map((ite, index) => (
-              <div className="item" key={index}>
-                <div
-                  className="info"
-                  style={{ background: ite.bgColor, borderColor: ite.bgColor }}
-                >
-                  <img src={ite.imglink} />
-                  <h5>{ite.name}</h5>
-                  <span>{ite.items}</span>
+          {data !== 0 &&
+            data.map((ite, index) => {
+              return (
+                <div className="item" key={index}>
+                  <Link to={`/cat/${ite.cat_name?.toLowerCase()}`}>
+                    <div
+                      className="info"
+                      style={{
+                        background: bgColor[index],
+                        borderColor: bgColor[index],
+                      }}
+                    >
+                      <img src={ite.image} width={100} />
+                      <h5 className="transition">{ite.cat_name}</h5>
+                      <span>{count !== undefined ? count[index] : ""}</span>
+                    </div>
+                  </Link>
                 </div>
-              </div>
-            ))}
+              );
+            })}
         </Slider>
       </div>
     </div>

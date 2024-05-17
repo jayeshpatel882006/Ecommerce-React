@@ -12,17 +12,16 @@
 }
 
 .catSliderSection .slick-next {
-    top: -40px !important;
-    right: 0px !important;
+visibility: hidden;
+    opacity: 0;
 }
 .catSliderSection .slick-track {
     overflow: hidden;
 }
 
 .catSliderSection .slick-prev {
-    top: -40px !important;
-    right: 80px;
-    left: inherit !important;
+visibility: hidden;
+    opacity: 0;
 }
 
 .cat_slider_Main .item {
@@ -32,7 +31,9 @@
     border-radius: 7px;
     cursor: pointer;
 }
-
+.cat_slider_Main .item a {
+    text-decoration: none;
+}
 .cat_slider_Main .item:hover {
     color: #3bb77e;
 }
@@ -48,14 +49,16 @@
 
 .cat_slider_Main .item .info:hover.info h5 {
     color: #3bb77e;
+    
 }
 
 .cat_slider_Main .item .info img {
     transition: transform 0.9s ease;
+    margin-top: 20px;
 }
 
 .cat_slider_Main .item .info:hover.info img {
-    transform: scale(1.07)
+    transform: scale(1.2)
 }
 
 .cat_slider_Main .item .info:hover {

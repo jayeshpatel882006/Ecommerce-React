@@ -23,6 +23,11 @@
     z-index: 100;
     visibility: visible;
 }
+.ProductThumb .imgWreper img {
+    height: 300px;
+    width: 300px !important;
+    object-fit: contain;
+}
 
 .ProductThumb .imgWreper {
     display: flex;

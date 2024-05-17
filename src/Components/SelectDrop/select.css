@@ -1,11 +1,11 @@
 .selectDrop {
-    width: 300px;
+    width: 200px;
     height: auto;
     background: #fff;
     position: absolute;
-    padding: 15px;
+    padding: 10px;
     top: 110%;
-    left: -20px;
+    left: 0px;
     z-index: 100;
     box-shadow: 0 3px 6px rgb(0 0 0 / 20%);
 }
@@ -63,6 +63,7 @@
     color: rgba(0, 0, 0, 0.6);
     background: white;
     border-radius: 7px;
+    line-height: 18px;
 }
 
 .selectDrop .serchResult li:hover {

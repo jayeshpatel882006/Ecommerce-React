@@ -22,7 +22,7 @@ import {
 import Person2OutLinedIcon from "@mui/icons-material/Person2Outlined";
 import Nav from "./nav/Nav";
 
-const Header = () => {
+const Header = ({ data }) => {
   const [accountDropDown, setAccountDropDown] = useState(false);
   const headerRef = useRef();
   const [category, setCategory] = useState([
@@ -182,7 +182,7 @@ const Header = () => {
             </div>
           </div>
         </header>
-        <Nav />
+        {data !== undefined && <Nav data={data} />}
       </div>
       <div className="AfterHeader"></div>
     </>

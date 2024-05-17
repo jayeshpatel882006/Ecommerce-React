@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SliderCompo from "./Slider/Slider";
 import CatSlider from "../../Components/CatSlider/CatSlider";
 import Banner from "../../Components/Banner/Banner";
@@ -7,11 +7,11 @@ import "./home.css";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Slider from "react-slick";
 import TopProducts from "../../Components/TopProducts/TopProducts";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowForward, StarPurple500TwoTone } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import Banner4 from "../../assets/images/banner-4.png";
 
-const Home = () => {
+const Home = ({ data }) => {
   var settings = {
     dots: false,
     infinite: true,
@@ -23,15 +23,61 @@ const Home = () => {
     fade: false,
     arrows: true,
   };
-  const [popularHeading, setPopularHeading] = useState([
-    "All",
-    "Milks & Dairies",
-    "Coffes & Teas",
-    "Pet Foods",
-    "Meats",
-    "Vegetables",
-    "Fruits",
-  ]);
+  const [ProductData, setProductData] = useState(data);
+  const [popularHeading, setPopularHeading] = useState([]);
+  const [activetab, setActiveTab] = useState();
+  const [avtiveTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabData, setActiveTabData] = useState();
+  const [dailyBestSaleProduct, setDailyBestSaleProduct] = useState([]);
+
+  useEffect(() => {
+    setPopularHeading([]);
+    let list = [];
+    ProductCard !== undefined &&
+      ProductData.map((ite, index) => {
+        ite.items?.map((item, index) => {
+          list.push(item.cat_name);
+          setPopularHeading((popularHeading) => [
+            ...popularHeading,
+            item.cat_name,
+          ]);
+        });
+      });
+    setActiveTab(list[0]);
+    list = [];
+  }, []);
+
+  useEffect(() => {
+    ProductData &&
+      ProductData.map((ite) => {
+        if (ite.cat_name === "Electronics") {
+          ite.items.map((items) => {
+            // console.log(items);
+            items.products.map((items2, index) => {
+              setDailyBestSaleProduct((dailyBestSaleProduct) => [
+                ...dailyBestSaleProduct,
+                items2,
+              ]);
+            });
+          });
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    let arr = [];
+    setActiveTabData(arr);
+
+    ProductData.length !== 0 &&
+      ProductData.map((item) => {
+        item.items.map((item_) => {
+          if (item_.cat_name === activetab) {
+            setActiveTabData(item_.products);
+          }
+        });
+      });
+  }, [activeTabData, activetab, avtiveTabIndex]);
+
   const [dailyBestSells, setDailyBestSalls] = useState([
     "Featured",
     "Popular",
@@ -265,10 +311,11 @@ const Home = () => {
       },
     ],
   ]);
+
   return (
     <div>
       <SliderCompo />
-      <CatSlider />
+      <CatSlider data={data} />
       <Banner />
       <section className="HomeProduct">
         <div className="container-fluid ">
@@ -279,8 +326,12 @@ const Home = () => {
                 popularHeading.map((ite, index) => (
                   <li
                     className={`list-inline-item transition ${
-                      index == 0 ? "Active" : ""
+                      index == avtiveTabIndex ? "Active" : ""
                     }`}
+                    onClick={() => {
+                      setActiveTabIndex(index);
+                      setActiveTab(ite);
+                    }}
                     key={index}
                   >
                     <Link className="cursor transition">{ite}</Link>
@@ -289,10 +340,10 @@ const Home = () => {
             </ul>
           </div>
           <div className="productRow justify-content-center">
-            {popularProducts &&
-              popularProducts.map((ite, index) => (
+            {activeTabData &&
+              activeTabData.map((ite, index) => (
                 <div className="item" key={index}>
-                  <ProductCard Data={ite} />
+                  <ProductCard Data={ite} catName={activetab} />
                 </div>
               ))}
           </div>
@@ -319,7 +370,7 @@ const Home = () => {
           </div>
           <div className="row">
             <div className="col-sm-3 demoImgContainer">
-              <img src={Banner4} className="demoImg w-100 transition" />
+              <img src={Banner4} className="demoImg w-100 h-100 transition" />
               <h4>Bring nature into your home</h4>
               <Button className="transition">
                 Shop Now <ArrowForward className="transition" />
@@ -327,12 +378,11 @@ const Home = () => {
             </div>
             <div className="col-sm-9">
               <Slider {...settings} className="dailyProductSlider">
-                {popularProducts &&
-                  popularProducts.map((ite, index) => (
-                    <div className="item" key={index}>
-                      <ProductCard Data={ite} key={index} />
-                    </div>
-                  ))}
+                {dailyBestSaleProduct?.map((ite, index) => (
+                  <div className="item" key={index}>
+                    <ProductCard Data={ite} key={index} />
+                  </div>
+                ))}
               </Slider>
             </div>
           </div>

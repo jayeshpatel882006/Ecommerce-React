@@ -12,6 +12,7 @@
 }
 
 .FilterTab li a {
+    text-transform: capitalize;
     text-decoration: none;
     color: #000;
     font-size: 16px;

@@ -68,6 +68,9 @@ header .headerSerch .search .searchIcon {
     opacity: 0.7;
 }
 
+header .headerSerch .selectDrop {
+    left: -20px !important;
+}
 header .headerSerch .search input {
     height: 30px;
     width: 100%;
@@ -99,6 +102,7 @@ header .countryWraper .selecterDrop {
     color: #279a65;
 
 }
+
 
 header .countryWraper .selecterDrop .selectDrop ul li {
     display: flex;
