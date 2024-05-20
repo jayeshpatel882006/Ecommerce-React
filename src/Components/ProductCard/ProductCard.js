@@ -73,9 +73,7 @@ const ProductCard = ({ Data, catName }) => {
             readOnly
           />
 
-          <span className="brand d-block">
-            By <Link>{Data?.brand}</Link>
-          </span>
+          <span className="brand d-block">By {Data?.brand}</span>
           <div className="d-flex align-items-center">
             <div className="d-flex align-items-center">
               <span className="price">Rs {Data?.price} </span>

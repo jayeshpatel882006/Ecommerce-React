@@ -16,6 +16,7 @@ import {
 } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ProductCard from "../../Components/ProductCard/ProductCard";
+import axios from "axios";
 
 const Details = ({ data }) => {
   const [currentProduct, setCurrentProduct] = useState();
@@ -23,7 +24,13 @@ const Details = ({ data }) => {
   const [bigImageSize, setBigImageSize] = useState([1000, 1000]);
   const [smlImageSize, setSmlImageSize] = useState([150, 150]);
   const [RelatedProduct, setRelatedProduct] = useState();
-
+  const [Reviews, setReviews] = useState();
+  const [review, setReview] = useState({
+    name: "",
+    rating: 0,
+    text: "",
+    productId: id,
+  });
   const zoomSliderBig = useRef();
   const zoomSlider = useRef();
   const [ParentCatName, setParentCatName] = useState();
@@ -53,7 +60,49 @@ const Details = ({ data }) => {
         }
       });
   };
+
+  const handalSubmitReview = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:3000/jayesh", review).then((res) => {
+        console.log(res);
+      });
+      setReview({
+        name: "",
+        rating: 0,
+        text: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getReview = async () => {
+    let data = {};
+    let revies = [];
+    try {
+      await axios.get("http://localhost:3000/jayesh").then((res) => {
+        data = res.data;
+      });
+      data !== undefined &&
+        data.map((item) => {
+          if (item.productId === id) {
+            revies.push({ ...item });
+            // setReviews({ ...Reviews, item });
+          }
+        });
+      const list = revies.filter(
+        (item, index) => revies.indexOf(item) === index
+      );
+      setReviews(list);
+      getReview();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
+    getReview();
     window.scrollTo(0, 0);
     // console.log(id);
     getCatName();
@@ -142,44 +191,6 @@ const Details = ({ data }) => {
       content: "M,S",
     },
   ];
-  const Users = [
-    {
-      name: "Sienna",
-      imgScr:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-2.png",
-      date: "December 4, 2022 at 3:12 pm",
-      rating: 4,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
-    },
-    {
-      name: "Brenna",
-      imgScr:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-3.png",
-      date: "December 4, 2022 at 3:12 pm",
-      rating: 4.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
-    },
-    {
-      name: "Gemma",
-      imgScr:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-4.png",
-      date: "December 4, 2022 at 3:12 pm",
-      rating: 3,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
-    },
-    {
-      name: "Brenna",
-      imgScr:
-        "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-3.png",
-      date: "December 4, 2022 at 3:12 pm",
-      rating: 4.5,
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt?",
-    },
-  ];
 
   var settings = {
     dots: false,
@@ -261,7 +272,7 @@ const Details = ({ data }) => {
                           zoomScale={1}
                           zoomType="hover"
                           imgAttributes={{
-                            alt: img,
+                            alt: `${img}?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`,
                           }}
                           src={`${img}?im=Resize=(${bigImageSize[0]},${bigImageSize[1]})`}
                         />
@@ -477,7 +488,7 @@ const Details = ({ data }) => {
                 >
                   <Button>
                     {ite === "Reviews"
-                      ? "Reviews (" + Users?.length + ")"
+                      ? "Reviews (" + Reviews?.length + ")"
                       : ite}
                   </Button>
                 </li>
@@ -486,90 +497,7 @@ const Details = ({ data }) => {
             <div className="displayAdditionalInfo">
               {activeAdditionalInfo === "Description" && (
                 <div className="DescriptionDisplay">
-                  <p>
-                    Uninhibited carnally hired played in whimpered dear gorilla
-                    koala depending and much yikes off far quetzal goodness and
-                    from for grimaced goodness unaccountably and meadowlark near
-                    unblushingly crucial scallop tightly neurotic hungrily some
-                    and dear furiously this apart. Spluttered narrowly yikes
-                    left moth in yikes bowed this that grizzly much hello on
-                    spoon-fed that alas rethought much decently richly and wow
-                    against the frequent fluidly at formidable acceptably
-                    flapped besides and much circa far over the bucolically hey
-                    precarious goldfinch mastodon goodness gnashed a jellyfish
-                    and one however because.
-                  </p>
-                  <ul>
-                    <li>
-                      <span>Type Of Packing</span>Bottle
-                    </li>
-                    <li>
-                      <span>Color</span>Green, Pink, Powder Blue, Purple
-                    </li>
-                    <li>
-                      <span>Quantity Per Case</span>100ml
-                    </li>
-                    <li>
-                      <span>Ethyl Alcohol</span>70%
-                    </li>
-                    <li>
-                      <span>Piece In One</span>Carton
-                    </li>
-                  </ul>
-                  <hr />
-                  <p>
-                    Laconic overheard dear woodchuck wow this outrageously taut
-                    beaver hey hello far meadowlark imitatively egregiously
-                    hugged that yikes minimally unanimous pouted flirtatiously
-                    as beaver beheld above forward energetic across this jeepers
-                    beneficently cockily less a the raucously that magic upheld
-                    far so the this where crud then below after jeez enchanting
-                    drunkenly more much wow callously irrespective limpet.
-                  </p>
-                  <h4>Packaging & Delivery</h4>
-                  <p>
-                    Less lion goodness that euphemistically robin expeditiously
-                    bluebird smugly scratched far while thus cackled sheepishly
-                    rigid after due one assenting regarding censorious while
-                    occasional or this more crane went more as this less much
-                    amid overhung anathematic because much held one exuberantly
-                    sheep goodness so where rat wry well concomitantly.
-                  </p>
-                  <p>
-                    Scallop or far crud plain remarkably far by thus far iguana
-                    lewd precociously and and less rattlesnake contrary caustic
-                    wow this near alas and next and pled the yikes articulate
-                    about as less cackled dalmatian in much less well jeering
-                    for the thanks blindly sentimental whimpered less across
-                    objectively fanciful grimaced wildly some wow and rose
-                    jeepers outgrew lugubrious luridly irrationally attractively
-                    dachshund.
-                  </p>
-                  <hr />
-                  <h4>Suggested Use</h4>
-                  <ul className="mb-4">
-                    <li>Refrigeration not necessary.</li>
-                    <li>Stir before serving</li>
-                  </ul>
-                  <h4>Other Ingredients</h4>
-                  <ul className="mb-4">
-                    <li>Organic raw pecans, organic raw cashews.</li>
-                    <li>
-                      This butter was produced using a LTG (Low Temperature
-                      Grinding) process
-                    </li>
-                    <li>
-                      Made in machinery that processes tree nuts but does not
-                      process peanuts, gluten, dairy or soy
-                    </li>
-                  </ul>
-                  <h4>Warnings</h4>
-                  <ul>
-                    <li>
-                      Oil separation occurs naturally. May contain pieces of
-                      shell.
-                    </li>
-                  </ul>
+                  <p>{currentProduct?.description}</p>
                 </div>
               )}
               {activeAdditionalInfo === "Additional info" && (
@@ -659,41 +587,50 @@ const Details = ({ data }) => {
                     <div className="row">
                       <div className="col-md-8">
                         <h4>Customer questions & answers</h4>
-                        <div className="commentList">
-                          {Users.map((ite, index) => (
-                            <div
-                              className="user shadow border-0 transition"
-                              key={index}
-                            >
-                              <div className="thumb">
-                                <img src={ite.imgScr} alt="..." />
-                                <h5 className="text-g">{ite.name}</h5>
-                              </div>
-                              <div className="desc">
-                                <div className="upperSection">
-                                  <p>{ite.date}</p>
-                                  <Rating
-                                    className="rating"
-                                    name="read-only"
-                                    value={ite.rating}
-                                    precision={0.5}
-                                    size="small"
-                                    readOnly
+                        <div className="commentList mt-5">
+                          {Reviews?.length !== 0 ? (
+                            Reviews?.map((ite, index) => (
+                              <div
+                                className="user shadow border-0 transition"
+                                key={index}
+                              >
+                                <div className="thumb">
+                                  <img
+                                    src={
+                                      "https://wp.alithemes.com/html/nest/demo/assets/imgs/blog/author-3.png"
+                                    }
+                                    alt="..."
                                   />
+                                  <h5 className="text-g">{ite.name}</h5>
                                 </div>
-                                <div className="lowerSection">
-                                  <p>
-                                    {ite.description}
-                                    <h6 className="reply transition">
-                                      <Button className="text-g transition">
-                                        Reply
-                                      </Button>
-                                    </h6>
-                                  </p>
+                                <div className="desc">
+                                  <div className="upperSection">
+                                    <p>{ite.date}</p>
+                                    <Rating
+                                      className="rating me-auto"
+                                      name="read-only"
+                                      value={ite.rating}
+                                      precision={0.5}
+                                      size="small"
+                                      readOnly
+                                    />
+                                  </div>
+                                  <div className="lowerSection">
+                                    <p>
+                                      {ite.text}
+                                      {/* <h6 className="reply transition">
+                                        <Button className="text-g transition">
+                                          Reply
+                                        </Button>
+                                      </h6> */}
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            ))
+                          ) : (
+                            <h5 className="m-5">No One Added The Review</h5>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-4 halfRatingSection">
@@ -790,7 +727,58 @@ const Details = ({ data }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="CommentForm"></div>
+                  <div className="CommentForm col-md-8">
+                    <form onSubmit={handalSubmitReview}>
+                      <h4>Add Review</h4>
+                      <div className="form-group">
+                        <textarea
+                          className="form-control"
+                          placeholder="Write Review"
+                          rows={5}
+                          value={review.text}
+                          onChange={(e) =>
+                            setReview({ ...review, text: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="row">
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Name"
+                              value={review.name}
+                              onChange={(e) =>
+                                setReview({ ...review, name: e.target.value })
+                              }
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-group">
+                            <Rating
+                              value={review.rating}
+                              precision={0.5}
+                              onChange={(e) =>
+                                setReview({ ...review, rating: e.target.value })
+                              }
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <Button
+                          type="submit"
+                          color="success"
+                          className="btn-g btn-lg"
+                        >
+                          Submit Review
+                        </Button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               )}
             </div>
