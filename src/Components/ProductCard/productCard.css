@@ -8,6 +8,9 @@
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0);
 
 }
+.ProductThumb a {
+    text-decoration: none;
+}
 
 .ProductThumb:hover {
     box-shadow: 0px 0px 7px rgba(0, 255, 81, 0.4);
@@ -121,12 +124,11 @@ width: 53%;
 .ProductThumb .info .title {
     padding: 0;
     width: 100%;
-}
-
-.ProductThumb .info .title a {
-    text-decoration: none;
     color: #253D4E;
     font-size: 16px;
+}
+.ProductThumb .info .title:hover {
+    color: #3BB77E;
 }
 
 .ProductThumb .info .brand {
@@ -148,6 +150,7 @@ width: 53%;
 
 .ProductThumb .info .oldprice {
     text-decoration: line-through;
+    color: #253D4E;
     font-size: 14px;
 }
 

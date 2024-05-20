@@ -25,10 +25,11 @@
     font-size: 40px;
     font-weight: 600;
     line-height: 1.2;
+    color: #0000009e;
 }
 
 .detailsPage .part1 .productInfo .priceSec .Price {
-    font-size: 58px;
+    font-size: 60px;
     font-weight: bold;
 }
 
@@ -44,11 +45,61 @@
     color: #B6B6B6;
 }
 
-.productImg {
+.productZoom {
     border: 1px solid #0000003d;
     border-radius: 10px;
     overflow: hidden;
-    height: 527px;
+width: 100%;
+    height: max-content;
+}
+
+/* .productZoom .item {
+     height: 100% 
+    background: #000; 
+}*/
+
+.zoomSliderBig .iiz__btn {
+    display: none;
+}
+
+.zoomSlider {
+    padding-top: 30px;
+}
+
+.zoomSlider .slick-slide {
+    padding-right: 20px !important;
+}
+
+.zoomSlider * {
+    outline: none !important;
+}
+
+.zoomSlider .item {
+    border: 2px solid transparent !important;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.zoomSlider .slick-current .item {
+    border: 2px solid #3bb77e !important;
+}
+
+.zoomSlider .slick-arrow {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.zoomSlider .slick-slider:hover .slick-arrow {
+    opacity: 1;
+    visibility: inherit;
+}
+
+.zoomSlider .slick-prev {
+    left: -25px !important;
+}
+.cat_slider_Main .item {
+    width: 95% !important;
 }
 
 .productImg .iiz__btn {
@@ -63,44 +114,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-
-.imgSlider {
-    margin-top: 10px;
-}
-
-.imgSlider .item {
-    height: auto;
-    width: auto;
-    border: 1px solid transparent
-}
-
-.imgSlider .item img {
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.imgSlider .selected {
-    border: 1px solid #3bb77e;
-}
-
-.cat_slider_Main .item {
-    width: 95% !important;
-}
-
-.imgSlider .slick-arrow {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.imgSlider .slick-slider:hover .slick-arrow {
-    opacity: 1;
-    visibility: inherit;
-}
-
-.imgSlider .slick-prev {
-    left: -25px !important;
-}
-
 .detailsPage .part2 {
     width: 20%;
     position: relative;
@@ -124,7 +137,7 @@
 }
 
 .Productsize ul li {
-    margin-right: 5px !important;
+    margin-left: 10px !important;
 }
 
 .Productsize ul li a {
@@ -132,7 +145,7 @@
     align-items: center;
     justify-content: center;
     padding: 5px 10px;
-    /* border: 1px solid rgba(0, 0, 0, 0.2); */
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-decoration: none;
     color: #000000af;
@@ -142,12 +155,14 @@
 
 .Productsize ul li .sizeSelected {
     background: #3bb77e;
+    border: 1px solid #3bb77e;
     color: #fff;
 
 }
 
 .Productsize ul li:hover a {
     background: #3bb77e;
+    border: 1px solid #3bb77e;
     color: #fff;
 
 }
@@ -266,11 +281,15 @@
     border: none
 }
 
+.detailsPage .detailsContainer {
+    max-width: 85%;
+}
 
 
 .PRODUCTINFO {
     border: 1px solid #ececec;
     border-radius: 15px;
+    margin-top: 30px;
     padding: 40px 50px;
 }
 
@@ -343,6 +362,43 @@
     margin-top: 30px;
 }
 
+.RetatedProductDisplay {
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+
+.RetatedProductDisplay .innreDiv {
+    height: auto;
+}
+
+.RetatedProductDisplay .innreDiv .item {
+    padding: 30px 20px;
+}
+
+.RetatedProductDisplay .innreDiv .item .ProductThumb .imgWreper img {
+    height: 200px !important;
+    width: 200px !important;
+}
+
+.RetatedProductDisplay .innreDiv .item .ProductThumb .info h4 {
+    margin-top: 10px !important;
+    padding-bottom: 5px;
+}
+
+.RetatedProductDisplay .innreDiv .item .ProductThumb .info h4::after {
+    content: "";
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.RetatedProductDisplay .innreDiv .item .ProductThumb .info .price {
+    font-size: 13px !important;
+}
+
+.RetatedProductDisplay .innreDiv .item .ProductThumb .info .oldprice {
+    font-size: 10px !important;
+}
 .RetatedProductDisplay h4 {
     position: relative;
     margin-top: 60px;
@@ -366,13 +422,7 @@
     display: flex;
 }
 
-.RetatedProductDisplay .innreDiv .item {
 
-    /* width: 100/5; */
-    /* background: #000; */
-    padding: 0px 15px;
-
-}
 .AdditionalInfoDisplay .Additionaltable {
     font-size: 16px;
     width: 100%;
@@ -395,6 +445,10 @@
     width: 100%;
 }
 
+.VendorDisplay .Company {
+    display: flex;
+    align-items: center;
+}
 .VendorDisplay .CompanyInfo {
     width: 100%;
     margin-left: 20px;

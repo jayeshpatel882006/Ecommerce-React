@@ -36,7 +36,7 @@ const Select = ({ data, placeholder, Icon }) => {
           className="openselect cursor"
           onClick={() => setOpenselect(!openselect)}
         >
-          {selectedItem.length > 14
+          {selectedItem?.length > 14
             ? selectedItem.substr(0, 14) + "..."
             : selectedItem}
           <KeyboardArrowDownIcon className="arrow" />

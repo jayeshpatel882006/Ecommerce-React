@@ -18,8 +18,8 @@ const Home = ({ data }) => {
     // speed: 300,
     slidesToShow: 4,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    // autoplay: true,
+    // autoplaySpeed: 3000,
     fade: false,
     arrows: true,
   };
@@ -31,6 +31,7 @@ const Home = ({ data }) => {
   const [dailyBestSaleProduct, setDailyBestSaleProduct] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     setPopularHeading([]);
     let list = [];
     ProductCard !== undefined &&
@@ -48,17 +49,20 @@ const Home = ({ data }) => {
   }, []);
 
   useEffect(() => {
+    let arr = [];
     ProductData &&
       ProductData.map((ite) => {
         if (ite.cat_name === "Electronics") {
           ite.items.map((items) => {
             // console.log(items);
             items.products.map((items2, index) => {
-              setDailyBestSaleProduct((dailyBestSaleProduct) => [
-                ...dailyBestSaleProduct,
-                items2,
-              ]);
+              arr.push({
+                ...items2,
+                parentCatName: ite.cat_name,
+                subCatName: items.cat_name,
+              });
             });
+            setDailyBestSaleProduct(arr);
           });
         }
       });
@@ -66,23 +70,26 @@ const Home = ({ data }) => {
 
   useEffect(() => {
     let arr = [];
-    setActiveTabData(arr);
 
     ProductData.length !== 0 &&
       ProductData.map((item) => {
         item.items.map((item_) => {
           if (item_.cat_name === activetab) {
-            setActiveTabData(item_.products);
+            item_.products.length !== 0 &&
+              item_.products.map((product) => {
+                arr.push({
+                  ...product,
+                  parentCatName: item.cat_name,
+                  subCatName: item_.cat_name,
+                });
+              });
+
+            setActiveTabData(arr);
           }
         });
       });
   }, [activeTabData, activetab, avtiveTabIndex]);
 
-  const [dailyBestSells, setDailyBestSalls] = useState([
-    "Featured",
-    "Popular",
-    "New added",
-  ]);
   const [popularProducts, setpopularProducts] = useState([
     {
       imgLink:
@@ -325,7 +332,7 @@ const Home = ({ data }) => {
               {popularHeading &&
                 popularHeading.map((ite, index) => (
                   <li
-                    className={`list-inline-item transition ${
+                    className={`list-inline-item transition  ${
                       index == avtiveTabIndex ? "Active" : ""
                     }`}
                     onClick={() => {
@@ -334,7 +341,7 @@ const Home = ({ data }) => {
                     }}
                     key={index}
                   >
-                    <Link className="cursor transition">{ite}</Link>
+                    <p className="cursor transition"> {ite}</p>
                   </li>
                 ))}
             </ul>
@@ -354,19 +361,6 @@ const Home = ({ data }) => {
         <div className="container-fluid  ">
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 cursor-text">Daily Best Sells</h4>
-            <ul className="list list-inline FilterTab transition">
-              {dailyBestSells &&
-                dailyBestSells.map((ite, index) => (
-                  <li
-                    className={`list-inline-item transition ${
-                      index == 0 ? "Active" : ""
-                    }`}
-                    key={index}
-                  >
-                    <Link className="cursor transition">{ite}</Link>
-                  </li>
-                ))}
-            </ul>
           </div>
           <div className="row">
             <div className="col-sm-3 demoImgContainer">
@@ -376,8 +370,8 @@ const Home = ({ data }) => {
                 Shop Now <ArrowForward className="transition" />
               </Button>
             </div>
-            <div className="col-sm-9">
-              <Slider {...settings} className="dailyProductSlider">
+            <div className="col-sm-9 demoProductContainer">
+              <Slider {...settings} className="dailyProductSlider w-100">
                 {dailyBestSaleProduct?.map((ite, index) => (
                   <div className="item" key={index}>
                     <ProductCard Data={ite} key={index} />

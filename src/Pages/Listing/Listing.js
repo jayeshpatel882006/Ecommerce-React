@@ -3,7 +3,7 @@ import "./listing.css";
 import { Link, useParams } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import ProductCard from "../../Components/ProductCard/ProductCard";
-import { ArrowForwardIosOutlined, HomeOutlined } from "@mui/icons-material";
+import { HomeOutlined } from "@mui/icons-material";
 const Listing = ({ data, singal }) => {
   // const [popularProducts, setpopularProducts] = useState([
   //   {
@@ -420,15 +420,22 @@ const Listing = ({ data, singal }) => {
   const [Data, setData] = useState();
   const id = useParams();
 
+  const [brandfilter, setBrandFilter] = useState();
+  const [ratingsArr, setRatingArr] = useState();
+
   let tempArr = [];
   useEffect(() => {
+    window.scrollTo(0, 0);
     data.map((ite) => {
-      // tempArr = [];
       if (singal === true) {
         if (ite.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
           ite.items?.map((ite2) => {
             ite2.products?.map((ite3) => {
-              tempArr.push(ite3);
+              tempArr.push({
+                ...ite3,
+                parentCatName: ite.cat_name,
+                subCatName: ite2.cat_name,
+              });
             });
           });
         }
@@ -440,8 +447,11 @@ const Listing = ({ data, singal }) => {
               id.id.replace(/-/g, " ").toLocaleLowerCase()
             ) {
               ite2.products.map((it3) => {
-                tempArr.push(it3);
-                // console.log(it3);
+                tempArr.push({
+                  ...it3,
+                  parentCatName: ite.cat_name,
+                  subCatName: ite2.cat_name,
+                });
               });
             }
           });
@@ -452,29 +462,121 @@ const Listing = ({ data, singal }) => {
       (item, index) => tempArr.indexOf(item) === index
     );
     // console.log(list);
+    checkFilters(list);
     setData(list);
   }, [id]);
 
   tempArr = [];
+  let brand = [];
+  let rating = [];
+  const checkFilters = (dataa) => {
+    dataa !== undefined &&
+      dataa.map((item) => {
+        brand.push(item.brand);
+        rating.push(parseFloat(item.rating));
+      });
+    const list = brand.filter((item, index) => brand.indexOf(item) === index);
+    setBrandFilter(list);
+
+    const ratArr = rating.filter((ite, index) => rating.indexOf(ite) === index);
+    setRatingArr(ratArr);
+  };
+
+  const filterByBrand = (keyword) => {
+    tempArr = [];
+    data?.map((items) => {
+      if (singal === true) {
+        items.items?.map((ite2) => {
+          ite2.products?.map((produc) => {
+            if (produc.brand?.toLowerCase() === keyword.toLowerCase()) {
+              tempArr.push({
+                ...produc,
+                parentCatName: items.cat_name,
+                subCatName: ite2.cat_name,
+              });
+              // console.log("Parent:", items.cat_name, "Child:", ite2.cat_name);
+            }
+          });
+        });
+      } else {
+        items.items?.map((ite2) => {
+          if (
+            ite2.cat_name.split(" ").join("-").toLowerCase() ===
+            id.id.split(" ").join("-").toLowerCase()
+          ) {
+            ite2.products?.map((produc) => {
+              if (produc.brand?.toLowerCase() === keyword.toLowerCase()) {
+                tempArr.push({
+                  ...produc,
+                  parentCatName: items.cat_name,
+                  subCatName: ite2.cat_name,
+                });
+                console.log("Parent:", items.cat_name, "Child:", ite2.cat_name);
+              }
+            });
+          }
+        });
+      }
+    });
+
+    const list = tempArr.filter(
+      (item, index) => tempArr.indexOf(item) === index
+    );
+    tempArr = [];
+    setData(list);
+    window.scrollTo(0, 0);
+  };
+  const filterByRating = (keyword) => {
+    tempArr = [];
+    data?.map((items) => {
+      if (singal === true) {
+        if (items.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
+          items.items?.map((ite2) => {
+            ite2.products?.map((produc) => {
+              if (produc.rating === keyword) {
+                tempArr.push({
+                  ...produc,
+                  parentCatName: items.cat_name,
+                  subCatName: ite2.cat_name,
+                });
+                // console.log("Parent:", items.cat_name, "Child:", ite2.cat_name);
+              }
+            });
+          });
+        }
+      } else {
+        items.items?.map((ite2) => {
+          if (
+            ite2.cat_name.split(" ").join("-").toLowerCase() ===
+            id.id.split(" ").join("-").toLowerCase()
+          ) {
+            ite2.products.map((produc) => {
+              if (produc.rating === keyword) {
+                tempArr.push({
+                  ...produc,
+                  parentCatName: items.cat_name,
+                  subCatName: ite2.cat_name,
+                });
+                // console.log("Parent:", items.cat_name, "Child:", ite2.cat_name);
+              }
+            });
+          }
+        });
+      }
+    });
+
+    const list = tempArr.filter(
+      (item, index) => tempArr.indexOf(item) === index
+    );
+    setData(list);
+    // console.log(list);
+    tempArr = [];
+    window.scrollTo(0, 0);
+  };
+
   const filterByPrice = (min, max) => {
     data?.map((item) => {
       if (singal === true) {
-        // // console.log("start");
-        // if (item.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
-        //   item.items?.map((ite2) => {
-        //     ite2.products?.map((ite3) => {
-        //       let price = parseInt(ite3.price.toString().replace(/,/g, ""));
-        //       if (min <= price && max >= price) {
-        //         ite2.products.map((it3) => {
-        //           // tempArr.push(it3);
-        //           console.log(ite3.price);
-        //         });
-        //       } else {
-        //         // console.log("Nothing");
-        //       }
-        //     });
-        //   });
-        // }
         if (item.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
           item.items?.map((ite2) => {
             ite2.products?.map((product) => {
@@ -485,15 +587,36 @@ const Listing = ({ data, singal }) => {
                   parentCatName: item.cat_name,
                   subCatName: ite2.cat_name,
                 });
+                // console.log("Parent:", item.cat_name, "Child:", ite2.cat_name);
               }
             });
           });
         }
+      } else {
+        item.items?.map((ite2) => {
+          if (
+            ite2.cat_name.split(" ").join("-").toLocaleLowerCase() ===
+            id.id.split(" ").join("-").toLocaleLowerCase()
+          ) {
+            ite2.products?.map((products) => {
+              let price = parseInt(products.price.toString().replace(/,/g, ""));
+              if (min <= price && max >= price) {
+                tempArr.push({
+                  ...products,
+                  parentCatName: item.cat_name,
+                  subCatName: ite2.cat_name,
+                });
+                // console.log("Parent:", item.cat_name, "Child:", ite2.cat_name);
+              }
+            });
+          }
+        });
       }
     });
     const list = tempArr.filter(
       (item, index) => tempArr.indexOf(item) === index
     );
+    // console.log(list);
     tempArr = [];
     setData(list);
   };
@@ -535,11 +658,16 @@ const Listing = ({ data, singal }) => {
           <div className="Listingdata">
             <div className="row">
               <div className="col-md-3 sideBarWreper">
-                {data !== 0 && (
+                {data !== 0 && Data !== undefined && (
                   <Sidebar
                     data={data}
+                    ratingsArr={ratingsArr}
+                    brandfilter={brandfilter}
                     currentData={Data}
                     filterByPrice={filterByPrice}
+                    filterByBrand={filterByBrand}
+                    checkFilters={checkFilters}
+                    filterByRating={filterByRating}
                   />
                 )}
               </div>
@@ -549,7 +677,7 @@ const Listing = ({ data, singal }) => {
                     We found <span>{Data?.length}</span> items for you!
                   </h4>
                 </div>
-                <div className="productRow justify-content-center">
+                <div className="productRow justify-content-center transition">
                   {Data &&
                     Data.map((ite, index) => (
                       <div className="item" key={index}>

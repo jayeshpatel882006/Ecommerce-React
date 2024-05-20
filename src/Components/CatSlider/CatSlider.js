@@ -99,8 +99,8 @@ const CatSlider = ({ data }) => {
   useEffect(() => {
     data.map((ite) => {
       ite.items.map((ite1) => {
-        temp = temp + ite1.products.length;
-        // console.log(ite1.products.length);
+        temp = temp + ite1.products?.length;
+        // console.log(ite1.products.);
       });
       LengthArr.push(temp);
       temp = 0;

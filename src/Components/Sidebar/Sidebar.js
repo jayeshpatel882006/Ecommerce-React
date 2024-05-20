@@ -2,48 +2,46 @@ import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { Link } from "react-router-dom";
 import Slider from "@mui/material/Slider";
-import Checkbox from "@mui/material/Checkbox";
-import { Button } from "@mui/material";
+import { Button, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { FilterAltOutlined } from "@mui/icons-material";
 import Rating from "@mui/material/Rating";
 import Banner11 from "../../assets/images/banner-11.png";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-const Sidebar = ({ data, filterByPrice }) => {
-  const [value, setValue] = useState([500, 25000]);
+const Sidebar = ({
+  data,
+  ratingsArr,
+  brandfilter,
+  filterByPrice,
+  filterByBrand,
+  filterByRating,
+}) => {
+  const [value, setValue] = useState([0, 1000]);
   const [count, setCount] = useState();
 
-  const [color, setColor] = useState([
-    {
-      name: "Red",
-      count: 56,
-    },
-    {
-      name: " Green",
-      count: 78,
-    },
-    {
-      name: "Blue",
-      count: 54,
-    },
-    {
-      name: "Yellow",
-      count: 2,
-    },
-  ]);
+  let maxPrice =
+    sessionStorage.getItem("cat") === "Electronics"
+      ? 100000
+      : sessionStorage.getItem("cat") === "Fashion"
+      ? 2000
+      : 1000;
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
     filterByPrice(newValue[0], newValue[1]);
   };
 
+  useEffect(() => {
+    filterByPrice(value[0], value[1]);
+    // checkFilters();
+  }, [value]);
+
   let temp = 0;
   let LengthArr = [];
 
   useEffect(() => {
-    data.map((ite) => {
+    data?.map((ite) => {
       ite.items.map((ite1) => {
         temp = temp + ite1.products.length;
-        // console.log(ite1.products.length);
       });
       LengthArr.push(temp);
       temp = 0;
@@ -55,22 +53,32 @@ const Sidebar = ({ data, filterByPrice }) => {
     setCount(list);
   }, []);
 
+  const FilterByBrand = (key) => {
+    filterByBrand(key);
+  };
+  const FilterByRating = (key) => {
+    filterByRating(parseFloat(key));
+  };
+
   return (
     <>
       <div className="SideBar">
         <div className="Card border-0 shadow">
           <h2>Category</h2>
           <div className="catList">
-            {data.map((ite, index) => (
+            {data?.map((ite, index) => (
               <div className="catItem  transition" key={index}>
                 <Link
                   className="d-flex align-items-center transition"
+                  onClick={() => sessionStorage.setItem("cat", ite.cat_name)}
                   to={`/cat/${ite.cat_name.toLowerCase()}`}
                 >
                   <span className="img">
                     <img src={ite.image} width={30} />
                   </span>
-                  <h4 className="mb-0 ms-3 me-3 transition">{ite.cat_name}</h4>
+                  <h4 className="mb-0 ms-3 me-3 transition">
+                    {ite.cat_name.toUpperCase()}
+                  </h4>
                   <span className="d-flex align-items-center justify-content-center rounded-circle ms-auto">
                     {count !== undefined && count[index]}
                   </span>
@@ -80,51 +88,72 @@ const Sidebar = ({ data, filterByPrice }) => {
           </div>
         </div>
         <div className="Card border-0 shadow">
-          <h2>Filter by price</h2>
-          <Slider
-            min={0}
-            max={1000}
-            step={1}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            color="success"
-          />
-          <div className="d-flex pt-2 pb-2 priceRange">
-            <span>
-              From: <strong className="text-success">Rs {value[0]}</strong>
-            </span>
-            <span className="ms-auto">
-              To:
-              <strong className="text-success">Rs {value[1]}</strong>
-            </span>
-          </div>
-
+          <h2>Filters </h2>
           <div className="Filters mt-3">
-            <h5>Color</h5>
+            <h5>By Price</h5>
+
+            <Slider
+              min={0}
+              max={maxPrice}
+              step={1}
+              value={value}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
+              color="success"
+            />
+
+            <div className="d-flex pt-2 pb-2 priceRange">
+              <span>
+                From: <strong className="text-success">Rs {value[0]}</strong>
+              </span>
+              <span className="ms-auto">
+                To:
+                <strong className="text-success">Rs {value[1]}</strong>
+              </span>
+            </div>
+          </div>
+          <div className="Filters mt-3">
+            <h5>By Brand</h5>
             <ul>
-              {color &&
-                color.map((ite, index) => (
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue=""
+                name="radio-buttons-group"
+              >
+                {brandfilter?.map((item, index) => (
                   <li key={index}>
-                    <Checkbox color="success" {...label} /> {ite.name} (
-                    {ite.count})
+                    {/* <Checkbox color="success" {...label} />
+                    {item} */}
+
+                    <FormControlLabel
+                      value={item}
+                      control={<Radio onChange={() => FilterByBrand(item)} />}
+                      label={item}
+                    />
                   </li>
                 ))}
+              </RadioGroup>
             </ul>
           </div>
 
           <div className="Filters mt-2">
-            <h5>Item Condition</h5>
+            <h5>Bt Rating</h5>
             <ul>
-              <li>
-                <Checkbox color="success" {...label} /> New (1506)
-              </li>
-              <li>
-                <Checkbox color="success" {...label} /> Refurbished (27)
-              </li>
-              <li>
-                <Checkbox color="success" {...label} /> Used (45)
-              </li>
+              <RadioGroup
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue=""
+                name="radio-buttons-group"
+              >
+                {ratingsArr?.map((item, index) => (
+                  <li key={index}>
+                    <FormControlLabel
+                      value={item}
+                      control={<Radio onChange={() => FilterByRating(item)} />}
+                      label={item}
+                    />
+                  </li>
+                ))}
+              </RadioGroup>
             </ul>
           </div>
           <div className="FiterBtn">

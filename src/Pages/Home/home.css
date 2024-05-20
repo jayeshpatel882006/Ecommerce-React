@@ -6,20 +6,22 @@
     margin-left: 15px;
 }
 
-.FilterTab li:hover a {
-    color: #3BB77E;
+.FilterTab li:hover p {
     top: -5px;
+    color: #3BB77E;
+    transition: all 0.1s ease-in-out !important;
 }
 
-.FilterTab li a {
+.FilterTab li p {
     text-transform: capitalize;
     text-decoration: none;
     color: #000;
     font-size: 16px;
+    top: 0px;
     position: relative;
 }
 
-.FilterTab .Active a {
+.FilterTab .Active p {
     color: #3BB77E !important;
 }
 
@@ -52,8 +54,24 @@
     padding: 0px !important;
     margin: 0px !important;
     border-radius: 20px;
-    width: 19% !important;
-}
+    width: 20% !important;
+        max-height: 530px !important;
+    
+    }
+    
+    .DailyProduct .demoProductContainer {
+        max-height: 530px !important;
+        width: 80% !important;
+    }
+    
+    .DailyProduct .demoProductContainer .item {
+        min-height: 530px !important;
+    }
+    
+    .DailyProduct .demoProductContainer .item .ProductThumb {
+        min-height: 530px !important;
+    
+    }
 
 .DailyProduct .demoImgContainer:hover img {
     transform: scale(1.1);
