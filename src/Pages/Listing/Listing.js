@@ -426,8 +426,8 @@ const Listing = ({ data, singal }) => {
   let tempArr = [];
   useEffect(() => {
     window.scrollTo(0, 0);
-    data.map((ite) => {
-      if (singal === true) {
+    if (singal === true) {
+      data.map((ite) => {
         if (ite.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
           ite.items?.map((ite2) => {
             ite2.products?.map((ite3) => {
@@ -439,25 +439,26 @@ const Listing = ({ data, singal }) => {
             });
           });
         }
-      } else {
-        data.map((ite) => {
-          ite.items?.map((ite2) => {
-            if (
-              ite2.cat_name.toLowerCase() ===
-              id.id.replace(/-/g, " ").toLocaleLowerCase()
-            ) {
-              ite2.products.map((it3) => {
-                tempArr.push({
-                  ...it3,
-                  parentCatName: ite.cat_name,
-                  subCatName: ite2.cat_name,
-                });
+      });
+    } else {
+      data.map((ite) => {
+        ite.items?.map((ite2) => {
+          if (
+            ite2.cat_name.toLowerCase() ===
+            id.id.replace(/-/g, " ").toLowerCase()
+          ) {
+            ite2.products.map((it3) => {
+              tempArr.push({
+                ...it3,
+                parentCatName: ite.cat_name,
+                subCatName: ite2.cat_name,
               });
-            }
-          });
+            });
+          }
         });
-      }
-    });
+      });
+    }
+
     const list = tempArr.filter(
       (item, index) => tempArr.indexOf(item) === index
     );
@@ -595,8 +596,8 @@ const Listing = ({ data, singal }) => {
       } else {
         item.items?.map((ite2) => {
           if (
-            ite2.cat_name.split(" ").join("-").toLocaleLowerCase() ===
-            id.id.split(" ").join("-").toLocaleLowerCase()
+            ite2.cat_name.split(" ").join("-").toLowerCase() ===
+            id.id.split(" ").join("-").toLowerCase()
           ) {
             ite2.products?.map((products) => {
               let price = parseInt(products.price.toString().replace(/,/g, ""));
@@ -637,9 +638,7 @@ const Listing = ({ data, singal }) => {
 
               <li className="list-inline-item">
                 <Link
-                  to={`/cat/${sessionStorage
-                    .getItem("cat")
-                    .toLocaleLowerCase()}`}
+                  to={`/cat/${sessionStorage.getItem("cat")?.toLowerCase()}`}
                 >
                   {sessionStorage.getItem("cat")}
                 </Link>

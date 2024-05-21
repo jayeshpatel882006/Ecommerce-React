@@ -73,7 +73,7 @@ const Home = ({ data }) => {
 
     ProductData.length !== 0 &&
       ProductData.map((item) => {
-        item.items.map((item_) => {
+        item.items?.map((item_) => {
           if (item_.cat_name === activetab) {
             item_.products.length !== 0 &&
               item_.products.map((product) => {

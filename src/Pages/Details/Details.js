@@ -30,6 +30,7 @@ const Details = ({ data }) => {
     rating: 0,
     text: "",
     productId: id,
+    Date: new Date().toLocaleString(),
   });
   const zoomSliderBig = useRef();
   const zoomSlider = useRef();
@@ -64,7 +65,7 @@ const Details = ({ data }) => {
   const handalSubmitReview = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/jayesh", review).then((res) => {
+      await axios.post("http://localhost:5000/jayesh", review).then((res) => {
         console.log(res);
       });
       setReview({
@@ -81,7 +82,7 @@ const Details = ({ data }) => {
     let data = {};
     let revies = [];
     try {
-      await axios.get("http://localhost:3000/jayesh").then((res) => {
+      await axios.get("http://localhost:5000/jayesh").then((res) => {
         data = res.data;
       });
       data !== undefined &&
@@ -102,8 +103,8 @@ const Details = ({ data }) => {
   };
 
   useEffect(() => {
-    getReview();
     window.scrollTo(0, 0);
+    // getReview();
     // console.log(id);
     getCatName();
 
@@ -604,10 +605,10 @@ const Details = ({ data }) => {
                                   <h5 className="text-g">{ite.name}</h5>
                                 </div>
                                 <div className="desc">
-                                  <div className="upperSection">
-                                    <p>{ite.date}</p>
+                                  <div className="upperSection ">
+                                    <p>{ite.Date}</p>
                                     <Rating
-                                      className="rating me-auto"
+                                      className="rating"
                                       name="read-only"
                                       value={ite.rating}
                                       precision={0.5}

@@ -154,7 +154,7 @@ width: 53%;
     font-size: 14px;
 }
 
-.ProductThumb .info .btnAdd {
+.ProductThumb .btnAdd {
     margin-left: auto;
     color: #3BB77E;
     padding: 6px 20px 6px 20px;
@@ -163,11 +163,11 @@ width: 53%;
     font-weight: 700;
 }
 
-.ProductThumb .info .btnAdd svg {
+.ProductThumb .btnAdd svg {
     margin-right: 10px;
 }
 
-.ProductThumb .info .btnAdd:hover {
+.ProductThumb .btnAdd:hover {
     background: #3BB77E !important;
     transform: translateY(-5px);
     color: #fff;

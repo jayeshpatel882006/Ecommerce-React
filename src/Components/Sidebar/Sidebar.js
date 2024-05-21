@@ -17,41 +17,46 @@ const Sidebar = ({
 }) => {
   const [value, setValue] = useState([0, 1000]);
   const [count, setCount] = useState();
+ const [maxPrice, setmaxPrice] = useState(1000);
 
-  let maxPrice =
-    sessionStorage.getItem("cat") === "Electronics"
-      ? 100000
-      : sessionStorage.getItem("cat") === "Fashion"
-      ? 2000
-      : 1000;
+ const handleChange = (event, newValue) => {
+   setValue(newValue);
+   filterByPrice(newValue[0], newValue[1]);
+ };
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    filterByPrice(newValue[0], newValue[1]);
-  };
+ //  sessionStorage.getItem("cat") === "Electronics"
+ //    ? setValue([0, 50000])
+ //    : sessionStorage.getItem("cat") === "Fashion"
+ //    ? setValue([0, 2000])
+ //    : setValue([0, 1000]);
 
-  useEffect(() => {
-    filterByPrice(value[0], value[1]);
-    // checkFilters();
-  }, [value]);
+ //  sessionStorage.getItem("cat") === "Electronics"
+ //    ? setmaxPrice(100000)
+ //    : sessionStorage.getItem("cat") === "Fashion"
+ //    ? setmaxPrice(2000)
+ //    : setmaxPrice(1000);
 
-  let temp = 0;
-  let LengthArr = [];
+ useEffect(() => {
+   filterByPrice(value[0], value[1]);
+ }, [value]);
 
-  useEffect(() => {
-    data?.map((ite) => {
-      ite.items.map((ite1) => {
-        temp = temp + ite1.products.length;
-      });
-      LengthArr.push(temp);
-      temp = 0;
-    });
+ let temp = 0;
+ let LengthArr = [];
 
-    const list = LengthArr.filter(
-      (item, index) => LengthArr.indexOf(item) === index
-    );
-    setCount(list);
-  }, []);
+ useEffect(() => {
+   data?.map((ite) => {
+     ite.items.map((ite1) => {
+       temp = temp + ite1.products.length;
+     });
+     LengthArr.push(temp);
+     temp = 0;
+   });
+
+   const list = LengthArr.filter(
+     (item, index) => LengthArr.indexOf(item) === index
+   );
+   setCount(list);
+ }, []);
 
   const FilterByBrand = (key) => {
     filterByBrand(key);

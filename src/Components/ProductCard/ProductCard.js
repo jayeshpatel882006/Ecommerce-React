@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./productCard.css";
 
 import Rating from "@mui/material/Rating";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { MyContext } from "../../App";
 import {
   CompareArrowsOutlined,
   FavoriteBorderSharp,
@@ -11,10 +12,14 @@ import {
   VisibilityOutlined,
 } from "@mui/icons-material";
 const ProductCard = ({ Data, catName }) => {
-
   const saveData = () => {
     sessionStorage.setItem("parentcatName", Data.parentCatName);
     sessionStorage.setItem("subCatName", Data.subCatName);
+  };
+
+  const context = useContext(MyContext);
+  const AddToCart = (item) => {
+    context.addToCart(item);
   };
 
   return (
@@ -79,15 +84,16 @@ const ProductCard = ({ Data, catName }) => {
               <span className="price">Rs {Data?.price} </span>
               <span className="oldprice">Rs {Data?.oldPrice} </span>
             </div>
-            <Button
-              className="btnAdd transition"
-              style={{ background: "#DEF9EC" }}
-            >
-              <ShoppingCartOutlined /> Add
-            </Button>
           </div>
         </div>
       </Link>
+      <Button
+        className="btnAdd transition w-100"
+        style={{ background: "#DEF9EC" }}
+        onClick={() => AddToCart(Data)}
+      >
+        <ShoppingCartOutlined /> Add
+      </Button>
     </div>
   );
 };

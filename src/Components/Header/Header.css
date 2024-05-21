@@ -130,6 +130,10 @@ header .headerTabs li span {
     cursor: pointer;
 }
 
+header .headerTabs li a {
+    color: #000 !important;
+    text-decoration: none;
+}
 header .headerTabs li img {
     margin-right: 10px;
 }

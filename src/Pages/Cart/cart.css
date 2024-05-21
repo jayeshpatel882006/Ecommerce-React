@@ -1,0 +1,249 @@
+.container-web {
+    padding: 0 !important;
+    margin-top: 60px;
+}
+
+.container-web h2 {
+    font-size: 40px;
+}
+
+.cart .secondRowHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart .secondRowHeader .clearbtn {
+    color: #B6B6B6;
+    text-transform: lowercase;
+    font-size: 17px;
+}
+
+.cart .secondRowHeader .clearbtn:hover {
+    color: #888686;
+}
+
+.cart .table {
+    border: 1px solid #e9ecef;
+    font-size: 17px;
+}
+
+.cart .table .main-heading {
+    background: #ececec;
+    border-radius: 40px;
+
+}
+
+.cart .table .main-heading th {
+    padding: 15px 15px;
+    font-weight: 500;
+
+}
+
+.cart .table .main-heading th:first-child {
+    border-radius: 20px 0 0 20px;
+}
+
+.cart .table .main-heading th:last-child {
+    border-radius: 0 20px 20px 0;
+}
+
+.cart .table tbody .img {
+    width: 140px;
+    height: 140px;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.204);
+    border-radius: 20px;
+    margin: 15px;
+}
+
+.cart .table tbody .img img {
+    width: 130px;
+    height: 130px;
+    border-radius: 20px;
+    object-fit: contain;
+}
+
+.cart .table tbody tr td {
+    vertical-align: middle;
+
+}
+
+
+
+.cart .table tbody tr td .info h4 a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #5a5a5a;
+    max-width: 50px;
+}
+
+.cart .table tbody tr td .info h4 a:hover {
+    color: #FDC040;
+}
+
+.cart .table tbody tr td .rating {
+    align-items: center;
+}
+
+.cart .table tbody tr td .rating h6 {
+    font-size: 13px;
+    padding-left: 10px;
+}
+
+.cart .table tbody tr .ruppes {
+    font-size: 20px;
+    font-weight: 700;
+    min-width: 130px;
+    color: #5a5a5a;
+
+}
+
+.cart .table tbody tr .quantity {
+    margin: 0 6px 0px 0;
+    background: #fff;
+    border: 2px solid #3BB77E !important;
+    font-size: 16px;
+    font-weight: 700;
+    color: #3BB77E;
+    border-radius: 5px;
+    padding: 11px 20px 11px 30px;
+    max-width: 90px;
+    position: relative;
+    width: 100%;
+}
+
+.cart .table tbody tr .quantity input {
+    width: 100%;
+    font-size: 16px;
+    border: 0px;
+    margin-left: -10px;
+}
+
+.cart .table tbody tr .quantity button {
+    position: absolute;
+    height: 10px;
+    width: 10px !important;
+    right: 5px;
+    min-width: 10px !important;
+    padding: 15px;
+}
+
+.cart .table tbody tr .quantity .addQty {
+    top: -3px;
+}
+
+.cart .table tbody tr .quantity .lowQty {
+    bottom: -3px;
+}
+
+.cart .table tbody tr .DeleteIcon button {
+    color: #070707;
+    align-items: center;
+    min-width: fit-content;
+}
+
+.cart .table tbody tr .DeleteIcon svg {
+    font-size: 24px;
+    color: #5a5a5a;
+    margin-right: auto;
+}
+
+.sideBar {
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.sideBar button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.sideBar button svg {
+    font-size: 23px;
+    margin-left: 9px;
+}
+
+.sideBar .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    margin: 0;
+    border: 1px solid rgba(125, 125, 125, 0.204);
+
+    padding: 10px;
+}
+
+.sideBar .inner:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.sideBar .inner:first-child h3 {
+    color: #3BB77E !important;
+    font-weight: 600;
+}
+
+.sideBar .inner:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.sideBar .inner:last-child h3 {
+    color: #3BB77E !important;
+    font-weight: 600;
+}
+
+
+.sideBar .inner h3,
+.sideBar .inner h4 {
+    margin: 0;
+    font-weight: 700;
+}
+
+.sideBar .inner h4 {
+    font-size: 15px;
+    color: #5a5a5a6d;
+}
+
+.sideBar .inner h3 {
+    font-size: 22px;
+    color: #5a5a5a;
+}
+
+/* .cart .table tbody tr {
+    display: flex;
+    align-items: center;
+} */
+.coupanContainer {
+    width: fit-content;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.coupanContainer h4 {
+    font-size: 25px;
+}
+
+.coupanContainer h5 {
+    font-size: 15px;
+    color: #5a5a5a;
+}
+
+.coupanContainer input {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.204);
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.coupanContainer button {
+    font-size: 14px;
+}
+
+.coupanContainer button svg {
+    font-size: 17px;
+    margin-right: 5px;
+}

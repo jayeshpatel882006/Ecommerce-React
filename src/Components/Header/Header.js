@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Header.css";
 import axios from "axios";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
@@ -21,10 +21,14 @@ import {
 } from "@mui/icons-material";
 import Person2OutLinedIcon from "@mui/icons-material/Person2Outlined";
 import Nav from "./nav/Nav";
+import { Link } from "react-router-dom";
+import { MyContext } from "../../App";
 
 const Header = ({ data }) => {
   const [accountDropDown, setAccountDropDown] = useState(false);
+  const [cartItemlength, setCartItemLength] = useState(0);
   const headerRef = useRef();
+  const context = useContext(MyContext);
   const [category, setCategory] = useState([
     "Milks and Dairies",
     "Wines & Drinks",
@@ -38,6 +42,10 @@ const Header = ({ data }) => {
     "Clothing & beauty",
   ]);
   let contryList = [];
+
+  useEffect(() => {
+    setCartItemLength(context.cartItems?.length);
+  }, [context]);
 
   const getContry = async () => {
     try {
@@ -60,7 +68,7 @@ const Header = ({ data }) => {
   useEffect(() => {
     getContry();
     window.addEventListener("scroll", () => {
-      let position = window.pageYOffset;
+      let position = window.scrollY;
       if (position > 100) {
         headerRef.current.classList.add("fixed");
       } else {
@@ -77,7 +85,9 @@ const Header = ({ data }) => {
 
           <div className="row w-100">
             <div className="col-sm-2 d-flex headerLogo align-items-center">
-              <img src={Logo} />
+              <Link to={"/"}>
+                <img src={Logo} />
+              </Link>
             </div>
             <div className="col-sm-5 d-flex align-items-center">
               <div className="headerSerch d-flex align-items-center">
@@ -116,11 +126,17 @@ const Header = ({ data }) => {
                     </span>
                   </li>
                   <li className="list-inline-item">
-                    <span>
-                      <img src={IconCart} />
-                      <span className="bedge  rounded-circle">2</span>
-                      Cart
-                    </span>
+                    <Link to="/cart">
+                      <span>
+                        <img src={IconCart} />
+                        {cartItemlength !== 0 && (
+                          <span className="bedge  rounded-circle">
+                            {cartItemlength}
+                          </span>
+                        )}
+                        Cart
+                      </span>
+                    </Link>
                   </li>
                   <li className="list-inline-item">
                     <span

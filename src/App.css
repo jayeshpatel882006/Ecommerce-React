@@ -91,6 +91,14 @@ body {
 }
 
 */
+.btn-green {
+  background: #3BB77E !important;
+  color: #fff !important;
+}
+
+.btn-green:hover {
+  background: #FDC040 !important;
+}
 .hd {
   font-size: 35px;
   font-weight: 600;
