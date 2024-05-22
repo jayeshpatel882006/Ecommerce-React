@@ -152,6 +152,8 @@
 .sideBar {
     padding: 10px 20px;
     border-radius: 10px;
+    position: sticky;
+        top: 300px;
 }
 
 .sideBar button {

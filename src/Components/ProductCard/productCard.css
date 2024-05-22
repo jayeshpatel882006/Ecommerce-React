@@ -169,6 +169,5 @@ width: 53%;
 
 .ProductThumb .btnAdd:hover {
     background: #3BB77E !important;
-    transform: translateY(-5px);
     color: #fff;
 }

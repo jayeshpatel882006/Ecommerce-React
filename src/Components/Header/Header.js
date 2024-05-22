@@ -21,13 +21,15 @@ import {
 } from "@mui/icons-material";
 import Person2OutLinedIcon from "@mui/icons-material/Person2Outlined";
 import Nav from "./nav/Nav";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../App";
 
 const Header = ({ data }) => {
   const [accountDropDown, setAccountDropDown] = useState(false);
   const [cartItemlength, setCartItemLength] = useState(0);
+  const [is_LogedIn, setis_LogedIn] = useState();
   const headerRef = useRef();
+  const navigate = useNavigate();
   const context = useContext(MyContext);
   const [category, setCategory] = useState([
     "Milks and Dairies",
@@ -45,6 +47,7 @@ const Header = ({ data }) => {
 
   useEffect(() => {
     setCartItemLength(context.cartItems?.length);
+    setis_LogedIn(context.isLogedIn);
   }, [context]);
 
   const getContry = async () => {
@@ -63,6 +66,13 @@ const Header = ({ data }) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handalSignOut = () => {
+    // console.log("EYs");
+    console.log(context.isLogedIn);
+    context.handalLogOut();
+    navigate("/");
   };
 
   useEffect(() => {
@@ -126,7 +136,7 @@ const Header = ({ data }) => {
                     </span>
                   </li>
                   <li className="list-inline-item">
-                    <Link to="/cart">
+                    <Link to={is_LogedIn === true && "/cart"}>
                       <span>
                         <img src={IconCart} />
                         {cartItemlength !== 0 && (
@@ -138,61 +148,66 @@ const Header = ({ data }) => {
                       </span>
                     </Link>
                   </li>
-                  <li className="list-inline-item">
-                    <span
-                      onClick={() => setAccountDropDown(!accountDropDown)}
-                      onMouseEnter={() => setAccountDropDown(true)}
+                  {!is_LogedIn === true ? (
+                    <li className="list-inline-item">
+                      <Link to="/auth/login">
+                        <Button className="btn-green">Login</Button>
+                      </Link>
+                    </li>
+                  ) : (
+                    <li className="list-inline-item">
+                      <span
+                        onClick={() => setAccountDropDown(!accountDropDown)}
+                        onMouseEnter={() => setAccountDropDown(true)}
 
-                      // onMouseLeave={() => setAccountDropDown(false)}
-                    >
-                      <img src={IconUser} />
-                      {/* <span className="bedge  rounded-circle">2</span>   */}
-                      Account
-                    </span>
-                    {accountDropDown && (
-                      <ClickAwayListener
-                        onClickAway={() => setAccountDropDown(false)}
+                        // onMouseLeave={() => setAccountDropDown(false)}
                       >
-                        <ul
-                          className="DropDownMenu"
-                          onMouseEnter={() => setAccountDropDown(true)}
-                          onMouseLeave={() => setAccountDropDown(false)}
+                        <img src={IconUser} />
+                        <span className="bedge  rounded-circle">2</span>
+                        Account
+                      </span>
+                      {accountDropDown && (
+                        <ClickAwayListener
+                          onClickAway={() => setAccountDropDown(false)}
                         >
-                          <li>
-                            <Button>
-                              {" "}
-                              <Person2OutLinedIcon />
-                              My Account
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <LocationOnOutlined /> Order Tracking
-                            </Button>
-                          </li>
+                          <ul
+                            className="DropDownMenu"
+                            onMouseEnter={() => setAccountDropDown(true)}
+                            onMouseLeave={() => setAccountDropDown(false)}
+                          >
+                            <li>
+                              <Button>
+                                <Person2OutLinedIcon />
+                                My Account
+                              </Button>
+                            </li>
+                            <li>
+                              <Button>
+                                <LocationOnOutlined /> Order Tracking
+                              </Button>
+                            </li>
 
-                          <li>
-                            <Button>
-                              {" "}
-                              <FavoriteBorderOutlined />
-                              My Wishlist
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <SettingsOutlined /> Setting
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              {" "}
-                              <LogoutOutlined /> Sign Out
-                            </Button>
-                          </li>
-                        </ul>
-                      </ClickAwayListener>
-                    )}
-                  </li>
+                            <li>
+                              <Button>
+                                <FavoriteBorderOutlined />
+                                My Wishlist
+                              </Button>
+                            </li>
+                            <li>
+                              <Button>
+                                <SettingsOutlined /> Setting
+                              </Button>
+                            </li>
+                            <li>
+                              <Button onClick={handalSignOut}>
+                                <LogoutOutlined /> Sign Out
+                              </Button>
+                            </li>
+                          </ul>
+                        </ClickAwayListener>
+                      )}
+                    </li>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./productCard.css";
 
 import Rating from "@mui/material/Rating";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { MyContext } from "../../App";
 import {
@@ -11,15 +11,19 @@ import {
   ShoppingCartOutlined,
   VisibilityOutlined,
 } from "@mui/icons-material";
+import { useEffect } from "react";
 const ProductCard = ({ Data, catName }) => {
+  const [isAdded, setIsAdded] = useState(false);
+  const { id } = useParams();
   const saveData = () => {
     sessionStorage.setItem("parentcatName", Data.parentCatName);
     sessionStorage.setItem("subCatName", Data.subCatName);
   };
-
   const context = useContext(MyContext);
+
   const AddToCart = (item) => {
     context.addToCart(item);
+    setIsAdded(true);
   };
 
   return (
@@ -91,8 +95,9 @@ const ProductCard = ({ Data, catName }) => {
         className="btnAdd transition w-100"
         style={{ background: "#DEF9EC" }}
         onClick={() => AddToCart(Data)}
+        disabled={isAdded === true ? true : false}
       >
-        <ShoppingCartOutlined /> Add
+        <ShoppingCartOutlined /> {isAdded === true ? "Added" : " Add"}
       </Button>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./cart.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Rating } from "@mui/material";
 import {
   DeleteOutline,
@@ -17,17 +17,24 @@ const Cart = ({ cartData }) => {
   const [qty, setQty] = useState(1);
   const [cartItems, setCartItems] = useState();
   const context = useContext(MyContext);
+  const navigate = useNavigate();
 
-  const getCartData = async (url) => {
-    let tempArr = [];
+  useEffect(() => {
+    if (context.isLogedIn != true) {
+      navigate("/");
+    }
+  }, []);
 
-    await axios.get(url).then((res) => {
-      res.data?.map((ite) => {
-        tempArr.push({ ...ite, Subtotal: ite.price });
-      });
-    });
-    setCartItems(tempArr);
-  };
+  // const getCartData = async (url) => {
+  //   let tempArr = [];
+
+  //   await axios.get(url).then((res) => {
+  //     res.data?.map((ite) => {
+  //       tempArr.push({ ...ite, Subtotal: ite.price });
+  //     });
+  //   });
+  //   setCartItems(tempArr);
+  // };
   useEffect(() => {
     // getCartData("http://localhost:3000/cartItems");
     setCartItems(cartData);

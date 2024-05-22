@@ -10,17 +10,23 @@ import NotFound from "./Pages/NotFound/NotFound";
 import Details from "./Pages/Details/Details";
 import axios from "axios";
 import Cart from "./Pages/Cart/Cart";
+import Login from "./Pages/Login/Login";
 
 const MyContext = createContext();
 function App() {
   const [productData, setProductData] = useState();
   const [cartItems, setCartItems] = useState([]);
+  const [isLogedIn, setisLogedIn] = useState(false);
 
   useEffect(() => {
     // getData("http://localhost:3000/jayeshProducts");
     getCart("http://localhost:5000/cartItems");
     getData("http://localhost:5000/jayeshProducts");
   }, []);
+
+  useEffect(() => {
+    setisLogedIn(localStorage.getItem("isLogdin") ? true : false);
+  }, [localStorage]);
 
   const getData = async (url) => {
     try {
@@ -79,8 +85,20 @@ function App() {
     setCartItems([]);
   };
 
+  const handalLogOut = () => {
+    localStorage.removeItem("isLogdin");
+    setisLogedIn(false);
+  };
+  const handalSignIn = () => {
+    localStorage.setItem("isLogdin", true);
+    setisLogedIn(true);
+  };
+
   const value = {
     cartItems,
+    isLogedIn,
+    handalLogOut,
+    handalSignIn,
     addToCart,
     removeFromCart,
     emptyCart,
@@ -108,11 +126,14 @@ function App() {
             path="/products/:id"
             element={<Details data={productData} />}
           />
+
           <Route
             exact={true}
-            path="/cart"
+            path={"/cart"}
             element={<Cart cartData={cartItems} />}
           />
+
+          <Route exact={true} path="/auth/login" element={<Login />} />
           <Route exact={true} path="*" element={<NotFound />} />
         </Routes>
         <Footer />

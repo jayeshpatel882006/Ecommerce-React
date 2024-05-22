@@ -1,0 +1,76 @@
+.LoginSignUp {
+    margin-top: 250px;
+    margin-bottom: 200px;
+}
+
+.Wreper .card {
+    width: 30%;
+    margin: auto;
+    background: #3bb77d;
+    color: #fff !important;
+    padding: 30px;
+}
+
+.Wreper .card .formLoader {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.Wreper .card h4 {
+    margin-bottom: 20px;
+}
+
+.Wreper .card .btn {
+    color: #fff;
+    background: #18e58799;
+    border-radius: 10px;
+}
+
+.Wreper .card .btn:hover {
+    background: #fdc040;
+}
+
+.Wreper .card .btn2 {
+    color: #fff;
+    align-self: center;
+    margin: auto;
+
+}
+
+.Wreper .card .btn2:hover {
+    background: #fdc040;
+}
+
+.Wreper .belowBtnContainer {
+    display: flex;
+    align-items: center;
+}
+
+.Wreper .card .passHidebtn {
+    position: absolute;
+    min-width: auto;
+    right: 10px;
+    top: 12px;
+}
+
+.Wreper .card .passHidebtn svg {
+    color: #fff;
+}
+
+.Wreper .card .MuiOutlinedInput-input {
+    font-size: 20px;
+}
+
+.Wreper .card .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root,
+.Wreper .card .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused,
+.Wreper .card .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input,
+.Wreper .card .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+
+    color: #fff !important;
+}
+
+.Wreper .card .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+
+    border-color: #287b54 !important;
+    border-width: 1px !important;
+}
