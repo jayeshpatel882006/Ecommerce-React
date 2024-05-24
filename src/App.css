@@ -91,6 +91,9 @@ body {
 }
 
 */
+.Loading {
+  display: none;
+}
 .btn-green {
   background: #3BB77E !important;
   color: #fff !important;
@@ -108,14 +111,15 @@ body {
   position: fixed;
   top: 0px;
   left: 0px;
-  width: 100%;
   height: 100%;
+  width: 100%;
   z-index: 10000;
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 ::selection {
   color: #fff;
   background: #3BB77E;

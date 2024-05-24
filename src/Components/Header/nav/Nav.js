@@ -10,6 +10,7 @@ import {
 } from "@mui/icons-material";
 
 import { Link } from "react-router-dom";
+import { ClickAwayListener } from "@mui/material";
 
 const Nav = ({ data, menutoggal, setMenuToggal }) => {
   const [Data, setData] = useState([]);
@@ -20,7 +21,11 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
 
   return (
     <>
-      <div className="nav d-flex align-items-center">
+      <div
+        className={`nav d-flex align-items-center ${
+          menutoggal ? "" : "d-none"
+        }`}
+      >
         <div className="container-fluid">
           <div className="row position-relative">
             <div className="col-sm-2 part1 d-flex align-items-center">
@@ -37,9 +42,9 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                       <ArrowBackIos />
                     </Button>
                   </div>
-                  <ul className="list list-inline mb-0">
+                  <ul className="list list-inline mb-0 linksContainer">
                     <li className="list-inline-item">
-                      <Button>
+                      <Button onClick={() => setMenuToggal(false)}>
                         <Link to="/">Home</Link>
                       </Button>
                     </li>
@@ -48,7 +53,7 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                       Data?.map((item, index) => {
                         return (
                           <li className="list-inline-item" key={index}>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link
                                 to={`/cat/${item.cat_name?.toLowerCase()}`}
                                 onClick={() =>
@@ -64,7 +69,9 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                               <ul>
                                 {item.items?.map((item_, index1) => (
                                   <li key={index1}>
-                                    <Button>
+                                    <Button
+                                      onClick={() => setMenuToggal(false)}
+                                    >
                                       <Link
                                         to={`/cat/${item.cat_name?.toLowerCase()}/${item_.cat_name
                                           .replace(/\s/g, "-")
@@ -89,13 +96,13 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                       })}
 
                     <li className="list-inline-item">
-                      <Button>
+                      <Button onClick={() => setMenuToggal(false)}>
                         <Link to="/about">About</Link>
                       </Button>
                     </li>
 
                     <li className="list-inline-item">
-                      <Button>
+                      <Button onClick={() => setMenuToggal(false)}>
                         <Link>Vendors</Link>
                       </Button>
                     </li>
@@ -150,77 +157,38 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                       <div className="dropDown_Menu">
                         <ul>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link to="/">Home</Link>
                             </Button>
                           </li>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link to="/products/details">Display</Link>
                             </Button>
                           </li>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link to="/listing">Listing</Link>
                             </Button>
                           </li>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link to="/about">About Us</Link>
                             </Button>
                           </li>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link>Contact</Link>
                             </Button>
                           </li>
                           <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link>My Account</Link>
                             </Button>
                           </li>
+
                           <li>
-                            <Button>
-                              <Link>Login</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Register</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Forgot password</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Reset password</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Purchase Guide</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Privacy Policy</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Privacy Policy</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
-                              <Link>Terms of Service</Link>
-                            </Button>
-                          </li>
-                          <li>
-                            <Button>
+                            <Button onClick={() => setMenuToggal(false)}>
                               <Link to="/sfaew">404 Page</Link>
                             </Button>
                           </li>
@@ -230,6 +198,11 @@ const Nav = ({ data, menutoggal, setMenuToggal }) => {
                     <li className="list-inline-item">
                       <Button>
                         <Link>Contect</Link>
+                      </Button>
+                    </li>
+                    <li className="list-inline-item">
+                      <Button>
+                        <Link>Sign in</Link>
                       </Button>
                     </li>
                   </ul>

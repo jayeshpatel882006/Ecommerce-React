@@ -20,97 +20,97 @@ function App() {
   const [isLogedIn, setisLogedIn] = useState(true);
   const [isLoding, setIsloading] = useState(false);
 
-  // useEffect(() => {
-  //   // getData("http://localhost:3000/jayeshProducts");
-  //   getCart("http://localhost:5000/cartItems");
-  //   getData("http://localhost:5000/jayeshProducts");
-  // }, []);
+  useEffect(() => {
+    // getData("http://localhost:3000/jayeshProducts");
+    getCart("http://localhost:5000/cartItems");
+    getData("http://localhost:5000/jayeshProducts");
+  }, []);
 
-  // useEffect(() => {
-  //   setisLogedIn(localStorage.getItem("isLogdin") ? true : false);
-  // }, [localStorage]);
+  useEffect(() => {
+    setisLogedIn(localStorage.getItem("isLogdin") ? true : false);
+  }, [localStorage]);
 
-  // const getData = async (url) => {
-  //   setIsloading(true);
-  //   try {
-  //     await axios.get(url).then((res) => {
-  //       setProductData(res.data);
-  //       console.log(res.data);
-  //       setTimeout(() => {
-  //         setIsloading(false);
-  //       }, 1500);
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-  // const getCart = async (url) => {
-  //   try {
-  //     await axios.get(url).then((res) => {
-  //       setCartItems(res.data);
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const getData = async (url) => {
+    setIsloading(true);
+    try {
+      await axios.get(url).then((res) => {
+        setProductData(res.data);
+        console.log(res.data);
+        setTimeout(() => {
+          setIsloading(false);
+        }, 1500);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getCart = async (url) => {
+    try {
+      await axios.get(url).then((res) => {
+        setCartItems(res.data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  // const addToCart = async (item) => {
-  //   // setIsloading(true);
-  //   let newitem = {
-  //     id: item.id.toString(),
-  //     productName: item.productName,
-  //     price: item.price,
-  //     rating: item.rating,
-  //     quantity: 1,
-  //     catImg: item.catImg,
-  //   };
-  //   cartItems?.map((product) => {
-  //     if (parseInt(product.id) === parseInt(item.id)) {
-  //       console.log("same", item);
-  //     }
-  //   });
+  const addToCart = async (item) => {
+    // setIsloading(true);
+    let newitem = {
+      id: item.id.toString(),
+      productName: item.productName,
+      price: item.price,
+      rating: item.rating,
+      quantity: 1,
+      catImg: item.catImg,
+    };
+    cartItems?.map((product) => {
+      if (parseInt(product.id) === parseInt(item.id)) {
+        console.log("same", item);
+      }
+    });
 
-  //   try {
-  //     await axios
-  //       .post("http://localhost:5000/cartItems", newitem)
-  //       .then((res) => {
-  //         if (res !== undefined) {
-  //           setCartItems([...cartItems, { ...item, quantity: 1 }]);
-  //         }
-  //         // setIsloading(false);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+    try {
+      await axios
+        .post("http://localhost:5000/cartItems", newitem)
+        .then((res) => {
+          if (res !== undefined) {
+            setCartItems([...cartItems, { ...item, quantity: 1 }]);
+          }
+          // setIsloading(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const removeFromCart = async (id) => {
-  //   let newData = cartItems.filter((ite) => ite.id !== id);
-  //   setCartItems(newData);
-  // };
+  const removeFromCart = async (id) => {
+    let newData = cartItems.filter((ite) => ite.id !== id);
+    setCartItems(newData);
+  };
 
-  // const emptyCart = () => {
-  //   setCartItems([]);
-  // };
+  const emptyCart = () => {
+    setCartItems([]);
+  };
 
-  // const handalLogOut = () => {
-  //   localStorage.removeItem("isLogdin");
-  //   setisLogedIn(false);
-  // };
-  // const handalSignIn = () => {
-  //   localStorage.setItem("isLogdin", true);
-  //   setisLogedIn(true);
-  // };
+  const handalLogOut = () => {
+    localStorage.removeItem("isLogdin");
+    setisLogedIn(false);
+  };
+  const handalSignIn = () => {
+    localStorage.setItem("isLogdin", true);
+    setisLogedIn(true);
+  };
 
   const value = {
-    //   cartItems,
+    cartItems,
     isLogedIn,
-    //   setIsloading,
-    //   handalLogOut,
-    //   handalSignIn,
-    //   addToCart,
-    //   removeFromCart,
-    //   emptyCart,
+    setIsloading,
+    handalLogOut,
+    handalSignIn,
+    addToCart,
+    removeFromCart,
+    emptyCart,
   };
 
   return (
@@ -121,37 +121,42 @@ function App() {
             <img src={Loader} loading="lazy" />
           </div>
         )}
+        <div className={`${isLoding ? "Loading" : ""}`}>
+          <Header data={productData} />
+          <Routes>
+            <Route
+              exact={true}
+              path="/"
+              element={<Home data={productData} />}
+            />
+            <Route
+              exact={true}
+              path="/cat/:id"
+              element={<Listing data={productData} singal={true} />}
+            />
+            <Route
+              exact={true}
+              path="/cat/:id/:id"
+              element={<Listing data={productData} singal={false} />}
+            />
+            <Route exact={true} path="/about" element={<About />} />
+            <Route
+              exact={true}
+              path="/products/:id"
+              element={<Details data={productData} />}
+            />
 
-        <Header data={productData} />
-        {/* <Routes>
-          <Route exact={true} path="/" element={<Home data={productData} />} />
-          <Route
-            exact={true}
-            path="/cat/:id"
-            element={<Listing data={productData} singal={true} />}
-          />
-          <Route
-            exact={true}
-            path="/cat/:id/:id"
-            element={<Listing data={productData} singal={false} />}
-          />
-          <Route exact={true} path="/about" element={<About />} />
-          <Route
-            exact={true}
-            path="/products/:id"
-            element={<Details data={productData} />}
-          />
+            <Route
+              exact={true}
+              path={"/cart"}
+              element={<Cart cartData={cartItems} />}
+            />
 
-          <Route
-            exact={true}
-            path={"/cart"}
-            element={<Cart cartData={cartItems} />}
-          />
-
-          <Route exact={true} path="/auth/login" element={<Login />} />
-          <Route exact={true} path="*" element={<NotFound />} />
-        </Routes> */}
-        {/* <Footer /> */}
+            <Route exact={true} path="/auth/login" element={<Login />} />
+            <Route exact={true} path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </div>
       </MyContext.Provider>
     </BrowserRouter>
   );

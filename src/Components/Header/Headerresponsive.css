@@ -1,46 +1,55 @@
-@media only screen and (min-width:320px) and (max-width:992px) {
+@media only screen and (min-width:320px) and (max-width:772px) {
 
-    body {
-        background: #000;
+body,
+    html {
+        overflow-x: hidden;
     }
 
-    .nav {
-        display: none;
-    }
+.AfterHeader {
+    margin-top: 90px;
+}
+.nav {
+position: absolute;
+    width: 0px !important;
+    height: 0px !important;
+}
 
-    .headerWreper .part1 {
-        width: 100% !important;
-        flex: 0 0 100% !important;
-        padding: 0;
-    }
+.headerWreper {
+    /* border-bottom: 1px solid #000; */
+    box-shadow: 0 1px 5px #0000001a;
+    position: fixed !important;
+}
 
-    .Mainlogo {
-        height: 80px !important;
-        width: 80px !important;
-
-    }
-
-    .headerWreper .part1 .headerToggal {
-        width: 35px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .headerWreper .part1 .headerToggal button {
-        min-width: fit-content;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    .headerWreper .part1 .headerToggal svg {
-        font-size: 25px !important;
-        color: #0000008f;
-    }
-
-    .headerWreper .part3 {
-        display: none !important;
-    }
+.headerWreper.fixed {
+    top: 0 !important;
+}
+.headerWreper .part1 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    padding: 0;
+}
+.Mainlogo {
+    height: 80px !important;
+    width: 80px !important;
+}
+.headerWreper .part1 .headerToggal {
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerWreper .part1 .headerToggal button {
+    min-width: fit-content;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.headerWreper .part1 .headerToggal svg {
+    font-size: 25px !important;
+    color: #0000008f;
+}
+.headerWreper .part3 {
+    display: none !important;
+}
 }
 
 @media only screen and (min-width:320px) and (max-width:992px) {
@@ -188,18 +197,18 @@
     }
 
     nav.active {
-        left: 0;
+        left: 20% !important;
     }
 
     nav {
         height: fit-content;
-        width: 100%;
+        width: 80%;
         position: fixed !important;
-        top: 0;
-        left: -100%;
+        top: 0 !important;
+            left: -100% !important;
         z-index: 101;
         background: #fff;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-in-out !important;
     }
 
     nav ul li {
@@ -251,5 +260,13 @@
         color: #000;
 
     }
+.linksContainer {
+    max-height: 300px;
+    overflow-y: auto;
+}
 
+.nav .dropDown_Menu {
+    width: 80% !important;
+    display: none;
+}
 }
