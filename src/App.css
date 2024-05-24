@@ -104,6 +104,18 @@ body {
   font-weight: 600;
   padding-bottom: 30px;
 }
+.loaderWereper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 ::selection {
   color: #fff;
   background: #3BB77E;

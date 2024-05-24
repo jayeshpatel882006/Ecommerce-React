@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Header.css";
+import "./Headerresponsive.css";
 import axios from "axios";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
@@ -12,12 +13,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import Select from "../SelectDrop/Select";
 import Button from "@mui/material/Button";
 import {
+  ArrowBackIos,
   FavoriteBorderOutlined,
-  GridViewOutlined,
-  HorizontalRule,
   LocationOnOutlined,
   LogoutOutlined,
+  Menu,
+  PersonOutline,
   SettingsOutlined,
+  ShoppingCartOutlined,
 } from "@mui/icons-material";
 import Person2OutLinedIcon from "@mui/icons-material/Person2Outlined";
 import Nav from "./nav/Nav";
@@ -28,9 +31,13 @@ const Header = ({ data }) => {
   const [accountDropDown, setAccountDropDown] = useState(false);
   const [cartItemlength, setCartItemLength] = useState(0);
   const [is_LogedIn, setis_LogedIn] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [menuToggal, setMenuToggal] = useState(false);
   const headerRef = useRef();
+  const serchref = useRef();
   const navigate = useNavigate();
   const context = useContext(MyContext);
+  const [serchsee, setsearchsee] = useState(false);
   const [category, setCategory] = useState([
     "Milks and Dairies",
     "Wines & Drinks",
@@ -51,6 +58,8 @@ const Header = ({ data }) => {
   }, [context]);
 
   const getContry = async () => {
+    // context.setIsloading(true);
+
     try {
       await axios
         .get("https://countriesnow.space/api/v0.1/countries")
@@ -62,6 +71,7 @@ const Header = ({ data }) => {
               contryList.push(ite.country);
             });
           }
+          // context.setIsloading(false);
         });
     } catch (error) {
       console.log(error);
@@ -80,9 +90,9 @@ const Header = ({ data }) => {
     window.addEventListener("scroll", () => {
       let position = window.scrollY;
       if (position > 100) {
-        headerRef.current.classList.add("fixed");
+        headerRef.current?.classList.add("fixed");
       } else {
-        headerRef.current.classList.remove("fixed");
+        headerRef.current?.classList.remove("fixed");
       }
     });
   }, []);
@@ -94,24 +104,94 @@ const Header = ({ data }) => {
           {/* <header> */}
 
           <div className="row w-100">
-            <div className="col-sm-2 d-flex headerLogo align-items-center">
+            <div className="col-sm-2 part1 d-flex headerLogo align-items-center">
               <Link to={"/"}>
-                <img src={Logo} />
+                <img src={Logo} loading="lazy" className="Mainlogo" />
               </Link>
+
+              <div className=" ms-auto headerToggalWreper d-flex align-items-center">
+                <div className="headerToggal ">
+                  <Button
+                    onClick={() => {
+                      setsearchsee(true);
+                      serchref.current.focus();
+                    }}
+                  >
+                    <SearchIcon />
+                  </Button>
+                </div>
+                <div
+                  onClick={() => setMenuToggal(true)}
+                  className="headerToggal "
+                >
+                  <Button>
+                    <Menu />
+                  </Button>
+                </div>
+                <div className="headerToggal headerTabsresponsive  ">
+                  <Button>
+                    <Link to={is_LogedIn === true && "/cart"}>
+                      <span>
+                        <ShoppingCartOutlined />
+                        {/* {cartItemlength !== 0 && (
+                        <span className="bedge  rounded-circle">
+                          {cartItemlength}
+                          </span>
+                        )} */}
+                        <span className="bedge  rounded-circle">3</span>
+                      </span>
+                    </Link>
+                  </Button>
+                </div>
+                {is_LogedIn && (
+                  <div className="myAccDrop">
+                    <Button>
+                      <PersonOutline />
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="col-sm-5 d-flex align-items-center">
-              <div className="headerSerch d-flex align-items-center">
+            <div className="col-sm-5 part2 d-flex  align-items-center">
+              <div
+                className={`headerSerch headerSerchResponsive ${
+                  serchsee === true ? "open" : ""
+                } d-flex align-items-center`}
+              >
+                <div
+                  className="closeSearch"
+                  onClick={() => {
+                    setsearchsee(false);
+                    serchref.current.blur();
+                    serchref.current.value = "";
+                  }}
+                >
+                  <ArrowBackIos />
+                </div>
+                <div className="countryWraper">
+                  <Select
+                    data={contryList}
+                    Icon={<LocationOnOutlined style={{ opacity: "0.5" }} />}
+                    placeholder="Your Location"
+                    txtlength={30}
+                  />
+                </div>
+
                 <Select data={category} placeholder="All Category" />
                 <div className="search ">
-                  <input type="text" placeholder="Search for items..." />
+                  <input
+                    type="text"
+                    placeholder="Search for items..."
+                    ref={serchref}
+                  />
                   <SearchIcon className="searchIcon cursor" />
                 </div>
               </div>
             </div>
-            <div className="Phonebutton">
+            {/* <div className="Phonebutton">
               <GridViewOutlined />
-            </div>
-            <div className="col-sm-5 d-flex  align-items-center leftHendSide">
+            </div> */}
+            <div className="col-sm-5 part3 d-flex  align-items-center leftHendSide">
               <div className="d-flex align-items-center another">
                 <div className="countryWraper">
                   <Select
@@ -123,14 +203,14 @@ const Header = ({ data }) => {
                 <div className="list list-inline mb-0 headerTabs ml-auto">
                   <li className="list-inline-item">
                     <span>
-                      <img src={IconCompare} />
+                      <img src={IconCompare} loading="lazy" />
                       <span className="bedge  rounded-circle">3</span>
                       Compare
                     </span>
                   </li>
                   <li className="list-inline-item">
                     <span>
-                      <img src={IconWishlist} />
+                      <img src={IconWishlist} loading="lazy" />
                       <span className="bedge  rounded-circle">6</span>
                       Wishlist
                     </span>
@@ -138,13 +218,14 @@ const Header = ({ data }) => {
                   <li className="list-inline-item">
                     <Link to={is_LogedIn === true && "/cart"}>
                       <span>
-                        <img src={IconCart} />
-                        {cartItemlength !== 0 && (
-                          <span className="bedge  rounded-circle">
-                            {cartItemlength}
-                          </span>
-                        )}
-                        Cart
+                        <img src={IconCart} loading="lazy" />
+                        {cartItemlength !== 0 &&
+                          cartItemlength !== undefined && (
+                            <span className="bedge  rounded-circle">
+                              {cartItemlength}
+                            </span>
+                          )}
+                        Cart{cartItemlength}
                       </span>
                     </Link>
                   </li>
@@ -162,7 +243,7 @@ const Header = ({ data }) => {
 
                         // onMouseLeave={() => setAccountDropDown(false)}
                       >
-                        <img src={IconUser} />
+                        <img src={IconUser} loading="lazy" />
                         <span className="bedge  rounded-circle">2</span>
                         Account
                       </span>
@@ -213,7 +294,12 @@ const Header = ({ data }) => {
             </div>
           </div>
         </header>
-        {data !== undefined && <Nav data={data} />}
+        {/* {data !== undefined && <Nav data={data} />} */}
+        <Nav
+          data={data}
+          menutoggal={menuToggal}
+          setMenuToggal={setMenuToggal}
+        />
       </div>
       <div className="AfterHeader"></div>
     </>

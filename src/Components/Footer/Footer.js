@@ -29,7 +29,7 @@ const Footer = () => {
                 <Newsletter />
               </div>
               <div className="img ">
-                <img src={imgbg} />
+                <img src={imgbg} loading="lazy" />
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@ const Footer = () => {
               <div className="col">
                 <div className="box d-flex align-items-center justify-content-center  w-100">
                   <span className="transition">
-                    <img src={img1} />
+                    <img src={img1} loading="lazy" />
                   </span>
                   <div className="info">
                     <h4>Best prices & offers</h4>
@@ -53,7 +53,7 @@ const Footer = () => {
               <div className="col">
                 <div className="box d-flex align-items-center justify-content-center  w-100 ">
                   <span className="transition">
-                    <img src={img2} />
+                    <img src={img2} loading="lazy" />
                   </span>
                   <div className="info">
                     <h4>Free delivery</h4>
@@ -64,7 +64,7 @@ const Footer = () => {
               <div className="col">
                 <div className="box d-flex align-items-center justify-content-center  w-100">
                   <span className="transition">
-                    <img src={img3} />
+                    <img src={img3} loading="lazy" />
                   </span>
                   <div className="info">
                     <h4>Great daily deal</h4>
@@ -75,7 +75,7 @@ const Footer = () => {
               <div className="col">
                 <div className="box d-flex align-items-center justify-content-center  w-100">
                   <span className="transition">
-                    <img src={img4} />
+                    <img src={img4} loading="lazy" />
                   </span>
                   <div className="info">
                     <h4>Wide assortment</h4>
@@ -86,7 +86,7 @@ const Footer = () => {
               <div className="col">
                 <div className="box d-flex align-items-center justify-content-center  w-100">
                   <span className="transition">
-                    <img src={img5} />
+                    <img src={img5} loading="lazy" />
                   </span>
                   <div className="info">
                     <h4>Easy returns</h4>
@@ -103,7 +103,7 @@ const Footer = () => {
             <div className="row">
               <div className="col-sm-3 part1">
                 <Link>
-                  <img src={Logo} />
+                  <img src={Logo} loading="lazy" />
                 </Link>
                 <br />
 

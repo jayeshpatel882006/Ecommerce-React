@@ -4,7 +4,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import { LocationOnOutlined } from "@mui/icons-material";
 
-const Select = ({ data, placeholder, Icon }) => {
+const Select = ({ data, placeholder, Icon, txtlength }) => {
   const [openselect, setOpenselect] = useState(false);
   const [select, setselect] = useState(0);
   const [listItem, setlistItem] = useState(data);
@@ -36,7 +36,11 @@ const Select = ({ data, placeholder, Icon }) => {
           className="openselect cursor"
           onClick={() => setOpenselect(!openselect)}
         >
-          {selectedItem?.length > 14
+          {txtlength
+            ? selectedItem?.length > txtlength
+              ? selectedItem.substr(0, txtlength) + "..."
+              : selectedItem
+            : selectedItem?.length > 14
             ? selectedItem.substr(0, 14) + "..."
             : selectedItem}
           <KeyboardArrowDownIcon className="arrow" />

@@ -22,7 +22,7 @@ const SliderCompo = () => {
       <div className="container-fluid position-relative">
         <Slider {...settings} className="slider_Main">
           <div className=" bg-g">
-            <img src={img1} alt="..." className="w-100" />
+            <img loading="lazy" src={img1} alt="..." className="w-100" />
             <div className="info">
               <h2>
                 Don’t miss amazing
@@ -33,7 +33,7 @@ const SliderCompo = () => {
             </div>
           </div>
           <div className=" bg-g">
-            <img src={img2} alt="..." className="w-100" />
+            <img loading="lazy" src={img2} alt="..." className="w-100" />
             <div className="info">
               <h2>
                 Fresh Vegetables

@@ -35,7 +35,7 @@ const Home = ({ data }) => {
     setPopularHeading([]);
     let list = [];
     ProductCard !== undefined &&
-      ProductData.map((ite, index) => {
+      ProductData?.map((ite, index) => {
         ite.items?.map((item, index) => {
           list.push(item.cat_name);
           setPopularHeading((popularHeading) => [
@@ -71,8 +71,8 @@ const Home = ({ data }) => {
   useEffect(() => {
     let arr = [];
 
-    ProductData.length !== 0 &&
-      ProductData.map((item) => {
+    ProductData?.length !== 0 &&
+      ProductData?.map((item) => {
         item.items?.map((item_) => {
           if (item_.cat_name === activetab) {
             item_.products.length !== 0 &&
@@ -364,7 +364,11 @@ const Home = ({ data }) => {
           </div>
           <div className="row">
             <div className="col-sm-3 demoImgContainer">
-              <img src={Banner4} className="demoImg w-100 h-100 transition" />
+              <img
+                src={Banner4}
+                loading="lazy"
+                className="demoImg w-100 h-100 transition"
+              />
               <h4>Bring nature into your home</h4>
               <Button className="transition">
                 Shop Now <ArrowForward className="transition" />

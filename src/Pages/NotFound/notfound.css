@@ -36,6 +36,9 @@
 .box a {
     text-decoration: none;
 }
+.box img:hover {
+    transform: scale(1.2);
+}
 
 .box .Btn svg {
     font-size: 40px;

@@ -42,6 +42,7 @@ const Cart = ({ cartData }) => {
 
   const updateCart = async (items, id, type) => {
     setCartItems(items);
+    //context.setIsloading(true);
     let data;
     cartItems?.map(async (ite) => {
       if (ite.id === id) {
@@ -57,16 +58,19 @@ const Cart = ({ cartData }) => {
       .put(`http://localhost:5000/cartItems/${parseInt(id)}`, data)
       .then((res) => {
         console.log(res.data);
+        // context.setIsloading(false);
       });
   };
 
   const handalRemove = async (id) => {
+    // context.setIsloading(false);
     try {
       await axios
         .delete(`http://localhost:5000/cartItems/${id}`)
         .then((res) => {
           // getCartData();
           context.removeFromCart(id);
+          // context.setIsloading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -77,12 +81,14 @@ const Cart = ({ cartData }) => {
     // console.log(id);
   };
   const clearcart = async () => {
+    // context.setIsloading(true);
     cartItems?.map(async (product) => {
       await axios
         .delete(`http://localhost:5000/cartItems/${parseInt(product.id)}`)
         .then((res) => {
           console.log(res.data);
           context.emptyCart();
+          // context.setIsloading(false);
         });
     });
   };
@@ -163,6 +169,7 @@ const Cart = ({ cartData }) => {
                               <img
                                 src={`${item.catImg}?im=Resize=(150,150)`}
                                 className="w-100"
+                                loading="lazy"
                               />
                             </div>
                             <div className="info">
@@ -263,10 +270,6 @@ const Cart = ({ cartData }) => {
                     Continue Shopping
                   </Button>
                 </Link>
-                <Button className="btn-green p-2">
-                  Update Cart
-                  <Update className="ms-2" />
-                </Button>
               </div>
               <div className="coupanContainer shadow">
                 <h4>Have a Apply Coupon?</h4>

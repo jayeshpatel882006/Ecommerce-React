@@ -32,7 +32,11 @@ const Banner = () => {
             BannerData.map((ite, index) => (
               <div className="col" key={index}>
                 <div className="box position-relative" key={index}>
-                  <img src={ite.imgLink} className="w-100 transition " />
+                  <img
+                    src={ite.imgLink}
+                    loading="lazy"
+                    className="w-100 transition "
+                  />
                   <h3 className="transition">{ite.text}</h3>
                   <Button className="transition">
                     {ite.btnName} <ArrowForwardIcon className="transition" />

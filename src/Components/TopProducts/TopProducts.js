@@ -17,7 +17,7 @@ const TopProducts = ({ title, Data }) => {
             key={index}
           >
             <div className="img">
-              <img src={ite.imgSrc} className="w-100" />
+              <img src={ite.imgSrc} className="w-100" loading="lazy" />
             </div>
             <div className="info px-3">
               <Link>

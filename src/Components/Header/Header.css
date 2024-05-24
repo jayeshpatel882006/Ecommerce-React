@@ -7,6 +7,10 @@ header {
 .AfterHeader {
     margin-top: 200px;
 }
+header .headerToggalWreper {
+    display: none;
+    visibility: hidden;
+}
 
 .headerWreper {
     background: #fff;
@@ -25,14 +29,20 @@ header {
 .headerWreper.fixed {
     top: -126px;
 }
-
+.headerSerchResponsive .countryWraper {
+    display: none;
+}
 header .headerSerch {
     border-radius: 5px;
     width: 100%;
-    height: 50px;
+    height: 50px !important;
     border: 1px solid #bce3c9;
     padding: 20px;
     position: relative;
+}
+header .headerSerch .closeSearch,
+.responsive {
+    display: none;
 }
 
 header .headerSerch .selecterDrop {

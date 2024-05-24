@@ -6,16 +6,21 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
+import GoogleLogo from "../../assets/images/Google.png";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { app } from "../../Firebase";
 import { MyContext } from "../../App";
 
 const Login = () => {
   const auth = getAuth(app);
+  const GoogleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const [passVisibal, setPassVisibal] = useState(false);
   const [connPass, setconnPass] = useState(false);
@@ -31,7 +36,12 @@ const Login = () => {
   const handalSignUp = (e) => {
     setShowLoader(true);
     e.preventDefault();
-    if (user.password === user.connPass) {
+    if (
+      user.password === user.connPass &&
+      user.password.length !== 0 &&
+      user.email.length !== 0 &&
+      user.connPass.length !== 0
+    ) {
       createUserWithEmailAndPassword(auth, user.email, user.password)
         .then((userCredential) => {
           // Signed up
@@ -57,9 +67,9 @@ const Login = () => {
   };
 
   const handalLogin = (e) => {
-    setShowLoader(true);
     e.preventDefault();
     if (user.password.length !== 0 && user.email.length !== 0) {
+      setShowLoader(true);
       signInWithEmailAndPassword(auth, user.email, user.password)
         .then((userCredential) => {
           // Signed in
@@ -79,7 +89,36 @@ const Login = () => {
           alert(error.code);
           setShowLoader(false);
         });
+    } else {
+      setShowLoader(false);
     }
+  };
+
+  const signinwithGoogle = () => {
+    setShowLoader(true);
+    signInWithPopup(auth, GoogleProvider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // // The signed-in user info.
+        // const user = result.user;
+        setShowLoader(false);
+        context.handalSignIn();
+        navigate("/");
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        alert(errorMessage);
+      });
   };
   return (
     <section className="LoginSignUp">
@@ -139,8 +178,14 @@ const Login = () => {
                 </Button>
                 <p className="text-center m-2">OR</p>
                 <div className="w-100 belowBtnContainer">
+                  <Button onClick={signinwithGoogle} className="w-100 btn">
+                    <img loading="lazy" src={GoogleLogo} /> signIn With Google
+                  </Button>
+                </div>
+                <p className="text-center m-2">OR</p>
+                <div className="w-100 belowBtnContainer">
                   <Button
-                    className=" btn2"
+                    className="btn2"
                     onClick={() => setShown(1)}
                     color="info"
                   >
@@ -220,6 +265,12 @@ const Login = () => {
                   SignUp
                 </Button>
               </form>
+              <p className="text-center m-2">OR</p>
+              <div className="w-100 belowBtnContainer">
+                <Button onClick={signinwithGoogle} className="w-100 btn">
+                  <img loading="lazy" src={GoogleLogo} /> signIn With Google
+                </Button>
+              </div>
               <p className="text-center m-2">OR</p>
               <div className="w-100 belowBtnContainer">
                 <Button

@@ -427,7 +427,7 @@ const Listing = ({ data, singal }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (singal === true) {
-      data.map((ite) => {
+      data?.map((ite) => {
         if (ite.cat_name?.toLowerCase() === id.id?.toLowerCase()) {
           ite.items?.map((ite2) => {
             ite2.products?.map((ite3) => {

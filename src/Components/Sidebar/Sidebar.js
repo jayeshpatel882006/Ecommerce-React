@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Slider from "@mui/material/Slider";
 import { Button, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import { FilterAltOutlined } from "@mui/icons-material";
@@ -17,46 +17,61 @@ const Sidebar = ({
 }) => {
   const [value, setValue] = useState([0, 1000]);
   const [count, setCount] = useState();
- const [maxPrice, setmaxPrice] = useState(1000);
+  const [maxPrice, setmaxPrice] = useState(1000);
+  const { id } = useParams();
 
- const handleChange = (event, newValue) => {
-   setValue(newValue);
-   filterByPrice(newValue[0], newValue[1]);
- };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    filterByPrice(newValue[0], newValue[1]);
+  };
 
- //  sessionStorage.getItem("cat") === "Electronics"
- //    ? setValue([0, 50000])
- //    : sessionStorage.getItem("cat") === "Fashion"
- //    ? setValue([0, 2000])
- //    : setValue([0, 1000]);
+  useEffect(() => {
+    sessionStorage.getItem("cat") === "Electronics"
+      ? setValue([0, 50000])
+      : sessionStorage.getItem("cat") === "Fashion"
+      ? setValue([0, 2000])
+      : setValue([0, 1000]);
 
- //  sessionStorage.getItem("cat") === "Electronics"
- //    ? setmaxPrice(100000)
- //    : sessionStorage.getItem("cat") === "Fashion"
- //    ? setmaxPrice(2000)
- //    : setmaxPrice(1000);
+    sessionStorage.getItem("cat") === "Electronics"
+      ? setmaxPrice(100000)
+      : sessionStorage.getItem("cat") === "Fashion"
+      ? setmaxPrice(2000)
+      : setmaxPrice(1000);
+  }, [id]);
 
- useEffect(() => {
-   filterByPrice(value[0], value[1]);
- }, [value]);
+  //  sessionStorage.getItem("cat") === "Electronics"
+  //    ? setValue([0, 50000])
+  //    : sessionStorage.getItem("cat") === "Fashion"
+  //    ? setValue([0, 2000])
+  //    : setValue([0, 1000]);
 
- let temp = 0;
- let LengthArr = [];
+  //  sessionStorage.getItem("cat") === "Electronics"
+  //    ? setmaxPrice(100000)
+  //    : sessionStorage.getItem("cat") === "Fashion"
+  //    ? setmaxPrice(2000)
+  //    : setmaxPrice(1000);
 
- useEffect(() => {
-   data?.map((ite) => {
-     ite.items.map((ite1) => {
-       temp = temp + ite1.products.length;
-     });
-     LengthArr.push(temp);
-     temp = 0;
-   });
+  useEffect(() => {
+    filterByPrice(value[0], value[1]);
+  }, [value]);
 
-   const list = LengthArr.filter(
-     (item, index) => LengthArr.indexOf(item) === index
-   );
-   setCount(list);
- }, []);
+  let temp = 0;
+  let LengthArr = [];
+
+  useEffect(() => {
+    data?.map((ite) => {
+      ite.items.map((ite1) => {
+        temp = temp + ite1.products.length;
+      });
+      LengthArr.push(temp);
+      temp = 0;
+    });
+
+    const list = LengthArr.filter(
+      (item, index) => LengthArr.indexOf(item) === index
+    );
+    setCount(list);
+  }, []);
 
   const FilterByBrand = (key) => {
     filterByBrand(key);
@@ -79,7 +94,7 @@ const Sidebar = ({
                   to={`/cat/${ite.cat_name.toLowerCase()}`}
                 >
                   <span className="img">
-                    <img src={ite.image} width={30} />
+                    <img src={ite.image} width={30} loading="lazy" />
                   </span>
                   <h4 className="mb-0 ms-3 me-3 transition">
                     {ite.cat_name.toUpperCase()}
@@ -176,6 +191,7 @@ const Sidebar = ({
               <img
                 src="https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-3.jpg"
                 className="w-100"
+                loading="lazy"
               />
             </div>
             <div className="InfoContainer">
@@ -198,6 +214,7 @@ const Sidebar = ({
               <img
                 src="https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-4.jpg"
                 className="w-100"
+                loading="lazy"
               />
             </div>
             <div className="InfoContainer">
@@ -220,6 +237,7 @@ const Sidebar = ({
               <img
                 src="https://wp.alithemes.com/html/nest/demo/assets/imgs/shop/thumbnail-5.jpg"
                 className="w-100"
+                loading="lazy"
               />
             </div>
             <div className="InfoContainer">
@@ -240,7 +258,7 @@ const Sidebar = ({
         </div>
 
         <div className="SideBarImg">
-          <img src={Banner11} className="w-100" />
+          <img src={Banner11} className="w-100" loading="lazy" />
           <h5 className="transition">
             Save 17% on <strong className="text-g">Oganic</strong> Juice
           </h5>

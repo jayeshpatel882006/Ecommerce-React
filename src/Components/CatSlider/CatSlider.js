@@ -129,7 +129,7 @@ const CatSlider = ({ data }) => {
         <h2 className="hd cursor-text">Featured Categories</h2>
         <Slider {...settings} className="cat_slider_Main w-100">
           {data !== 0 &&
-            data.map((ite, index) => {
+            data?.map((ite, index) => {
               return (
                 <div className="item" key={index}>
                   <Link to={`/cat/${ite.cat_name?.toLowerCase()}`}>
@@ -140,7 +140,7 @@ const CatSlider = ({ data }) => {
                         borderColor: bgColor[index],
                       }}
                     >
-                      <img src={ite.image} width={100} />
+                      <img src={ite.image} loading="lazy" width={100} />
                       <h5 className="transition">{ite.cat_name}</h5>
                       <span>{count !== undefined ? count[index] : ""}</span>
                     </div>

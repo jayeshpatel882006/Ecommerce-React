@@ -34,6 +34,7 @@ const ProductCard = ({ Data, catName }) => {
             <img
               src={Data?.catImg + "?im=Resize=(400,450)"}
               className="w-100 transition rounded"
+              loading="lazy"
             />
           </div>
 
