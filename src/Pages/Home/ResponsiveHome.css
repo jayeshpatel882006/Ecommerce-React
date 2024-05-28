@@ -1,0 +1,161 @@
+
+@media only screen and (min-width:320px) and (max-width:992px){
+.homeproductTitleWreper{
+    flex-direction: column !important;
+}
+.homeproductTitleWreper .FilterTab{
+    white-space: nowrap !important; overflow-x: scroll !important;width: 100%;display: block!important;
+    margin: 0 !important;padding: 0 !important;
+}
+.homeproductTitleWreper .FilterTab li{
+    display: inline-block !important;
+    vertical-align: top !important;
+    width: max-content !important;
+    margin-left: 10px !important;
+}
+.HomeProduct .productRow {
+    white-space: nowrap !important; overflow-x: scroll !important;width: 100%;display: block!important;
+    margin: 0 !important;padding: 0 !important;
+} 
+.HomeProduct .productRow .item{
+    display: inline-block !important;
+    min-height: 300px !important;
+}
+.HomeProduct .productRow .item .ProductThumb{
+    /* min-height: 340px !important; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.HomeProduct .productRow .item .ProductThumb .imgWreper{
+    min-width: 100%;
+}
+.HomeProduct .productRow .item .ProductThumb .imgWreper img{
+    max-height: 138px !important;
+}
+.HomeProduct .productRow .item .ProductThumb .info .catname{
+    font-size: 10px;
+}
+.HomeProduct .productRow .item .ProductThumb .imgWreper .p-4 {
+    padding:0px !important;
+}
+.HomeProduct .productRow .item .ProductThumb .info .title{
+    font-size: 12px !important;
+    text-wrap: balance;
+    margin: 0 !important;
+}
+.HomeProduct .productRow .item .ProductThumb .info .brand{
+    font-size: 10px !important;
+}
+.HomeProduct .productRow .item .ProductThumb .info .css-1nbsiwm-MuiRating-root{
+    font-size: 12px;
+}
+
+.DailyProduct .demoProductContainer  {
+     width: 100% !important;
+    /* max-height: 225px !important; */ 
+}
+.DailyProduct .dailyBestSaleinsideWreper{
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+.DailyProduct .productRow {
+    white-space: nowrap !important; overflow-x: scroll !important;width: 100%;display: block!important;
+    
+} 
+.DailyProduct .productRow .item{
+    display: inline-block !important;
+    width: 200px;
+    padding: 15px;
+}
+.DailyProduct .productRow .item .ProductThumb{
+    min-height: 340px !important;
+    min-height: max-content !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.DailyProduct .productRow .item .ProductThumb .imgWreper{
+    min-width: 100%;
+}
+.DailyProduct .productRow .item .ProductThumb .imgWreper img{
+    max-height: 138px !important;
+}
+.DailyProduct .productRow .item .ProductThumb .info .catname{
+    font-size: 10px;
+}
+.DailyProduct .productRow .item .ProductThumb .imgWreper .p-4 {
+    padding:0px !important;
+}
+.DailyProduct .productRow .item .ProductThumb .info .title{
+    font-size: 12px !important;
+    text-wrap: balance;
+    margin: 0 !important;
+}
+.DailyProduct .productRow .item .ProductThumb .info .brand{
+    font-size: 10px !important;
+}
+.DailyProduct .productRow .item .ProductThumb .info .css-1nbsiwm-MuiRating-root{
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+} 
+@media only screen and (min-width:320px) and (max-width:577px){
+    .HomeProduct .productRow .item{
+        width: 200px !important;
+       
+    }
+   
+}
+@media only screen and (min-width:577px) and (max-width:776px){
+    .HomeProduct .productRow .item{
+        width: 200px !important;
+    }
+
+}
+@media only screen and (min-width:776px) and (max-width:992px){
+    .HomeProduct .productRow .item{
+        width: 300px !important;
+    }
+}

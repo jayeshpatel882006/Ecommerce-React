@@ -1,0 +1,111 @@
+@media only screen and (min-width:320px) and (max-width:992px){
+
+    .listingPage .breadCrumb{
+        padding: 30px 30px;
+        margin-bottom: 15px;
+    }
+    .listingPage .breadCrumb h1{
+        font-size:calc(1.375rem + 4.5vw);;
+    }
+    .listingPage .breadCrumb ul{
+        margin: 0 !important;
+    }
+    
+    .listingPage .rightContent {
+        width: 100% !important;
+        max-width: 100%;
+    }
+   
+   .listingPage .HomeProduct .productRow{
+    white-space: wrap !important;
+    display: flex !important;
+   }
+   
+   .listingPage .sideBarWreper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    max-width: 100% ;
+    height: 100% !important;
+    z-index: 10001;
+    flex: 0 0 100%;
+    overflow-y: scroll;
+    background: #ffffffb0;
+    
+}
+
+.listingPage .sideBarWreper .SideBar{
+    top: 50px;
+}
+.listingPage .sideBarWreper .SideBar .Card{
+    background: #fff;
+}
+.listingPage .sideBarWreper .SideBar .Card .FiterBtn button{
+    width: 100% !important;
+}
+
+.listingPage .sideBarWreper .SideBar .hideBtn button{
+color: black;
+/* width:30px !important; */
+background: #3bb77e !important;
+margin: 10px 0 20px 0;
+
+}
+.listingPage .rightContent .ListingDataHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.listingPage .rightContent .ListingDataHeader .FilterBtn button{
+ background: #3bb77e;
+ color: #fff;
+}
+    
+
+
+}
+
+@media only screen and (min-width:320px) and (max-width:577px){
+    .listingPage .rightContent .ListingDataHeader h4{
+        font-size: 15px;
+    }
+    .listingPage .rightContent .ListingDataHeader h4 span{
+        font-size: 20px;
+    }
+    .listingPage .rightContent .productRow .item{
+        width: 50% !important;
+       }
+    
+}
+@media only screen and (min-width:577px) and (max-width:776px){
+    .listingPage .rightContent .ListingDataHeader h4{
+        font-size: 20px;
+    }
+    .listingPage .rightContent .ListingDataHeader h4 span{
+        font-size: 25px;
+
+    }
+    .listingPage .rightContent .productRow .item{
+        width: 33% !important;
+       }
+    
+    
+}
+@media only screen and (min-width:776px) and (max-width:992px){
+    
+    .listingPage .rightContent .productRow .item{
+        width: 25% !important;
+       }
+    
+
+    .listingPage .rightContent .ListingDataHeader h4{
+        font-size: 20px;
+    }
+    .listingPage .rightContent .ListingDataHeader h4 span{
+        font-size: 25px;
+
+    }
+    
+    
+}

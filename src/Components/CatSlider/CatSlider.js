@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./catslider.css";
+import "./ResponsiveCatSlider.css"
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { MyContext } from "../../App";
 
 const CatSlider = ({ data }) => {
   const [CategoryItems, setcategoryItems] = useState([
@@ -91,6 +93,7 @@ const CatSlider = ({ data }) => {
     },
   ]);
   const [count, setCount] = useState();
+  const context  = useContext(MyContext)
   const bgColor = ["#feefea", "#ecffec", "#fff3eb"];
   // let count;
   let temp = 0;
@@ -116,23 +119,47 @@ const CatSlider = ({ data }) => {
     dots: false,
     infinite: false,
     // speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
+    slidesToShow:   5 , 
+    autoplay: context.windowWidth > 922 ? true : false,
+    autoplaySpeed: context.windowWidth > 922 ? 3000 : false,
     fade: false,
-    arrows: true,
+    arrows: context.windowWidth < 922 ? true : false,
   };
   return (
     <div className="catSliderSection">
       <div className="container-fluid ">
         <h2 className="hd cursor-text">Featured Categories</h2>
+        {/* <Slider {...settings} className="cat_slider_Main w-100">
+          { CategoryItems!== 0 &&
+            CategoryItems?.map((ite, index) => {
+              return (
+                <div className="item" key={index}>
+                  <Link to={`/cat/${ite.name?.toLowerCase()}`}>
+                    <div
+                      className="info"
+                      style={{
+                        background: ite.bgColor,
+                        borderColor: ite.bgColor,
+                      }}
+                    >
+                      <img src={ite.imglink} loading="lazy" width={100} />
+                      <h5 className="transition">{ite.name}</h5>
+                      <span>{ite.items !== undefined ? ite.items : ""}</span>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
+        </Slider> */}
+        
         <Slider {...settings} className="cat_slider_Main w-100">
           {data !== 0 &&
             data?.map((ite, index) => {
               return (
                 <div className="item" key={index}>
-                  <Link to={`/cat/${ite.cat_name?.toLowerCase()}`}>
+                  <Link to={`/cat/${ite.cat_name?.toLowerCase()}`} onClick={()=>{
+                    sessionStorage.setItem("cat", ite.cat_name);
+                  }}>
                     <div
                       className="info"
                       style={{
@@ -141,13 +168,35 @@ const CatSlider = ({ data }) => {
                       }}
                     >
                       <img src={ite.image} loading="lazy" width={100} />
-                      <h5 className="transition">{ite.cat_name}</h5>
+                      <h5 className="transition">{ite.cat_name.charAt(0).toUpperCase() + ite.cat_name.slice(1)}</h5>
                       <span>{count !== undefined ? count[index] : ""}</span>
                     </div>
                   </Link>
                 </div>
               );
             })}
+            {data !== 0 &&
+              data?.map((ite, index) => {
+                return (
+                  <div className="item" key={index}>
+                    <Link to={`/cat/${ite.cat_name?.toLowerCase()}`} onClick={()=>{
+                      sessionStorage.setItem("cat", ite.cat_name);
+                    }}>
+                      <div
+                        className="info"
+                        style={{
+                          background: bgColor[index],
+                          borderColor: bgColor[index],
+                        }}
+                      >
+                        <img src={ite.image} loading="lazy" width={100} />
+                        <h5 className="transition">{ite.cat_name.charAt(0).toUpperCase() + ite.cat_name.slice(1)}</h5>
+                        <span>{count !== undefined ? count[index] : ""}</span>
+                      </div>
+                    </Link>
+                  </div>
+                );
+              })}
         </Slider>
       </div>
     </div>

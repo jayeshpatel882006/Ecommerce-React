@@ -39,24 +39,24 @@ const ProductCard = ({ Data, catName }) => {
           </div>
 
           <div className="overlay transition">
-            <Link
+            <Button
               tooltip="Add To Wishlist"
               className="actionBtn  bt-1 transition mb-0 mt-0"
             >
               <FavoriteBorderSharp />
-            </Link>
-            <Link
+            </Button>
+            <Button
               tooltip="Compare"
               className="actionBtn bt-2 transition mb-0 mt-0"
             >
               <CompareArrowsOutlined />
-            </Link>
-            <Link
+            </Button>
+            <Button
               tooltip="Quick view"
               className="actionBtn bt-3 transition mb-0 mt-0"
             >
               <VisibilityOutlined />
-            </Link>
+            </Button>
           </div>
         </div>
 
@@ -70,8 +70,8 @@ const ProductCard = ({ Data, catName }) => {
         <div className="info">
           <span className="d-block catname">{Data.subCatName}</span>
           <h4 className="title transition">
-            {Data?.productName?.length > 70
-              ? Data.productName.substr(0, 70) + "..."
+            {Data?.productName?.length > 20
+              ? Data.productName.substr(0, 20) + "..."
               : Data.productName}
           </h4>
           <Rating
@@ -92,14 +92,28 @@ const ProductCard = ({ Data, catName }) => {
           </div>
         </div>
       </Link>
+      {context.isLogedIn === true? (
       <Button
-        className="btnAdd transition w-100"
-        style={{ background: "#DEF9EC" }}
-        onClick={() => AddToCart(Data)}
-        disabled={isAdded === true ? true : false}
-      >
-        <ShoppingCartOutlined /> {isAdded === true ? "Added" : " Add"}
-      </Button>
+      className="btnAdd transition w-100"
+      style={{ background: "#DEF9EC" }}
+      onClick={() => AddToCart(Data)}
+      
+      disabled={isAdded === true ? true : false}
+    >
+      <ShoppingCartOutlined /> {isAdded === true ? "Added" : " Add"}
+    </Button>)
+
+    :
+    (<Button
+    className="btnAdd transition w-100"
+    style={{ background: "#DEF9EC" }}
+    disabled
+  >
+    <ShoppingCartOutlined />  Add
+  </Button>)
+    }
+      
+    
     </div>
   );
 };

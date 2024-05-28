@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Footer.css";
 import img1 from "../../assets/images/icon-1.svg";
 import img2 from "../../assets/images/icon-2.svg";
@@ -10,13 +10,15 @@ import { Link } from "react-router-dom";
 import imgbg from "../../assets/images/banner-9.png";
 import {
   AccessTimeOutlined,
-  HeadsetMic,
   HeadsetMicOutlined,
   LocationOnOutlined,
   SendOutlined,
 } from "@mui/icons-material";
 import Newsletter from "../Newsletter/Newsletter";
+import "./ResponsiveFooter.css"
+import {MyContext} from "../../App"
 const Footer = () => {
+  const context = useContext(MyContext)
   return (
     <>
       <section className="NewsLetter">
@@ -25,8 +27,15 @@ const Footer = () => {
             <div className="d-flex">
               <div className="info">
                 <h2>Stay home & get your daily needs from our shop</h2>
+               {
+                context.windowWidth >922 && (
+                <>
                 <span>Start You'r Daily Shopping with Nest Mart</span>
-                <Newsletter />
+                  <Newsletter />
+                </>
+                  
+                )
+              } 
               </div>
               <div className="img ">
                 <img src={imgbg} loading="lazy" />
@@ -130,7 +139,7 @@ const Footer = () => {
                   <strong>Hours</strong>:10:00 - 18:00, Mon - Sat
                 </p>
               </div>
-              <div className="col-sm-6 part2">
+              <div className="col-sm-9 part2">
                 <div className="row">
                   <div className="col subPart1">
                     <h4>Company</h4>
@@ -228,9 +237,7 @@ const Footer = () => {
                       <Link>Cheese</Link>
                     </p>
                   </div>
-                </div>
-              </div>
-              <div className="col-sm-3 part3">
+                  <div className="col subPart5">
                 <h4>My Links</h4>
                 <p className="link">
                   <a
@@ -249,6 +256,9 @@ const Footer = () => {
                   </a>
                 </p>
               </div>
+                </div>
+              </div>
+           
             </div>
           </div>
         </footer>

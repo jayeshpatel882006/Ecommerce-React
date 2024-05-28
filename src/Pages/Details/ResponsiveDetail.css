@@ -1,0 +1,169 @@
+@media only screen and (min-width:320px) and (max-width:992px){
+    .detailsPage .detailsContainer{
+        max-width: 100%;
+    }
+    .detailsPage .productZoom .slick-slide .item .iiz{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .detailsPage .productZoom .slick-slide img {
+        max-height: 50vh;
+        border: 1px solid #0000003d ;
+        padding: 2px;
+        border-radius: 20px;
+    }
+    .detailsPage .zoomSlider .item img{
+        max-height: 100px !important;
+        object-fit: contain !important;
+    }
+    .detailsPage .zoomSlider .slick-current .item{
+        border: 0px !important;
+    }
+    .detailsPage .productZoom{
+        border: 0px !important;
+    }
+
+    .detailsPage .part1 .productInfo{
+        padding: 20px ;
+        width: 100% !important;
+    }
+    .detailsPage .part1 .row .col-md-5{
+        width: 100% !important;
+    }
+    .detailsPage .part1 .productInfo p{
+        font-size: 13px;
+    }
+    .detailsPage .part1 .productInfo h3{
+        font-size: 25px ;
+    }
+    .detailsPage .part1 .productInfo .priceSec {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    .detailsPage .part1 .productInfo .priceSec .Price{
+        font-size: 25px;
+    }
+    .detailsPage .part1 .productInfo .priceSec .OLDPriceWreper{
+        flex-direction: row-reverse !important;
+        gap: 5px;
+        margin: 0px !important;
+    }
+    .detailsPage .part1 .productInfo .priceSec .OLDPriceWreper .oldPrice{
+        font-size: 21px;
+    }
+    .detailsPage .part1 .productInfo .priceSec .OLDPriceWreper .offPercent{
+        font-size: 13px;
+    }
+    .detailsPage .part1 .smallDetails .pt2 {
+        margin: 0px;
+    }
+    .detailsPage .part1 .PRODUCTINFO{
+        padding: 10px 10px
+    }
+    .detailsPage .PRODUCTINFO .navLine{
+        white-space: nowrap !important;
+        overflow-x: scroll;
+    }
+    .detailsPage .PRODUCTINFO .navLine li button{
+        margin-left: 10px;
+    }
+    .detailsPage .PRODUCTINFO .commentArea .mainCommentSection{
+        flex-direction: column-reverse;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .commentList{
+        margin-top: 10px !important;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .halfRatingSection{
+        margin-bottom: 30px;
+        width: 100% !important;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .halfRatingSection .rating{
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 50% !important;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .commentList .user{
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .commentList .user .thumb h5{
+        font-size: 13px;
+    }
+
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .commentList .desc .upperSection p{
+        font-size: 12px;
+        color: #00000094;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .innerCommentSection{
+        width: 100% !important;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .commentList .user .thumb img{
+        height: 40px;
+        width: 40px;
+    }
+    .detailsPage .PRODUCTINFO .ReviewsDisplay .CommentForm{
+        width: 100% !important;
+    } 
+
+
+    .RetatedProductDisplay  .innreDiv .item{
+        width: 180px !important;
+        padding: 7px;
+    }
+    .RetatedProductDisplay  .innreDiv .slick-slide {
+        width: 200px !important;
+    }
+    .RetatedProductDisplay  .innreDiv{
+        width: 100%;
+        white-space: wrap !important;
+        overflow-x: scroll !important;
+    }
+    .RetatedProductDisplay  .innreDiv .item .ProductThumb .imgWreper .p-4{
+        padding: 0 !important;
+    }
+    .RetatedProductDisplay  .innreDiv .item .ProductThumb .imgWreper img{
+        max-height: 138px !important;
+        width: 100%;
+    }
+
+    .RetatedProductDisplay .innreDiv .item  .ProductThumb{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .productInfo .Productsize {
+        display: flex;
+        align-items: center;
+    }
+    .productInfo .Productsize ul{
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        overflow-x: scroll;
+        padding: 0px !important ;
+        margin: 0px !important;
+
+    }
+
+}
+    @media only screen and (min-width:320px) and (max-width:577px){
+        .RetatedProductDisplay{
+            width: 90%;
+        }
+    }
+    @media only screen and (min-width:577px) and (max-width:776px){
+        .RetatedProductDisplay{
+            width: 93%;
+        }
+    }
+    @media only screen and (min-width:776px) and (max-width:992px){
+        .RetatedProductDisplay{
+            width: 95%;
+        }
+        .RetatedProductDisplay .innreDiv .item{
+            width: 215px !important;
+            padding: 7px;
+        }
+    }

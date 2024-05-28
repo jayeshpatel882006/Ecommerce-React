@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 
 import GoogleLogo from "../../assets/images/Google.png";
-
+import "./ResponsiveLogin.css";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -111,6 +111,7 @@ const Login = () => {
       })
       .catch((error) => {
         // Handle Errors here.
+        setShowLoader(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.

@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "./details.css";
+import "./ResponsiveDetail.css"
 import { Link, useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
@@ -14,13 +15,17 @@ import {
   ShoppingCartOutlined,
   ShuffleOutlined,
 } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import axios from "axios";
+import { MyContext } from "../../App";
 
 const Details = ({ data }) => {
   const [currentProduct, setCurrentProduct] = useState();
-  const { id } = useParams();
+  const [isAdded, setIsAdded] = useState(false);
+
+  const id  = useParams();
+  const context = useContext(MyContext)
   const [bigImageSize, setBigImageSize] = useState([1000, 1000]);
   const [smlImageSize, setSmlImageSize] = useState([150, 150]);
   const [RelatedProduct, setRelatedProduct] = useState();
@@ -29,7 +34,7 @@ const Details = ({ data }) => {
     name: "",
     rating: 0,
     text: "",
-    productId: id,
+    productId: id.id,
     Date: new Date().toLocaleString(),
   });
   const zoomSliderBig = useRef();
@@ -48,7 +53,7 @@ const Details = ({ data }) => {
           ite.items.map((items) => {
             // console.log(items);
             items.products.map((items2) => {
-              if (items2?.id !== parseInt(id)) {
+              if (items2?.id !== parseInt(id.id)) {
                 arr.push({
                   ...items2,
                   parentCatName: ite.cat_name,
@@ -73,6 +78,7 @@ const Details = ({ data }) => {
         rating: 0,
         text: "",
       });
+      getReview();
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +93,7 @@ const Details = ({ data }) => {
       });
       data !== undefined &&
         data.map((item) => {
-          if (item.productId === id) {
+          if (item.productId === id.id) {
             revies.push({ ...item });
             // setReviews({ ...Reviews, item });
           }
@@ -96,11 +102,29 @@ const Details = ({ data }) => {
         (item, index) => revies.indexOf(item) === index
       );
       setReviews(list);
-      getReview();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getCurrentProduct = ()=>{
+    context.setIsloading(true)
+    data?.map((item) => {
+      item.items?.map((ite2) => {
+        ite2.products?.map((product) => {
+          if (parseInt(product.id) === parseInt(id.id)) {
+            setCurrentProduct(product);
+            context.setIsloading(false)
+          }
+        });
+      });
+    });
+  }
+  useEffect(()=>{
+   getCurrentProduct();
+   window.scrollTo(0, 0);
+   getReview();
+  },[])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -108,22 +132,24 @@ const Details = ({ data }) => {
     // console.log(id);
     getCatName();
 
-    data?.map((item) => {
-      item.items?.map((ite2) => {
-        ite2.products?.map((product) => {
-          if (parseInt(product.id) === parseInt(id)) {
-            setCurrentProduct(product);
-          }
-        });
-      });
-    });
+    
+     getCurrentProduct();
   }, [id]);
 
   const Goto = (index) => {
     zoomSlider.current.slickGoTo(index);
     zoomSliderBig.current.slickGoTo(index);
   };
-
+  
+  const AddToCart = () => {
+    if (context.isLogedIn === true) {
+      
+      context.addToCart(currentProduct);
+      setIsAdded(true);
+    }else{
+      alert("Login Frist")
+    }
+  };
   const [sizeSelected, setSizeSelected] = useState(0);
   const AdditionalInfo = [
     "Description",
@@ -216,16 +242,19 @@ const Details = ({ data }) => {
   };
   var settings2 = {
     dots: false,
-    infinite: true,
+    infinite: context.windowWidth >922 ?  true : false,
     // speed: 300,
     // centerMode: true,
     slidesToShow: 4,
     fade: false,
-    arrows: true,
+    arrows: context.windowWidth >922 ?  true : false,
   };
 
   return (
+    <>
+   
     <section className="detailsPage">
+      {context.windowWidth > 922 &&
       <div className="breadCrumbWerper">
         <ul className="breadcrumb">
           <li className="breadcrumb-item">
@@ -255,11 +284,12 @@ const Details = ({ data }) => {
           </li>
         </ul>
       </div>
+    }
 
       <div className="container-fluid detailsContainer">
         <div className="w-100 part1">
           <div className="row">
-            <div className="col-md-5 ">
+            <div className={`${context.windowWidth >922 ?  "col-md-5" : "false"}   `}>
               <div className="productZoom">
                 <Slider
                   {...settings1}
@@ -339,7 +369,7 @@ const Details = ({ data }) => {
               </div>
               <div className="priceSec d-flex align-items-center">
                 <span className="text-g Price">Rs {currentProduct?.price}</span>
-                <div className="ms-3 d-flex flex-column align-item-center justify-content-center">
+                <div className="ms-3 OLDPriceWreper d-flex flex-column align-item-center justify-content-center">
                   {currentProduct?.discount !== undefined && (
                     <span className="text-org offPercent">
                       {currentProduct?.discount}% off
@@ -354,8 +384,8 @@ const Details = ({ data }) => {
               <br />
               {currentProduct?.weight?.length !== 0 && (
                 <div className="Productsize d-flex align-items-center">
+                    <span> Weight:</span>
                   <ul className="list list-inline mb-0 ps-2">
-                    <span> Weight :</span>
                     {currentProduct?.weight?.map((item, index) => (
                       <li className="list-inline-item" key={index}>
                         <Link
@@ -413,11 +443,12 @@ const Details = ({ data }) => {
                 )}
 
               <div className="addToCartStrip d-flex align-items-center">
+              {context.windowWidth >922 && 
                 <div className="quantity">
                   <Button
                     className="text-g addQty"
                     onClick={() => setQty(qty + 1)}
-                  >
+                    >
                     <KeyboardArrowUpOutlined />
                   </Button>
                   <input
@@ -425,7 +456,7 @@ const Details = ({ data }) => {
                     min={1}
                     onChange={(e) => setQty(e.target.value)}
                     value={qty}
-                  />
+                    />
                   <Button
                     className="text-g lowQty"
                     onClick={() => {
@@ -433,11 +464,12 @@ const Details = ({ data }) => {
                         setQty(qty - 1);
                       }
                     }}
-                  >
+                    >
                     <KeyboardArrowDownOutlined />
                   </Button>
                 </div>
-                <Button className="addToCartBtn transition">
+                  }
+                <Button className="addToCartBtn transition" onClick={()=>AddToCart()}>
                   <ShoppingCartOutlined /> Add To Cart
                 </Button>
                 <Button className="addToCartOtherBtn transition">
@@ -585,8 +617,8 @@ const Details = ({ data }) => {
               {activeAdditionalInfo === "Reviews" && (
                 <div className="ReviewsDisplay">
                   <div className="commentArea">
-                    <div className="row">
-                      <div className="col-md-8">
+                    <div className="row mainCommentSection">
+                      <div className="col-md-8 innerCommentSection">
                         <h4>Customer questions & answers</h4>
                         <div className="commentList mt-5">
                           {Reviews?.length !== 0 ? (
@@ -610,7 +642,7 @@ const Details = ({ data }) => {
                                     <Rating
                                       className="rating"
                                       name="read-only"
-                                      value={ite.rating}
+                                      value={parseFloat( ite.rating)}
                                       precision={0.5}
                                       size="small"
                                       readOnly
@@ -790,19 +822,34 @@ const Details = ({ data }) => {
         {RelatedProduct !== undefined && (
           <div className="RetatedProductDisplay">
             <h4>Related products</h4>
+            {context.windowWidth > 992 ? 
             <div className="innreDiv">
-              <Slider {...settings} className="w-100">
+            <Slider {...settings} className="w-100">
+              {RelatedProduct?.map((ite, index) => (
+                <div className="item" key={index}>
+                  <ProductCard Data={ite} key={index} />
+                </div>
+              ))}
+            </Slider>
+          </div> 
+          : 
+          <div className="innreDiv">
+             
                 {RelatedProduct?.map((ite, index) => (
                   <div className="item" key={index}>
                     <ProductCard Data={ite} key={index} />
                   </div>
                 ))}
-              </Slider>
+           
             </div>
+            }
+            
           </div>
         )}
       </div>
     </section>
+   
+    </>
   );
 };
 

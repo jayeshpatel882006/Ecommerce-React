@@ -17,14 +17,19 @@ const MyContext = createContext();
 function App() {
   const [productData, setProductData] = useState();
   const [cartItems, setCartItems] = useState([]);
-  const [isLogedIn, setisLogedIn] = useState(true);
+  const [isLogedIn, setisLogedIn] = useState(false);
   const [isLoding, setIsloading] = useState(false);
+  const [windowWidth ,setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    // getData("http://localhost:3000/jayeshProducts");
+    getData("http://localhost:5000/productData");
     getCart("http://localhost:5000/cartItems");
-    getData("http://localhost:5000/jayeshProducts");
+    // getData("http://localhost:5000/jayeshProducts");
+    // setWindowWidth(window.innerWidth)
   }, []);
+  useEffect(()=>{
+    setWindowWidth(window.innerWidth)
+  },[window.innerWidth])
 
   useEffect(() => {
     setisLogedIn(localStorage.getItem("isLogdin") ? true : false);
@@ -35,7 +40,7 @@ function App() {
     try {
       await axios.get(url).then((res) => {
         setProductData(res.data);
-        console.log(res.data);
+
         setTimeout(() => {
           setIsloading(false);
         }, 1500);
@@ -105,6 +110,7 @@ function App() {
   const value = {
     cartItems,
     isLogedIn,
+    windowWidth,
     setIsloading,
     handalLogOut,
     handalSignIn,

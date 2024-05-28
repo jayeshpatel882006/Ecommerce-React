@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import SliderCompo from "./Slider/Slider";
 import CatSlider from "../../Components/CatSlider/CatSlider";
 import Banner from "../../Components/Banner/Banner";
-import { Link } from "react-router-dom";
 import "./home.css";
+import "./ResponsiveHome.css"
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import Slider from "react-slick";
 import TopProducts from "../../Components/TopProducts/TopProducts";
-import { ArrowForward, StarPurple500TwoTone } from "@mui/icons-material";
-import { Button } from "@mui/material";
+import { ArrowForward } from "@mui/icons-material";
+import { Backdrop, Button, CircularProgress } from "@mui/material";
 import Banner4 from "../../assets/images/banner-4.png";
+import { MyContext } from "../../App";
 
 const Home = ({ data }) => {
   var settings = {
@@ -23,35 +24,49 @@ const Home = ({ data }) => {
     fade: false,
     arrows: true,
   };
-  const [ProductData, setProductData] = useState(data);
+  const productRowRef = useRef()
+  const [ProductData, setProductData] = useState();
   const [popularHeading, setPopularHeading] = useState([]);
   const [activetab, setActiveTab] = useState();
   const [avtiveTabIndex, setActiveTabIndex] = useState(0);
   const [activeTabData, setActiveTabData] = useState();
   const [dailyBestSaleProduct, setDailyBestSaleProduct] = useState([]);
+  const [isLoadingProducts ,setIsLoadingProducts] = useState(false);
+  const context = useContext(MyContext)
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  // useEffect(()=>{
+  //   setTimeout(() => {
+  //     setIsLoadingProducts(false)
+  //   }, 1000);
+  // },[isLoadingProducts])
+  useEffect(()=>{
+    setProductData(data)
+  },[data])
+
+  const getPopularHeading =()=>{
     setPopularHeading([]);
     let list = [];
-    ProductCard !== undefined &&
-      ProductData?.map((ite, index) => {
-        ite.items?.map((item, index) => {
+    data?.length !== 0 &&
+      data?.map((ite) => {
+        ite.items?.map((item) => {
           list.push(item.cat_name);
-          setPopularHeading((popularHeading) => [
-            ...popularHeading,
-            item.cat_name,
-          ]);
+          // setPopularHeading((popularHeading) => [
+          //   ...popularHeading,
+          //   item.cat_name,
+          // ]);
         });
       });
+       setPopularHeading(list)
+      // console.log(list);
     setActiveTab(list[0]);
-    list = [];
-  }, []);
 
-  useEffect(() => {
+    list = [];
+  }
+
+  const getdailyBestSale =()=>{
     let arr = [];
-    ProductData &&
-      ProductData.map((ite) => {
+    data &&
+      data.map((ite) => {
         if (ite.cat_name === "Electronics") {
           ite.items.map((items) => {
             // console.log(items);
@@ -66,11 +81,19 @@ const Home = ({ data }) => {
           });
         }
       });
-  }, []);
-
+  }
   useEffect(() => {
-    let arr = [];
+    window.scrollTo(0, 0);
+    getPopularHeading();
+    getdailyBestSale();
+    
+  }, [data]);
 
+ 
+    
+
+  const getActiveData = ()=>{
+    let arr = [];
     ProductData?.length !== 0 &&
       ProductData?.map((item) => {
         item.items?.map((item_) => {
@@ -84,11 +107,19 @@ const Home = ({ data }) => {
                 });
               });
 
-            setActiveTabData(arr);
+              setTimeout(() => {
+                setIsLoadingProducts(false)
+              }, 500);
+              setActiveTabData(arr);
           }
         });
       });
-  }, [activeTabData, activetab, avtiveTabIndex]);
+      productRowRef.current.scrollLeft =0
+  }
+  useEffect(() => {
+    getActiveData()
+   
+  }, [ activetab, avtiveTabIndex]);
 
   const [popularProducts, setpopularProducts] = useState([
     {
@@ -323,14 +354,16 @@ const Home = ({ data }) => {
     <div>
       <SliderCompo />
       <CatSlider data={data} />
+      {context.windowWidth > 922 &&
       <Banner />
+      }
       <section className="HomeProduct">
         <div className="container-fluid ">
-          <div className="d-flex align-items-center">
-            <h4 className="hd mb-0 cursor-text">Popular Products</h4>
-            <ul className="list list-inline FilterTab transition">
-              {popularHeading &&
-                popularHeading.map((ite, index) => (
+          <div className="d-flex align-items-center homeproductTitleWreper">
+              {popularHeading && (<>
+            <h4 className="hd mb-0 cursor-text res-full" >Popular Products</h4>
+            <ul className="list list-inline FilterTab transition res-full">
+                {popularHeading.map((ite, index) => (
                   <li
                     className={`list-inline-item transition  ${
                       index == avtiveTabIndex ? "Active" : ""
@@ -338,21 +371,28 @@ const Home = ({ data }) => {
                     onClick={() => {
                       setActiveTabIndex(index);
                       setActiveTab(ite);
+                      setIsLoadingProducts(true)
                     }}
                     key={index}
                   >
                     <p className="cursor transition"> {ite}</p>
                   </li>
-                ))}
+                ))  }
             </ul>
+            </>
+                )}
           </div>
-          <div className="productRow justify-content-center">
-            {activeTabData &&
-              activeTabData.map((ite, index) => (
-                <div className="item" key={index}>
-                  <ProductCard Data={ite} catName={activetab} />
-                </div>
-              ))}
+          <div className={`productRow ${isLoadingProducts ? "LoadingProduct" : ""}   justify-content-center`} ref={productRowRef}>
+         {
+          // {
+            activeTabData &&
+             activeTabData.map((ite, index) => (
+               <div className="item" key={index}>
+                 <ProductCard Data={ite} catName={activetab} />
+               </div>
+             ))
+         }
+           
           </div>
         </div>
       </section>
@@ -362,8 +402,8 @@ const Home = ({ data }) => {
           <div className="d-flex align-items-center">
             <h4 className="hd mb-0 cursor-text">Daily Best Sells</h4>
           </div>
-          <div className="row">
-            <div className="col-sm-3 demoImgContainer">
+          <div className="row dailyBestSaleinsideWreper">
+            <div className="col-sm-3 demoImgContainer res-hide">
               <img
                 src={Banner4}
                 loading="lazy"
@@ -374,19 +414,37 @@ const Home = ({ data }) => {
                 Shop Now <ArrowForward className="transition" />
               </Button>
             </div>
-            <div className="col-sm-9 demoProductContainer">
+            <div className="col-sm-9 demoProductContainer ">
+              {context.windowWidth > 922 ? (
               <Slider {...settings} className="dailyProductSlider w-100">
                 {dailyBestSaleProduct?.map((ite, index) => (
                   <div className="item" key={index}>
                     <ProductCard Data={ite} key={index} />
                   </div>
                 ))}
-              </Slider>
+                 </Slider>
+                ) :(
+                  <div className={`productRow ${isLoadingProducts ? "LoadingProduct" : ""}   justify-content-center`} ref={productRowRef}>
+                  {
+                    dailyBestSaleProduct?.map((ite, index) => (
+                        <div className="item" key={index}>
+                          <ProductCard Data={ite} catName={activetab} />
+                        </div>
+                      ))
+                  }
+                    
+                   </div>
+                )
+              }
+              
+             
             </div>
           </div>
         </div>
       </section>
-      <section className="topProduct">
+      {
+        context.windowWidth > 922 &&(
+          <section className="topProduct">
         <div className="container-fluid  w-100">
           <div className="row">
             <div className="col">
@@ -404,6 +462,9 @@ const Home = ({ data }) => {
           </div>
         </div>
       </section>
+        )
+      }
+      
     </div>
   );
 };

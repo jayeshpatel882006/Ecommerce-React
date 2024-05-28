@@ -14,6 +14,7 @@ import Select from "../SelectDrop/Select";
 import Button from "@mui/material/Button";
 import {
   ArrowBackIos,
+  CompareArrowsOutlined,
   FavoriteBorderOutlined,
   LocationOnOutlined,
   LogoutOutlined,
@@ -31,8 +32,8 @@ const Header = ({ data }) => {
   const [accountDropDown, setAccountDropDown] = useState(false);
   const [cartItemlength, setCartItemLength] = useState(0);
   const [is_LogedIn, setis_LogedIn] = useState();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [menuToggal, setMenuToggal] = useState(false);
+  const [userMenuDrop, setUserMenuDrop] = useState(false);
   const headerRef = useRef();
   const serchref = useRef();
   const navigate = useNavigate();
@@ -80,7 +81,6 @@ const Header = ({ data }) => {
 
   const handalSignOut = () => {
     // console.log("EYs");
-    console.log(context.isLogedIn);
     context.handalLogOut();
     navigate("/");
   };
@@ -128,26 +128,77 @@ const Header = ({ data }) => {
                     <Menu />
                   </Button>
                 </div>
-                <div className="headerToggal headerTabsresponsive  ">
-                  <Button>
-                    <Link to={is_LogedIn === true && "/cart"}>
-                      <span>
-                        <ShoppingCartOutlined />
-                        {/* {cartItemlength !== 0 && (
-                        <span className="bedge  rounded-circle">
-                          {cartItemlength}
-                          </span>
-                        )} */}
-                        <span className="bedge  rounded-circle">3</span>
-                      </span>
-                    </Link>
-                  </Button>
-                </div>
+
                 {is_LogedIn && (
                   <div className="myAccDrop">
-                    <Button>
+                    <Button onClick={() => setUserMenuDrop(!userMenuDrop)}>
                       <PersonOutline />
                     </Button>
+                    {userMenuDrop && (
+                      <div
+                        className="overLay"
+                        onClick={() => setUserMenuDrop(false)}
+                      ></div>
+                    )}
+                    <ul
+                      className={`DropDownMenu myAccDropMenu ${
+                        userMenuDrop && "ActiveUserMenu"
+                      }`}
+                    >
+                      <li>
+                        <Button onClick={()=>setUserMenuDrop(false)}>
+                          <Person2OutLinedIcon />
+                          My Account
+                        </Button>
+                      </li>
+                      <li>
+                          <Link to={is_LogedIn === true && "/cart"} onClick={()=>setUserMenuDrop(false)}>
+                        <Button>
+                            <span>
+                              <ShoppingCartOutlined />
+                              {cartItemlength !== 0 && (
+                                <span className="bedge  rounded-circle">
+                                  {cartItemlength}
+                                </span>
+                              )}
+                              Cart
+                              {/* <span className="bedge  rounded-circle">3</span> */}
+                            </span>
+                        </Button>
+                          </Link>
+                      </li>
+                      <li>
+                        <Button onClick={()=>setUserMenuDrop(false)}>
+                          <LocationOnOutlined /> Order Tracking
+                        </Button>
+                      </li>
+
+                      <li>
+                        <Button onClick={()=>setUserMenuDrop(false)}>
+                          <FavoriteBorderOutlined />
+                          My Wishlist
+                        </Button>
+                      </li>
+                      <li>
+                        <Button onClick={()=>setUserMenuDrop(false)}>
+                          <SettingsOutlined /> Setting
+                        </Button>
+                      </li>
+                      <li>
+                        <Button onClick={()=>setUserMenuDrop(false)}>
+                      <span>
+                      <CompareArrowsOutlined />
+                      {/* <span className="bedge  rounded-circle">3</span> */}
+                      Compare
+                    </span>
+                        </Button>
+                      </li>
+                      <li>
+                        <Button onClick={handalSignOut}>
+                          <LogoutOutlined /> Sign Out
+                        </Button>
+                      </li>
+                    </ul>
                   </div>
                 )}
               </div>
@@ -215,21 +266,22 @@ const Header = ({ data }) => {
                       Wishlist
                     </span>
                   </li>
+                        {is_LogedIn &&
                   <li className="list-inline-item">
                     <Link to={is_LogedIn === true && "/cart"}>
                       <span>
                         <img src={IconCart} loading="lazy" />
-                        {cartItemlength !== 0 &&
-                          cartItemlength !== undefined && (
+                         
                             <span className="bedge  rounded-circle">
                               {cartItemlength}
                             </span>
-                          )}
-                        Cart{cartItemlength}
+                          
+                        Cart
                       </span>
                     </Link>
                   </li>
-                  {!is_LogedIn === true ? (
+                          }
+                  {!is_LogedIn ? (
                     <li className="list-inline-item">
                       <Link to="/auth/login">
                         <Button className="btn-green">Login</Button>
@@ -240,7 +292,6 @@ const Header = ({ data }) => {
                       <span
                         onClick={() => setAccountDropDown(!accountDropDown)}
                         onMouseEnter={() => setAccountDropDown(true)}
-
                         // onMouseLeave={() => setAccountDropDown(false)}
                       >
                         <img src={IconUser} loading="lazy" />

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Sidebar.css";
 import { Link, useParams } from "react-router-dom";
 import Slider from "@mui/material/Slider";
 import { Button, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { FilterAltOutlined } from "@mui/icons-material";
+import { ArrowBackIos, FilterAltOutlined } from "@mui/icons-material";
 import Rating from "@mui/material/Rating";
 import Banner11 from "../../assets/images/banner-11.png";
+import { MyContext } from "../../App";
 
 const Sidebar = ({
   data,
@@ -14,11 +15,16 @@ const Sidebar = ({
   filterByPrice,
   filterByBrand,
   filterByRating,
+  seeFilterTab,
+  setSeeFilterTab
 }) => {
   const [value, setValue] = useState([0, 1000]);
   const [count, setCount] = useState();
   const [maxPrice, setmaxPrice] = useState(1000);
   const { id } = useParams();
+  
+  
+  const context = useContext(MyContext)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -39,17 +45,7 @@ const Sidebar = ({
       : setmaxPrice(1000);
   }, [id]);
 
-  //  sessionStorage.getItem("cat") === "Electronics"
-  //    ? setValue([0, 50000])
-  //    : sessionStorage.getItem("cat") === "Fashion"
-  //    ? setValue([0, 2000])
-  //    : setValue([0, 1000]);
-
-  //  sessionStorage.getItem("cat") === "Electronics"
-  //    ? setmaxPrice(100000)
-  //    : sessionStorage.getItem("cat") === "Fashion"
-  //    ? setmaxPrice(2000)
-  //    : setmaxPrice(1000);
+ 
 
   useEffect(() => {
     filterByPrice(value[0], value[1]);
@@ -83,7 +79,7 @@ const Sidebar = ({
   return (
     <>
       <div className="SideBar">
-        <div className="Card border-0 shadow">
+        <div className="Card border-0 shadow res-hide">
           <h2>Category</h2>
           <div className="catList">
             {data?.map((ite, index) => (
@@ -107,7 +103,11 @@ const Sidebar = ({
             ))}
           </div>
         </div>
-        <div className="Card border-0 shadow">
+ 
+        {  seeFilterTab &&  <>
+        
+           <div className="Card border-0 shadow">
+          <div className="hideBtn"><Button onClick={()=>setSeeFilterTab(false)}><ArrowBackIos /></Button></div>
           <h2>Filters </h2>
           <div className="Filters mt-3">
             <h5>By Price</h5>
@@ -177,14 +177,15 @@ const Sidebar = ({
             </ul>
           </div>
           <div className="FiterBtn">
-            <Button className="transition">
+            <Button className="transition" onClick={()=>setSeeFilterTab(false)}>
               <FilterAltOutlined />
               Filter
             </Button>
           </div>
-        </div>
+        </div></>}
+      
 
-        <div className="Card border-0 shadow">
+        <div className="Card border-0 shadow res-hide">
           <h2>New products</h2>
           <div className="Products">
             <div className="imgContainer">
@@ -257,7 +258,7 @@ const Sidebar = ({
           </div>
         </div>
 
-        <div className="SideBarImg">
+        <div className="SideBarImg res-hide">
           <img src={Banner11} className="w-100" loading="lazy" />
           <h5 className="transition">
             Save 17% on <strong className="text-g">Oganic</strong> Juice

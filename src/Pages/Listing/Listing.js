@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./listing.css";
+import "./ResponsiveListing.css"
 import { Link, useParams } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import ProductCard from "../../Components/ProductCard/ProductCard";
-import { HomeOutlined } from "@mui/icons-material";
+import { FilterAltOffOutlined, FilterAltOutlined, HomeOutlined } from "@mui/icons-material";
+import { MyContext } from "../../App";
+import { Button } from "@mui/material";
 const Listing = ({ data, singal }) => {
   // const [popularProducts, setpopularProducts] = useState([
   //   {
@@ -419,9 +422,10 @@ const Listing = ({ data, singal }) => {
 
   const [Data, setData] = useState();
   const id = useParams();
-
+const context = useContext(MyContext)
   const [brandfilter, setBrandFilter] = useState();
   const [ratingsArr, setRatingArr] = useState();
+  const [seeFilterTab , setSeeFilterTab] = useState(context.windowWidth > 922 ? true :false)
 
   let tempArr = [];
   useEffect(() => {
@@ -465,6 +469,7 @@ const Listing = ({ data, singal }) => {
     // console.log(list);
     checkFilters(list);
     setData(list);
+    window.scrollTo(0,0)
   }, [id]);
 
   tempArr = [];
@@ -640,7 +645,7 @@ const Listing = ({ data, singal }) => {
                 <Link
                   to={`/cat/${sessionStorage.getItem("cat")?.toLowerCase()}`}
                 >
-                  {sessionStorage.getItem("cat")}
+                  {sessionStorage.getItem("cat").charAt(0).toUpperCase() + sessionStorage.getItem("cat").slice(1)}
                 </Link>
               </li>
 
@@ -656,25 +661,36 @@ const Listing = ({ data, singal }) => {
 
           <div className="Listingdata">
             <div className="row">
+            {  seeFilterTab &&
               <div className="col-md-3 sideBarWreper">
-                {data !== 0 && Data !== undefined && (
-                  <Sidebar
-                    data={data}
-                    ratingsArr={ratingsArr}
-                    brandfilter={brandfilter}
-                    currentData={Data}
-                    filterByPrice={filterByPrice}
-                    filterByBrand={filterByBrand}
-                    checkFilters={checkFilters}
-                    filterByRating={filterByRating}
-                  />
-                )}
-              </div>
+                <div  className="overLay" onClick={()=> (setSeeFilterTab(false))}/>
+              {data !== 0 && Data !== undefined && (
+                <Sidebar
+                  data={data}
+                  ratingsArr={ratingsArr}
+                  brandfilter={brandfilter}
+                  currentData={Data}
+                  filterByPrice={filterByPrice}
+                  filterByBrand={filterByBrand}
+                  checkFilters={checkFilters}
+                  filterByRating={filterByRating}
+                  seeFilterTab={seeFilterTab}
+                  setSeeFilterTab={setSeeFilterTab}
+                />
+              )}
+            </div>
+            }
+            
               <div className="col-md-9 rightContent HomeProduct pt-0">
                 <div className="ListingDataHeader">
                   <h4 className="homeproduct">
                     We found <span>{Data?.length}</span> items for you!
                   </h4>
+            {context.windowWidth < 922 &&  
+<div className="FilterBtn">
+                  <Button onClick={()=>setSeeFilterTab(true)}><FilterAltOutlined />Filter</Button>
+  </div>
+            }
                 </div>
                 <div className="productRow justify-content-center transition">
                   {Data &&

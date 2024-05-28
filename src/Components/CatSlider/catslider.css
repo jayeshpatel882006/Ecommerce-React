@@ -31,6 +31,9 @@ visibility: hidden;
     border-radius: 7px;
     cursor: pointer;
 }
+.cat_slider_Main .item h5 {
+    font-size: 1.25rem;
+}
 .cat_slider_Main .item a {
     text-decoration: none;
 }

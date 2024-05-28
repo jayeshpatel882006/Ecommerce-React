@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./cart.css";
+import "./ResponsiveCart.css"
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Rating } from "@mui/material";
 import {
@@ -25,18 +26,7 @@ const Cart = ({ cartData }) => {
     }
   }, []);
 
-  // const getCartData = async (url) => {
-  //   let tempArr = [];
-
-  //   await axios.get(url).then((res) => {
-  //     res.data?.map((ite) => {
-  //       tempArr.push({ ...ite, Subtotal: ite.price });
-  //     });
-  //   });
-  //   setCartItems(tempArr);
-  // };
   useEffect(() => {
-    // getCartData("http://localhost:3000/cartItems");
     setCartItems(cartData);
   }, [cartData]);
 
@@ -126,22 +116,12 @@ const Cart = ({ cartData }) => {
             </div>
             <div className="mainContainer">
               <div className="table-responsive mt-4">
+                  {context.windowWidth > 992 ?
                 <table className="table">
+                  
                   <thead>
                     <tr className="main-heading">
-                      <th className="custome-checkbox start pl-30">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          name="checkbox"
-                          id="exampleCheckbox11"
-                          value=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheckbox11"
-                        ></label>
-                      </th>
+                     
                       <th scope="col">Product</th>
                       <th scope="col">Unit Price</th>
                       <th scope="col">Quantity</th>
@@ -151,18 +131,11 @@ const Cart = ({ cartData }) => {
                       </th>
                     </tr>
                   </thead>
+                  
                   <tbody>
                     {cartItems?.map((item, index) => (
                       <tr key={index}>
-                        <td>
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            name="checkbox"
-                            id="exampleCheckbox11"
-                            value=""
-                          />
-                        </td>
+                   
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="img">
@@ -258,12 +231,128 @@ const Cart = ({ cartData }) => {
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </table> :(
+                  <>
+                 {cartItems?.map((item, index) => (
+                  <div className="mainCartComtainer">
+                      <div className="row prt1">
+                        <div className="col-4 img">
+                          <img
+                            src={`${item.catImg}?im=Resize=(150,150)`}
+                            className="w-100"
+                            loading="lazy"
+                            />
+                        </div>
+                    
+                        <div className="col-7 info">
+                          <h4>
+                            <Link
+                              to={`/products/${item.id}`}
+                              className="transition"
+                              >
+                              {item.productName}
+                            </Link>
+                          </h4>
+                          <div className="d-flex rating">
+                            <Rating
+                              value={parseFloat(item.rating)}
+                              readOnly
+                              className="ratingIcon"
+                              />
+                            <h6>({item.rating})</h6>
+                          </div>
+                        </div>
+                        </div>       
+                 
+                  
+                    <div>
+                    <div className="row">
+                        
+                      <div className="quantity col">
+                        <Button
+                          className="text-g addQty"
+                          onClick={() => {
+                            setQty(qty + 1);
+                            let temp = cartItems?.map((product, key) => {
+                              return key === parseInt(index)
+                                ? {
+                                    ...product,
+                                    quantity: item.quantity + 1,
+                                  }
+                                : { ...product };
+                            });
+                            setCartItems(temp);
+                            updateCart(temp, item.id, "plus");
+                          }}
+                        >
+                          <KeyboardArrowUpOutlined />
+                        </Button>
+                        <input
+                          type="number"
+                          min={1}
+                          onChange={(e) => setQty(e.target.value)}
+                          value={item.quantity}
+                        />
+                        <Button
+                          className="text-g lowQty"
+                          onClick={() => {
+                            setQty(qty - 1);
+                            if (item.quantity > 1) {
+                              let temp = cartItems?.map((product, key) => {
+                                return key === parseInt(index)
+                                  ? {
+                                      ...product,
+                                      quantity: item.quantity - 1,
+                                    }
+                                  : { ...product };
+                              });
+                              setCartItems(temp);
+                              updateCart(temp, item.id, "minus");
+                            }
+                          }}
+                        >
+                          <KeyboardArrowDownOutlined />
+                        </Button>
+                      </div>
+                   
+                    <div className="ruppes text-g col">
+                    {item.quantity < 2 ? 
+                     (
+                       <>
+                        Rs{(
+                          parseInt(item.price.split(",").join("")) *
+                          parseInt(item.quantity)
+                        ).toLocaleString()}
+                        </>
+                    )
+:
+                       <div>
+                        {(
+                        parseInt(item.price.split(",").join(""))).toLocaleString()} 
+                        X  {item.quantity}  =
+                      {(
+                        parseInt(item.price.split(",").join("")) *
+                        parseInt(item.quantity)
+                      ).toLocaleString()}Rs
+                        </div>}
+                    </div>
+                    <div className="DeleteIcon cursor col">
+                      <Button onClick={() => handalRemove(item.id)}>
+                        <DeleteOutline />
+                      </Button>
+                    </div>
+                    </div>
+                    </div>
+                  </div>
+                ))}
+                </>
+              )
+                  }
               </div>
             </div>
             <div className="belowContainer">
               <hr />
-              <div className="d-flex justify-content-between">
+              <div className="continueBtn d-flex justify-content-between">
                 <Link to="/">
                   <Button className="btn-green p-2">
                     <ArrowBack className="me-2" />

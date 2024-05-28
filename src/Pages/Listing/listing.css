@@ -91,7 +91,9 @@
 .rightContent .productRow .item {
     width: 25% !important;
 }
-
+.rightContent .productRow .item .ProductThumb .imgWreper img{
+    max-height: 310px;
+}
 .rightContent .productRow .item .ProductThumb .info .price {
     font-size: 15px !important;
 }
